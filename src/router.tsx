@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import {
   AllProducts,
+  ForgotEmail,
+  ForgotPassword,
   Home,
   Login,
   NotFound,
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/forgot/email",
+        element: <ForgotEmail />,
+      },
+      {
+        path: "/forgot/password",
+        element: <ForgotPassword />,
       },
       {
         path: "/products",

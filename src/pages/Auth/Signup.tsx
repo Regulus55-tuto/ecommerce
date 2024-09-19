@@ -9,6 +9,7 @@ interface IProps {
   email: string;
   password: string;
   confirmPassword: string;
+  consent: boolean;
 }
 
 const Signup = () => {
@@ -24,6 +25,7 @@ const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      consent: false,
     },
   });
 
@@ -99,6 +101,18 @@ const Signup = () => {
               ariaInvalid={isDirty}
               labelText={"Confirm password"}
               type={"password"}
+              className={"mb-10"}
+              autocomplete="off"
+            />
+
+            <Input
+              {...register("consent", {
+                required: "Please check Consent Terms",
+              })}
+              error={errors.consent?.message}
+              ariaInvalid={isDirty}
+              labelText={"consent"}
+              type={"checkbox"}
               className={"mb-10"}
               autocomplete="off"
             />

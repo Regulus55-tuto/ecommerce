@@ -4,5 +4,16 @@ import Signup from "./Auth/Signup";
 import AllProducts from "./AllProducts";
 import NotFound from "./NotFound";
 import ProductDetail from "./ProductDetail";
+import ForgotEmail from "./Auth/ForgotEmail";
+import ForgotPassword from "./Auth/ForgotPassword";
 
-export { Home, Signup, Login, AllProducts, NotFound, ProductDetail };
+export {
+  Home,
+  Signup,
+  Login,
+  ForgotEmail,
+  ForgotPassword,
+  AllProducts,
+  NotFound,
+  ProductDetail,
+};

@@ -16,12 +16,12 @@ const Main = () => {
                   Welcome to the World of
                   <br />
                   <span className="block text-violet-500 lg:inline">
-                    College Galaxy Shop
+                    Galaxy College Shop
                   </span>
                 </h1>
                 <p className="mt-6 text-center text-lg leading-8 text-gray-600 lg:text-left">
                   <span className="inline font-semibold text-gray-900">
-                    College Galaxy Shop
+                    Galaxy College Shop{" "}
                   </span>{" "}
                   are shopping mall for university
                 </p>

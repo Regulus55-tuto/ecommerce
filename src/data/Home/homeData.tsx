@@ -18,9 +18,9 @@ export const MAIN_DATA = [
   },
   {
     name: "Galaxy Fold",
-    price: 400,
+    price: 900,
     time: "12: 21: 01",
-    image: "/images/화면-캡처-2024-07-12-100357.webp",
+    image: "/images/df2f0e1f-fc01-4ecb-b3d7-d8dd27dd0d59.webp",
     zIndex: "z-10",
     direction: "right-[unset] lg:right-[60px]",
   },
