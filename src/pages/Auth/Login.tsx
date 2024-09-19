@@ -25,6 +25,8 @@ const Login = () => {
   });
 
   const signWithGoogle = () => {};
+  const signWithKakao = () => {};
+  const signWithNaver = () => {};
 
   const submit = (data: IProps) => {
     console.log(data);
@@ -92,6 +94,22 @@ const Login = () => {
             onClick={signWithGoogle}
             icon={() => <FcGoogle className={"mr-2 text-2xl"} />}
             className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
+          />
+          <Button
+            text={"Sign with Kakao"}
+            onClick={signWithKakao}
+            icon={() => (
+              <img src="/images/kakao.png" className="mr-2 w-7 h-7" />
+            )}
+            className="mt-1 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
+          />
+          <Button
+            text={"Sign with Naver"}
+            onClick={signWithNaver}
+            icon={() => (
+              <img src="/images/naver.png" className="mr-2 w-7 h-7" />
+            )}
+            className="mt-1 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
           />
           <div className="mt-10 text-slate-500">
             Don't have an account?
