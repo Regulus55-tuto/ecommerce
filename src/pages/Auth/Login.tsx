@@ -85,7 +85,7 @@ const Login = () => {
 
             <Button
               text={"Login"}
-              disabled={isSubmitting}
+              disabled={isSubmitting} // 제출중일때 isSubmitting 을 true 로 바꿔서 선택못하게 함
               className="rounded-lg bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
             />
           </form>
