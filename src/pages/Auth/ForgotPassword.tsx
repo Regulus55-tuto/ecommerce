@@ -9,6 +9,7 @@ interface IProps {
 }
 
 const ForgotPassword = () => {
+
   const {
     register,
     handleSubmit,
@@ -27,11 +28,6 @@ const ForgotPassword = () => {
 
   return (
     <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
-      <AuthImageContainer
-        image={"/images/lucent-login-and-password-folder.png"}
-        firstText="Find your password"
-        secondText=""
-      />
       <div className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
         <div className="mb-14 flex-col items-center text-center">
           <h2 className="mb-2 text-3xl font-bold">Forgot your password? </h2>
@@ -77,6 +73,12 @@ const ForgotPassword = () => {
           </div>
         </div>
       </div>
+
+      <AuthImageContainer
+          image={"/images/lucent-login-and-password-folder.png"}
+          firstText="Find your password"
+          secondText=""
+      />
     </section>
   );
 };

@@ -13,7 +13,10 @@ interface IProps {
 }
 
 const Signup = () => {
+
+
   const {
+
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors },
@@ -133,7 +136,8 @@ const Signup = () => {
         </div>
       </div>
       <AuthImageContainer
-        image={"/images/simplistic-mobile-login-via-phone-device.png"}
+        // image={"/images/simplistic-mobile-login-via-phone-device.png"}
+        image={"/images/webp.webp"}
         firstText="shop smarter"
         secondText="Signup here"
       />

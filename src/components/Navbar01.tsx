@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsPencil } from "react-icons/bs";
 import { FaShopify } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar01 = () => {
   return (
     <header className={"flex justify-between border-b border-gray-300 p-2"}>
       <Link to={"/"} className={"flex items-center text-2xl text-brand"}>
@@ -24,4 +24,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar01;
