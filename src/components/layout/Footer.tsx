@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, useLocation} from "react-router-dom";
 import {footerCompany, footerMarketPlace, footerResource, footerSocial} from "../../data/layout/LayoutData";
-import { FaShopify } from "react-icons/fa";
+import {FaShopify} from "react-icons/fa";
 
 const Footer = () => {
     const navigation = useLocation()
@@ -23,7 +23,7 @@ const Footer = () => {
                             </Link>
                         </div>
                     </div>
-{/*footer 부분 맨 왼쪽 갤럭시 콜리지 샾 부분*/}
+                    {/*footer 부분 맨 왼쪽 갤럭시 콜리지 샾 부분*/}
 
                     <div className={'sm:col-span-6 md:col-span-3 lg:col-span-2 lg:ml-auto'}>
                         <h6 className={'mb-2 font-medium text-gray-800'}>
@@ -81,7 +81,7 @@ const Footer = () => {
                 <div className="w-full max-w-7xl px-4 sm:px-6 md:flex md:items-center md:justify-between">
                     {/* Social links */}
                     <ul className="mb-4 flex md:order-1 md:ml-4 md:mb-0">
-                        {footerSocial.map(({ path, link, name }, i) => (
+                        {footerSocial.map(({path, link, name}, i) => (
                             <li key={name} className={`${i === 0 ? '' : 'ml-4'}`}>
                                 <button
                                     onClick={(e) => {
@@ -96,7 +96,7 @@ const Footer = () => {
                                         viewBox="0 0 32 32"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
-                                        <path d={path} />
+                                        <path d={path}/>
                                     </svg>
                                 </button>
                             </li>
@@ -110,7 +110,7 @@ const Footer = () => {
                             target="_blank"
                             to="https://github.com/Regulus55"
                         >
-                          Hakjoon
+                            Hakjoon
                         </Link>
                         . All rights reserved.
                     </div>
