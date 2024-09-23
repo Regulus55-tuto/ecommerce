@@ -3,6 +3,7 @@ import Intro from "components/Home/Intro";
 import Main from "components/Home/Main";
 import React from "react";
 import ImageRarity from "../components/Home/ImageRarity";
+import SlideContainer from "../components/Home/SlideContainer";
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <Main/>
             <Intro/>
             <ImageRarity/>
+            <SlideContainer/>
             <Faq/>
         </>
     );

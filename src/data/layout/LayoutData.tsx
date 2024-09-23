@@ -27,21 +27,21 @@ export const headerData = {
                     name: 'Clothing',
                     href: '/collections/Clothing',
 
-                    items: [{ name: 'Tops', href: '/collections/Tops' }],
+                    items: [{name: 'Tops', href: '/collections/Tops'}],
                 },
                 {
                     id: 'accessories',
                     name: 'Accessories',
                     href: '/collections/Accessories',
 
-                    items: [{ name: 'Bags', href: '/collections/Bags' }],
+                    items: [{name: 'Bags', href: '/collections/Bags'}],
                 },
             ],
         },
     ],
     pages: [
-        { name: 'NFTs', href: '/nfts' },
-        { name: 'Shop All', href: '/collections' },
+        {name: 'NFTs', href: '/nfts'},
+        {name: 'Shop All', href: '/collections'},
     ],
 };
 
@@ -119,3 +119,42 @@ export const footerSocial = [
         name: 'Facebook',
     },
 ];
+
+export const productData = [
+    {
+        id: 1,
+        title: 'galaxy-fold5',
+        price: 400,
+        img: '/images/fold5.jpg'
+    },
+    {
+        id: 2,
+        title: 'galaxy-fold6',
+        price: 400,
+        img: '/images/fold6.jpg'
+    },
+    {
+        id: 3,
+        title: 'galaxy-flip4',
+        price: 400,
+        img: '/images/flip4.jpg'
+    },
+    {
+        id: 4,
+        title: 'galaxy-flip6',
+        price: 400,
+        img: '/images/flip6.jpg'
+    },
+    {
+        id: 5,
+        title: 'galaxy-s23',
+        price: 400,
+        img: '/images/s23.jpg'
+    },
+    {
+        id: 6,
+        title: 'galaxy-ultra',
+        price: 400,
+        img: '/images/ultra.jpg'
+    },
+]
