@@ -16,6 +16,9 @@ const Navbar = () => {
         <Link to={"/products/new"}>
           <BsPencil />
         </Link>
+        <Link to={"/login"}>
+          <button>Login</button>
+        </Link>
       </nav>
     </header>
   );

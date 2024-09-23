@@ -9,9 +9,9 @@ import {
 export const MAIN_DATA = [
   {
     name: "Happy Jolly #61",
-    price: 0.01,
+    price: 350,
     time: "16: 21: 01",
-    image: "/images/0022227104__SM-F741NLBAKOO__M_640_640.jpg",
+    image: "/images/df2f0e1f-fc01-4ecb-b3d7-d8dd27dd0d59.webp",
     rotation: "-rotate-[12deg]",
     scale: "scale-[.8]",
     direction: "left-0 right-[unset] lg:left-[unset] lg:right-[120px]",
@@ -20,15 +20,15 @@ export const MAIN_DATA = [
     name: "Galaxy Fold",
     price: 900,
     time: "12: 21: 01",
-    image: "/images/df2f0e1f-fc01-4ecb-b3d7-d8dd27dd0d59.webp",
+    image: "/images/KakaoTalk_20240922_215005920_04.webp",
     zIndex: "z-10",
     direction: "right-[unset] lg:right-[60px]",
   },
   {
     name: "Galaxy Flip",
-    price: 200,
+    price: 600,
     time: "08: 21: 01",
-    image: "/images/bubble-gum-big-screen-phone.png",
+    image: "/images/11.jfif",
     rotation: "rotate-[12deg]",
     scale: "scale-[.8]",
     direction: "right-0",
@@ -57,11 +57,11 @@ export const FAQ_DATA = [
   {
     name: "How do I get a Happy Jolly?",
     description: `1. Select Happy Jolly you want to buy.
-        2. Click buy button to go to the OpenSea website and sign up for an account.
-        3. Once you're signed in, you can click the "Buy Now" button to purchase the Happy Jolly NFT at the listed price.
-        4. Once the transaction is confirmed and your payment is processed, the NFT will be transferred to your digital wallet on OpenSea. You can access your wallet by clicking on your profile icon and selecting "My Profile."
-        5. That's it! You now own the NFT and can keep it in your digital wallet or transfer it to another wallet or marketplace if you wish.
-        `,
+      2. Click buy button to go to the OpenSea website and sign up for an account.
+      3. Once you're signed in, you can click the "Buy Now" button to purchase the Happy Jolly NFT at the listed price.
+      4. Once the transaction is confirmed and your payment is processed, the NFT will be transferred to your digital wallet on OpenSea. You can access your wallet by clicking on your profile icon and selecting "My Profile."
+      5. That's it! You now own the NFT and can keep it in your digital wallet or transfer it to another wallet or marketplace if you wish.
+      `,
     icon: WalletIcon,
     color: "bg-orange-500",
   },

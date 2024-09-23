@@ -28,7 +28,7 @@ const ForgotPassword = () => {
   return (
     <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
       <AuthImageContainer
-        image={"/images/bubble-gum-big-screen-phone.png"}
+        image={"/images/lucent-login-and-password-folder.png"}
         firstText="Find your password"
         secondText=""
       />

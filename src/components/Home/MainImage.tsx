@@ -33,7 +33,7 @@ const MainImage = ({
         `}
     >
       <LazyLoadImage
-        src={"/images/bubble-gum-big-screen-phone"}
+        src={image}
         width={600}
         height={400}
         // placeholder={<ImagePlaceholder/>}
