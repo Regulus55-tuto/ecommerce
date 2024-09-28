@@ -7,8 +7,8 @@ const Navbar01 = () => {
   return (
     <header className={"flex justify-between border-b border-gray-300 p-2"}>
       <Link to={"/"} className={"flex items-center text-2xl text-brand"}>
-        <FaShopify />
-        <h1>Galaxy shop</h1>
+        <FaShopify size={"32px"} color={"#8B5CF6"} className="mr-2" />
+        <h1>GU shop</h1>
       </Link>
       <nav className={"flex items-center gap-4 font-semibold"}>
         <Link to={"/products"}>Products</Link>
