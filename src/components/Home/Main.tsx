@@ -15,7 +15,7 @@ const Main = () => {
                 <h1 className="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-left">
                   Welcome to the World of
                   <br />
-                  <span className="block text-violet-500 lg:inline">
+                  <span className="block text-violet-400 lg:inline">
                     GU shop
                   </span>
                 </h1>

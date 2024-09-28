@@ -20,8 +20,8 @@ export default function AuthImageContainer({
         </h1>
         <LazyLoadImage
           src={image}
-          width={600}
-          height={500}
+          width={400}
+          height={300}
           // effect="blur"
           alt="Image Alt"
           className="-mt-16"
