@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import {
-  AllProducts,
+  AdminPage,
+  AllProducts, Collections,
   ForgotEmail,
   ForgotPassword,
   Home,
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         path: "/product/detail",
         element: <ProductDetail />,
       },
+      {
+        path: '/product/new',
+        element: <AdminPage/>
+      },
+      {
+        path: '/collections',
+        element: <Collections/>
+      }
     ],
   },
 ]);

@@ -6,6 +6,8 @@ import NotFound from "./NotFound";
 import ProductDetail from "./ProductDetail";
 import ForgotEmail from "./Auth/ForgotEmail";
 import ForgotPassword from "./Auth/ForgotPassword";
+import AdminPage from "./AdminPage";
+import Collections from "./Collections";
 
 export {
   Home,
@@ -16,4 +18,6 @@ export {
   AllProducts,
   NotFound,
   ProductDetail,
+  AdminPage,
+  Collections
 };
