@@ -129,9 +129,9 @@ export const productData = [
   },
   {
     id: 2,
-    title: "galaxy-fold6",
+    title: "galaxy fold 5",
     price: 400,
-    img: "/images/fold6.jpg",
+    img: "/images/fold6.png",
   },
   {
     id: 3,
@@ -156,5 +156,44 @@ export const productData = [
     title: "galaxy-ultra",
     price: 400,
     img: "/images/ultra.jpg",
+  },
+];
+
+export const productData2 = [
+  {
+    id: 1,
+    title: "new-arrivals-1",
+    price: 600,
+    img: "/images/new1.png",
+  },
+  {
+    id: 2,
+    title: "new-arrivals-2",
+    price: 600,
+    img: "/images/new2.png",
+  },
+  {
+    id: 3,
+    title: "new-arrivals-3",
+    price: 600,
+    img: "/images/new3.png",
+  },
+  {
+    id: 4,
+    title: "new-arrivals-4",
+    price: 600,
+    img: "/images/new4.png",
+  },
+  {
+    id: 5,
+    title: "new-arrivals-5",
+    price: 600,
+    img: "/images/new5.png",
+  },
+  {
+    id: 6,
+    title: "new-arrivals-6",
+    price: 600,
+    img: "/images/new6.png",
   },
 ];
