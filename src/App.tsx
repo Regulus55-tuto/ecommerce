@@ -8,7 +8,7 @@ import Navbar01 from "components/layout/Navbar01";
 const App = () => {
   return (
     <>
-      <Navbar01 />
+      <Navbar/>
       <Outlet />
       <Footer />
     </>
