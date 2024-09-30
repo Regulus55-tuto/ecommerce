@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // 인터페이스 만들어야
-const ProductCard = ({ id, title, price, img }: any) => {
+interface IProps {
+  id?: string;
+  title: string;
+  price: number;
+  img: string;
+}
+
+const ProductCard = ({ id, title, price, img }: IProps) => {
   return (
     <Link to={`/products/${id}`}>
       <div className="relative overflow-hidden rounded-2xl bg-gray-100 pt-[100%]">

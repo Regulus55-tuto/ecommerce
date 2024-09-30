@@ -125,6 +125,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+
       <AuthImageContainer
         image={"/images/bubble-gum-big-screen-phone.png"}
         firstText="shop smarter"

@@ -54,7 +54,7 @@ const Signup = () => {
               labelText="Username"
               type="text"
               className={"mb-3"}
-              autocomplete="off"
+              autocomplete="on"
               autofocus
             />
 
@@ -71,7 +71,7 @@ const Signup = () => {
               labelText="Email"
               type="email"
               className="mb-3"
-              autocomplete="off"
+              autocomplete="on"
             />
 
             <Input
