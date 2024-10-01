@@ -13,13 +13,13 @@ React, javascript(es6), TypeScript, React-hook-form, Tailwind CSS, @headlessui/r
 
 Navbar
 
-![1](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/8460372e-412c-49cc-8e26-b008fb1898dd/nav.png)
+![main1.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/8460372e-412c-49cc-8e26-b008fb1898dd/nav.png)
 
 - Headless UI 를 이용한 navbar 구현
 
 슬라이드
 
-![2](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/94787d7a-927c-4f9c-baed-e3b86c167609/slide1.png)
+![slide1.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/94787d7a-927c-4f9c-baed-e3b86c167609/slide1.png)
 
 ![slide2.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/2567c482-298c-48db-aadc-bcfcff0b29e8/slide2.png)
 
