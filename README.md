@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Galaxy University Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+대학생을 위한 삼성 갤럭시 제품 전문 판매 사이트
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## 기술스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React, javascript(es6), TypeScript, React-hook-form, Tailwind CSS, @headlessui/react, react-lazy-load-image-component, swiper
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## 주요 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Navbar
 
-### `npm run build`
+![nav.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/8460372e-412c-49cc-8e26-b008fb1898dd/nav.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Headless UI 를 이용한 navbar 구현
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+슬라이드
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![slide1.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/94787d7a-927c-4f9c-baed-e3b86c167609/slide1.png)
 
-### `npm run eject`
+![slide2.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/2567c482-298c-48db-aadc-bcfcff0b29e8/slide2.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- swiper 를 이용한 슬라이드 기능 구현
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+반응형UI
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![login.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/46b40648-807f-45bc-83f0-ddde7ea97d7a/login.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![login1.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/715e52aa-3cbf-4c9b-bb35-e80f884012a0/35f19590-49af-4968-a37c-647f0ce67feb/login1.png)
 
-## Learn More
+- 화면 너비에 따른 UI 자동 조정
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 추후 추가할 내용
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Navbar 항목 업데이트
+- 결제기능 업데이트
