@@ -21,11 +21,12 @@ const ImageRarity = () => {
               }
             >
               <LazyLoadImage
-                src={"images/rary2.png"}
+                src={"images/rary.png"}
                 width={"100%"}
+                height={"100%"}
                 // effect={"blur"}
                 alt={"Image Alt"}
-                className={"h-full w-full object-cover"}
+                className={"h-full w-full object-contain"}
               />
             </div>
 
@@ -39,7 +40,7 @@ const ImageRarity = () => {
                   <span className={"block text-violet-500 lg:inline"}>
                     Ultra Rare
                   </span>{" "}
-                  Galaxy-Mobile-Phone
+                  Galaxy-Devices
                 </h1>
                 <p className="mx-auto max-w-2xl pt-12 text-lg leading-8 text-gray-900">
                   Through special discounts and various events just for college

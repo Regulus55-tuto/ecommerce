@@ -71,7 +71,7 @@ const ForgotEmail = () => {
 
       <AuthImageContainer
         image={"/images/simplistic-mobile-login-via-phone-device.png"}
-        firstText="Find your password"
+        firstText="Find your email"
         secondText=""
       />
     </section>

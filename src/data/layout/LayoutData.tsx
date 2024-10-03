@@ -8,33 +8,51 @@ export const headerData = {
         {
           name: "New Arrivals",
           href: "/collections",
-          imageSrc:
-            "https://res.cloudinary.com/dchh1a7k8/image/upload/v1676699141/items/whiteTote_lwcm2h.webp",
+          imageSrc: "images/book4u.png",
           imageAlt: "Tote bag",
         },
         {
           name: "Basic Tees",
           href: "/collections/Tops",
 
-          imageSrc:
-            "https://res.cloudinary.com/dchh1a7k8/image/upload/v1676699141/items/blackT_front_ro4ws2.webp",
+          imageSrc: "images/buzz3.png",
           imageAlt: "black tees",
         },
       ],
+
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
-          href: "/collections/Clothing",
+          id: "smartphone",
+          name: "SmartPhone",
+          href: "/collections/SmartPhone",
 
-          items: [{ name: "Tops", href: "/collections/Tops" }],
+          items: [
+            { name: "A series", href: "/collections/galaxyA" },
+            { name: "S series", href: "/collections/galaxyS" },
+            { name: "Flip series", href: "/collections/galaxyFlip" },
+            { name: "Fold series", href: "/collections/galaxyFold" },
+          ],
         },
         {
-          id: "accessories",
-          name: "Accessories",
-          href: "/collections/Accessories",
+          id: "laptop",
+          name: "Laptop",
+          href: "/collections/Laptop",
 
-          items: [{ name: "Bags", href: "/collections/Bags" }],
+          items: [
+            { name: "Book series", href: "/collections/galaxyBook" },
+            { name: "Tab series", href: "/collections/galaxyTab" },
+          ],
+        },
+        {
+          id: "accessory",
+          name: "Accessory",
+          href: "/collections/Accessory",
+
+          items: [
+            { name: "Watch series", href: "/collections/galaxyWatch" },
+            { name: "Buzz series", href: "/collections/galaxyBuzz" },
+            { name: "Ring", href: "/collections/galaxyRing" },
+          ],
         },
       ],
     },
@@ -123,77 +141,90 @@ export const footerSocial = [
 export const productData = [
   {
     id: 1,
-    title: "galaxy-fold5",
-    price: 400,
-    img: "/images/fold5.jpg",
+    title: "Galaxy S23 FE",
+    price: 700,
+    img: "/images/s23fe_1.png",
   },
   {
     id: 2,
-    title: "galaxy fold 5",
-    price: 400,
+    title: "Galaxy S24",
+    price: 800,
+    img: "/images/s24.png",
+  },
+
+  {
+    id: 3,
+    title: "Galaxy Flip5",
+    price: 850,
+    img: "/images/flip5.png",
+  },
+  {
+    id: 4,
+    title: "Galaxy Fold6",
+    price: 900,
     img: "/images/fold6.png",
   },
   {
-    id: 3,
-    title: "galaxy-flip4",
-    price: 400,
-    img: "/images/flip4.jpg",
-  },
-  {
-    id: 4,
-    title: "galaxy-flip6",
-    price: 400,
-    img: "/images/flip6.jpg",
-  },
-  {
     id: 5,
-    title: "galaxy-s23",
-    price: 400,
-    img: "/images/s23.jpg",
+    title: "Galaxy Buzz3",
+    price: 250,
+    img: "/images/buzz3.png",
   },
   {
     id: 6,
-    title: "galaxy-ultra",
-    price: 400,
-    img: "/images/ultra.jpg",
+    title: "Galaxy Watch5 Pro",
+    price: 500,
+    img: "/images/w5pro.png",
+  },
+  {
+    id: 7,
+    title: "Galaxy Tap S7 Fe",
+    price: 700,
+    img: "/images/ts7fe.png",
+  },
+  {
+    id: 7,
+    title: "Galaxy Book3",
+    price: 800,
+    img: "/images/book3.png",
   },
 ];
 
-export const productData2 = [
+export const newArrivalsData = [
   {
     id: 1,
-    title: "new-arrivals-1",
+    title: "Galaxy Watch7",
     price: 600,
-    img: "/images/new1.png",
+    img: "/images/w7-1.png",
   },
   {
     id: 2,
-    title: "new-arrivals-2",
-    price: 600,
-    img: "/images/new2.png",
+    title: "Galaxy Flip6",
+    price: 900,
+    img: "/images/flip6.png",
   },
   {
     id: 3,
-    title: "new-arrivals-3",
-    price: 600,
-    img: "/images/new3.png",
+    title: "Galaxy Fold6",
+    price: 990,
+    img: "/images/fold6.png",
   },
   {
     id: 4,
-    title: "new-arrivals-4",
+    title: "Galaxy Tap S9",
     price: 600,
-    img: "/images/new4.png",
+    img: "/images/ts9.png",
   },
   {
     id: 5,
-    title: "new-arrivals-5",
-    price: 600,
-    img: "/images/new5.png",
+    title: "Galaxy Book4 Ultra",
+    price: 800,
+    img: "/images/book4u.png",
   },
   {
     id: 6,
-    title: "new-arrivals-6",
-    price: 600,
-    img: "/images/new6.png",
+    title: "Galaxy Ring",
+    price: 460,
+    img: "/images/ring.png",
   },
 ];
