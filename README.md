@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Galaxy University Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+대학생을 위한 삼성 갤럭시 제품 전문 판매 사이트
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## 기술스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React, javascript(es6), TypeScript, React-hook-form, Tailwind CSS, @headlessui/react, react-lazy-load-image-component, swiper
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## 주요 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Navbar
 
-### `npm run build`
+![main1.PNG](https://private-user-images.githubusercontent.com/155502886/372437426-6c80ee92-d5dd-4f99-835f-7d870002d572.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjc3ODA3NDEsIm5iZiI6MTcyNzc4MDQ0MSwicGF0aCI6Ii8xNTU1MDI4ODYvMzcyNDM3NDI2LTZjODBlZTkyLWQ1ZGQtNGY5OS04MzVmLTdkODcwMDAyZDU3Mi5QTkc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAwMVQxMTAwNDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT01MDU1ODkzM2UwY2IxYWZjYjY5ZjE1ODRiOGI0NDhiMzA0NmE4OTY3ZDY2N2VhMGRmMGIzYmQ5MmI1NjliMTEwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.9tkdJOxJviZRD9i5z8I_6z9V_MheNMbN-VBKCccHpsI)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Headless UI 를 이용한 navbar 구현
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+슬라이드
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![slide1.PNG](https://private-user-images.githubusercontent.com/155502886/372437463-b7559c92-ea04-4542-9311-b622b319f56a.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjc3ODA5OTAsIm5iZiI6MTcyNzc4MDY5MCwicGF0aCI6Ii8xNTU1MDI4ODYvMzcyNDM3NDYzLWI3NTU5YzkyLWVhMDQtNDU0Mi05MzExLWI2MjJiMzE5ZjU2YS5QTkc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAwMVQxMTA0NTBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mN2IwOWU2ODg2YmFlZDk3ODY4Y2QzZDJkZTI4NzMzNGYxNmQ4YjlmYjdiMjI0ZDAwMWQwMmEzODdjMmI5MDJhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.5QlX3QU6qsWcThnO5kGRtsSELigNke0M1OriONLtK7Q)
 
-### `npm run eject`
+![slide2.PNG](https://private-user-images.githubusercontent.com/155502886/372437467-45e557d9-eba3-4e26-b1bd-25db4c1ad373.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjc3ODA3ODgsIm5iZiI6MTcyNzc4MDQ4OCwicGF0aCI6Ii8xNTU1MDI4ODYvMzcyNDM3NDY3LTQ1ZTU1N2Q5LWViYTMtNGUyNi1iMWJkLTI1ZGI0YzFhZDM3My5QTkc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAwMVQxMTAxMjhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00Y2QzNzEyYmYyNTYxYzM4NWQ0ZjU0YmZlYzU1MjdhODQzYTczNGUxN2VmMmRiNDM0NmJlMzUwZjRjMDc0NzU5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.JSW2Ez7XX-hxqQlebG5rhsCb-KkK6yNdBW6RCAl1ZNo)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- swiper 를 이용한 슬라이드 기능 구현
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+반응형UI
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![login.PNG](https://private-user-images.githubusercontent.com/155502886/372437417-09df1030-6d8e-4564-8857-191528ca6315.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjc3ODA3ODgsIm5iZiI6MTcyNzc4MDQ4OCwicGF0aCI6Ii8xNTU1MDI4ODYvMzcyNDM3NDE3LTA5ZGYxMDMwLTZkOGUtNDU2NC04ODU3LTE5MTUyOGNhNjMxNS5QTkc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAwMVQxMTAxMjhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00NjM4OGUxMTkyN2YzNjU2OTZmNGQ3YzEzYTFiODZmYzNlNzJmZDk0NzAyZjRlMzNhZWE0MTBkZTk3ZDE0ODZmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.93sLzYW1yfxPslYBOEJCd-ELPcyvaq3Qb62vAs3PZHE)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![login1.PNG](https://private-user-images.githubusercontent.com/155502886/372437421-afb42150-a3ae-468f-899c-50a967e68791.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjc3ODA3ODgsIm5iZiI6MTcyNzc4MDQ4OCwicGF0aCI6Ii8xNTU1MDI4ODYvMzcyNDM3NDIxLWFmYjQyMTUwLWEzYWUtNDY4Zi04OTljLTUwYTk2N2U2ODc5MS5QTkc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAwMVQxMTAxMjhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jODE1ZGMzZDRkODIyZTdiODc1NzFhYWYyZTE3YWY1M2UyNzVjOWQ4MTYwYTkzODg0YWM2YTczNGUwZTY0NTRkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.-6BfMFqnfDEjuOlSZ0i-xnS1qXJs1cvgMG82NkuUzPY)
 
-## Learn More
+- 화면 너비에 따른 UI 자동 조정
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 추후 추가할 내용
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Navbar 항목 업데이트
+- 결제기능 업데이트
