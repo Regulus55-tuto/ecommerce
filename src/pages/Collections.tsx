@@ -76,7 +76,7 @@ const Collections = () => {
                         <div className={'lg:col-span-3'}>
                             <ul className={'grid grid-cols-1 gap-6 md:grid-cols-2'}>
                                 <>
-
+                                    {}
                                 </>
                             </ul>
                         </div>
