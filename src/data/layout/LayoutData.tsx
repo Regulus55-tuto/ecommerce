@@ -58,8 +58,8 @@ export const headerData = {
     },
   ],
   pages: [
-    { name: "NFTs", href: "/nfts" },
     { name: "Shop All", href: "/collections" },
+    { name: "New Arrivals", href: "/collections" },
   ],
 };
 

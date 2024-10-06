@@ -36,7 +36,6 @@ const Navbar = () => {
                 onMouseLeave={onMouseLeave}
                 ref={buttonRef}
             />
-
         </header>
     );
 };

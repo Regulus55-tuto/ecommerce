@@ -232,7 +232,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
 
                 {isAdmin && (
                   <Link
-                    to={"/product/new"}
+                    to={"/Product/new"}
                     className={
                       "flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                     }

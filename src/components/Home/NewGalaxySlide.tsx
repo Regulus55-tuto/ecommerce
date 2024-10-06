@@ -17,8 +17,8 @@ const NewGalaxySlide = () => {
       <ProductTitle title={"New Arrivals"} />
       <Swiper
         navigation={{
-          nextEl: ".image-swiper-button-next-product",
-          prevEl: ".image-swiper-button-prev-product",
+          nextEl: ".image-swiper-button-next-Product",
+          prevEl: ".image-swiper-button-prev-Product",
           disabledClass: "opacity-20",
         }}
         spaceBetween={30}
@@ -50,7 +50,7 @@ const NewGalaxySlide = () => {
         <div className={"mt-8 flex items-center justify-center"}>
           <div
             className={
-              "swiper-button image-swiper-button-prev-product mr-4 h-6 w-6 cursor-pointer"
+              "swiper-button image-swiper-button-prev-Product mr-4 h-6 w-6 cursor-pointer"
             }
           >
             <ChevronLeftIcon />
@@ -58,7 +58,7 @@ const NewGalaxySlide = () => {
           <div className={"custom-pagination flex justify-center"} />
           <div
             className={
-              "swiper-button image-swiper-button-next-product ml-4 h-6 w-6 cursor-pointer"
+              "swiper-button image-swiper-button-next-Product ml-4 h-6 w-6 cursor-pointer"
             }
           >
             <ChevronRightIcon />
