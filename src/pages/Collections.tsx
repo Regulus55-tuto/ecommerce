@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ProductTitle from "../components/ui/ProductTitle";
 import {Menu} from "@headlessui/react";
 import {ChevronDownIcon, FunnelIcon} from "@heroicons/react/16/solid";
 import CategorySort from "../components/Product/CategorySort";
 import useSortParams from "../hooks/useSortParams";
+import FilterDesktop from "../components/Product/FilterDesktop";
+import {COLLECTION, FILTERS} from "../data/Products";
 
 const Collections = () => {
     const {query, searchParams, setSortParams, deleteSortParams} = useSortParams()
 
+    // Get Filter Options
+    const [colors, setColors] = useState<string[]>([]);
+    const [sizes, setSizes] = useState<string[]>([])
 
     return (
         <div className={'bg-white'}>
@@ -45,10 +50,39 @@ const Collections = () => {
                             className={'-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden'}
                         >
                             <span className={'sr-only'}>Filters</span>
-                            <FunnelIcon className={"h-5 w-5"} aria-hidden="true" />
+                            <FunnelIcon className={"h-5 w-5"} aria-hidden="true"/>
                         </button>
                     </div>
                 </div>
+
+                {/*{filter}*/}
+                <section aria-labelledby={'products-heading'} className={'pt-6 pb-24'}>
+                    <h2 id={'products-heading'} className={'sr-only'}>
+                        Products
+                    </h2>
+                    <div className={'grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4'}>
+
+                        {/*filterBox*/}
+                        <FilterDesktop
+                            allCategories={COLLECTION}
+                            filters={FILTERS}
+                            colors={colors}
+                            sizes={sizes}
+                            setSortParams={setSortParams}
+                            deleteSortParams={deleteSortParams}
+                            searchParams={searchParams}
+                        />
+
+                        <div className={'lg:col-span-3'}>
+                            <ul className={'grid grid-cols-1 gap-6 md:grid-cols-2'}>
+                                <>
+
+                                </>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
             </main>
         </div>
     );
