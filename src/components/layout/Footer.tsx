@@ -138,7 +138,7 @@ const Footer = () => {
               target="_blank"
               to="https://github.com/Regulus55"
             >
-              Hakjoon
+              Regulus55
             </Link>
             . All rights reserved.
           </div>
