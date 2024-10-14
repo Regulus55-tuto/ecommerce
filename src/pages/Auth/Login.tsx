@@ -3,7 +3,8 @@ import { EMAIL_REGEX } from "data/Auth/authData";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 
 interface IProps {
   email: string;
@@ -11,6 +12,8 @@ interface IProps {
 }
 
 const Login = () => {
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -34,8 +37,18 @@ const Login = () => {
     console.log("Naver login");
   };
 
-  const submit = (data: IProps) => {
+  const submit = async (data: IProps) => {
     console.log(data);
+    try{
+      const url = 'http://localhost:8000/api/auth/login'
+      const {status} = await axios.post(url, data)
+      if(status === 200){
+        alert('login success')
+        navigate('/')
+      }
+    }catch(e){
+      console.log('errorrrrrr',e)
+    }
   };
 
   return (
@@ -49,73 +62,73 @@ const Login = () => {
         </div>
         <div className="flex w-full flex-col items-center">
           <form
-            className="flex w-full max-w-sm flex-col"
-            onSubmit={handleSubmit((data) => submit(data))}
+              className="flex w-full max-w-sm flex-col"
+              onSubmit={handleSubmit((data) => submit(data))}
           >
             <Input
-              {...register("email", {
-                required: "Please provide an email",
-                pattern: {
-                  value: EMAIL_REGEX,
-                  message: "Please provide a properly formatted email address",
-                },
-              })}
-              error={errors.email?.message}
-              ariaInvalid={isDirty}
-              labelText="Email"
-              type="email"
-              className="mb-3"
-              autofocus
-              autocomplete="on"
+                {...register("email", {
+                  required: "Please provide an email",
+                  pattern: {
+                    value: EMAIL_REGEX,
+                    message: "Please provide a properly formatted email address",
+                  },
+                })}
+                error={errors.email?.message}
+                ariaInvalid={isDirty}
+                labelText="Email"
+                type="email"
+                className="mb-3"
+                autofocus
+                autocomplete="on"
             />
 
             <Input
-              {...register("password", {
-                required: "Please provide a password",
-                minLength: {
-                  value: 6,
-                  message: "Password needs to be between 6 to 20 characters",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Password needs to be between 6 to 20 characters",
-                },
-              })}
-              error={errors.password?.message}
-              ariaInvalid={isDirty}
-              labelText="Password"
-              type="password"
-              className="mb-10"
-              autocomplete="off"
+                {...register("password", {
+                  required: "Please provide a password",
+                  minLength: {
+                    value: 6,
+                    message: "Password needs to be between 6 to 20 characters",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Password needs to be between 6 to 20 characters",
+                  },
+                })}
+                error={errors.password?.message}
+                ariaInvalid={isDirty}
+                labelText="Password"
+                type="password"
+                className="mb-10"
+                autocomplete="off"
             />
 
             <Button
-              text={"Login"}
-              disabled={isSubmitting} // 제출중일때 isSubmitting 을 true 로 바꿔서 선택못하게 함
-              className="rounded-lg bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+                text={"Login"}
+                disabled={isSubmitting} // 제출중일때 isSubmitting 을 true 로 바꿔서 선택못하게 함
+                className="rounded-lg bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
             />
           </form>
           <Button
-            text={"Sign with Google"}
-            onClick={signWithGoogle}
-            icon={() => <FcGoogle className={"mr-2 text-2xl"} />}
-            className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
+              text={"Sign with Google"}
+              onClick={signWithGoogle}
+              icon={() => <FcGoogle className={"mr-2 text-2xl"}/>}
+              className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
           />
           <Button
-            text={"Sign with Kakao"}
-            onClick={signWithKakao}
-            icon={() => (
-              <img src="/images/kakao.png" className="mr-2 w-7 h-7" />
-            )}
-            className="mt-1 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
+              text={"Sign with Kakao"}
+              onClick={signWithKakao}
+              icon={() => (
+                  <img src="/images/kakao.png" className="mr-2 w-7 h-7"/>
+              )}
+              className="mt-1 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
           />
           <Button
-            text={"Sign with Naver"}
-            onClick={signWithNaver}
-            icon={() => (
-              <img src="/images/naver.png" className="mr-2 w-7 h-7" />
-            )}
-            className="mt-1 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
+              text={"Sign with Naver"}
+              onClick={signWithNaver}
+              icon={() => (
+                  <img src="/images/naver.png" className="mr-2 w-7 h-7"/>
+              )}
+              className="mt-1 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500 hover:bg-gray-50"
           />
           <div className="mt-10 text-slate-500">
             Don't have an account?
@@ -123,13 +136,20 @@ const Login = () => {
               Sign up
             </Link>
           </div>
+
+          <div className="text-slate-500">
+            Forgot your Password?
+            <Link to={"/forgot/password"} className="p-2 font-semibold text-violet-500">
+             Find My Password
+            </Link>
+          </div>
         </div>
       </div>
 
       <AuthImageContainer
-        image={"/images/login.webp"}
-        firstText="shop smarter"
-        secondText="Login here"
+          image={"/images/login.webp"}
+          firstText="shop smarter"
+          secondText="Login here"
       />
     </section>
   );

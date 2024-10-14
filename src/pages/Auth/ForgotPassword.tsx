@@ -2,7 +2,8 @@ import { AuthImageContainer, Button, Input } from "components/ui";
 import { EMAIL_REGEX } from "data/Auth/authData";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 
 interface IProps {
   email: string;
@@ -22,8 +23,17 @@ const ForgotPassword = () => {
     },
   });
 
-  const submit = (data: IProps) => {
+  const submit = async (data: IProps) => {
     console.log(data);
+    try{
+      const url = 'http://localhost:8000/api/auth/find/password'
+      const {status} =await axios.post(url, data)
+      if(status === 201){
+        alert('mail send successfully')
+      }
+    }catch(e){
+      console.log('errorrrrr',e)
+    }
   };
 
   return (

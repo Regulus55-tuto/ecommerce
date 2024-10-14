@@ -2,11 +2,12 @@ import {AuthImageContainer, Button, Input} from "components/ui";
 import {EMAIL_REGEX} from "data/Auth/authData";
 import React from "react";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Checkbox from "../../components/ui/Checkbox";
+import axios from "axios";
 
 interface IProps {
-    userName: string;
+    username: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -20,6 +21,8 @@ interface IProps {
 }
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -28,7 +31,7 @@ const Signup = () => {
     } = useForm<IProps>({
         mode: "onSubmit",
         defaultValues: {
-            userName: "",
+            username: "",
             email: "",
             password: "",
             confirmPassword: "",
@@ -41,8 +44,24 @@ const Signup = () => {
         },
     });
 
-    const submit = (data: IProps) => {
+    const submit = async (data: IProps) => {
         console.log(data);
+
+        try{
+            // const userInput = {
+            //     username: data.username,
+            //     email: data.email,
+            //     password: data.password,
+            // }
+            const url = 'http://localhost:8000/api/auth/signup'
+            const { status} = await axios.post(url, data)
+            if(status === 201){
+                alert('signup ss')
+                navigate('/login')
+            }
+        }catch(e){
+            console.log('errorrrr',e)
+        }
     };
 
     const agreements = [
@@ -67,10 +86,10 @@ const Signup = () => {
                         onSubmit={handleSubmit((data) => submit(data))}
                     >
                         <Input
-                            {...register("userName", {
+                            {...register("username", {
                                 required: "Please provide an Username",
                             })}
-                            error={errors.userName?.message}
+                            error={errors.username?.message}
                             ariaInvalid={isDirty}
                             labelText="Username"
                             type="text"
