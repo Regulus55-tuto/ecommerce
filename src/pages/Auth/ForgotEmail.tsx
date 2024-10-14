@@ -70,7 +70,7 @@ const ForgotEmail = () => {
       </div>
 
       <AuthImageContainer
-        image={"/images/simplistic-mobile-login-via-phone-device.png"}
+        image={"/images/login.webp"}
         firstText="Find your email"
         secondText=""
       />

@@ -13,7 +13,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
 }
 
-const LABEL_CLASS = `duration absolute top-px left-2 -translate-y-1/2 scale-75 bg-white px-1 transition-all origin-left	
+const LABEL_CLASS = ` duration absolute top-px left-2 -translate-y-1/2 scale-75 bg-white px-1 transition-all origin-left	
 peer-placeholder-shown:top-7 peer-placeholder-shown:left-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-slate-500
 peer-focus:top-px peer-focus:left-2 peer-focus:scale-75 peer-focus:text-violet-500 pointer-events-none	`;
 

@@ -127,7 +127,7 @@ const Login = () => {
       </div>
 
       <AuthImageContainer
-        image={"/images/bubble-gum-big-screen-phone.png"}
+        image={"/images/login.webp"}
         firstText="shop smarter"
         secondText="Login here"
       />

@@ -75,9 +75,9 @@ const ForgotPassword = () => {
       </div>
 
       <AuthImageContainer
-          image={"/images/lucent-login-and-password-folder.png"}
+          image={"/images/register.webp"}
           firstText="Find your password"
-          secondText=""
+          secondText="Find your password"
       />
     </section>
   );
