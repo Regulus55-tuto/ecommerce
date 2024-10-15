@@ -11,6 +11,7 @@ import {
   ProductDetail,
   Signup,
 } from "./pages";
+import ChangePassword from "./pages/Auth/ChangePassword";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: '/collections',
         element: <Collections/>
+      },
+      {
+        path: '/change/password',
+        element: <ChangePassword/>
       }
     ],
   },
