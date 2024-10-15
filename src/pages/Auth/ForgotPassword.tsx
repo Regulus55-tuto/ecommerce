@@ -2,7 +2,7 @@ import { AuthImageContainer, Button, Input } from "components/ui";
 import { EMAIL_REGEX } from "data/Auth/authData";
 import React from "react";
 import { useForm } from "react-hook-form";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 interface IProps {
@@ -10,7 +10,6 @@ interface IProps {
 }
 
 const ForgotPassword = () => {
-
   const {
     register,
     handleSubmit,
@@ -25,14 +24,14 @@ const ForgotPassword = () => {
 
   const submit = async (data: IProps) => {
     console.log(data);
-    try{
-      const url = 'http://localhost:8000/api/auth/find/password'
-      const {status} =await axios.post(url, data)
-      if(status === 201){
-        alert('mail send successfully')
+    try {
+      const url = "http://localhost:8000/api/auth/find/password";
+      const { status } = await axios.post(url, data);
+      if (status === 201) {
+        alert("mail send successfully");
       }
-    }catch(e){
-      console.log('errorrrrr',e)
+    } catch (e) {
+      console.log("errorrrrr", e);
     }
   };
 
@@ -41,7 +40,9 @@ const ForgotPassword = () => {
       <div className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
         <div className="mb-14 flex-col items-center text-center">
           <h2 className="mb-2 text-3xl font-bold">Forgot your password? </h2>
-          <p className="text-slate-500">Request a password reset email </p>
+          <p className="text-slate-500">
+            Enter your email to reset your account password{" "}
+          </p>
         </div>
         <div className="flex w-full flex-col items-center">
           <form
@@ -85,9 +86,9 @@ const ForgotPassword = () => {
       </div>
 
       <AuthImageContainer
-          image={"/images/register.webp"}
-          firstText="Find your password"
-          secondText="Find your password"
+        image={"/images/register.webp"}
+        firstText="Start your password recovery"
+        secondText="We'll help you get back in"
       />
     </section>
   );
