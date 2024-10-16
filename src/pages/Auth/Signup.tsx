@@ -12,12 +12,13 @@ interface IProps {
   password: string;
   confirmPassword: string;
   code: string;
-
-  overTwenty: boolean;
-  agreeOfTerm: boolean;
-  agreeOfPersonalInfo: boolean;
-  agreeOfMarketing: boolean;
-  etc: boolean;
+  consent: {
+    overTwenty: boolean;
+    agreeOfTerm: boolean;
+    agreeOfPersonalInfo: boolean;
+    agreeOfMarketing: boolean;
+    etc: boolean;
+  };
 }
 
 const Signup = () => {
@@ -29,6 +30,7 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { isSubmitting, isDirty, errors },
     setError,
@@ -40,12 +42,13 @@ const Signup = () => {
       password: "",
       confirmPassword: "",
       code: "",
-
-      overTwenty: false,
-      agreeOfTerm: false,
-      agreeOfPersonalInfo: false,
-      agreeOfMarketing: false,
-      etc: false,
+      consent: {
+        overTwenty: false,
+        agreeOfTerm: false,
+        agreeOfPersonalInfo: false,
+        agreeOfMarketing: false,
+        etc: false,
+      },
     },
   });
 
@@ -69,7 +72,9 @@ const Signup = () => {
   };
 
   const submit = async (data: IProps) => {
+    const { email, password, username, consent } = data;
     console.log(data);
+
     try {
       // const userInput = {
       //     username: data.username,
@@ -114,6 +119,60 @@ const Signup = () => {
       required: false,
     },
   ];
+
+  const watchConsent = watch("consent");
+  const selectAllChecked = Object.values(watchConsent).every((data) => data);
+
+  const [checkItems, setCheckItems] = useState<string[]>([]);
+  const [consent, setConsent] = useState<IProps["consent"]>({
+    overTwenty: false,
+    agreeOfTerm: false,
+    agreeOfPersonalInfo: false,
+    agreeOfMarketing: false,
+    etc: false,
+  });
+
+  const handleSingleCheck = (checked: any, id: any, key: any) => {
+    setValue(`consent.${key}` as keyof IProps, checked);
+    if (checked) {
+      setCheckItems((prev) => [...prev, id]);
+      setConsent((prev) => ({
+        ...prev,
+        [key]: true,
+      }));
+    } else {
+      setCheckItems(checkItems.filter((el) => el !== id));
+      setConsent((prev) => ({
+        ...prev,
+        [key]: false,
+      }));
+    }
+  };
+
+  const handleAllCheck = (checked: any) => {
+    agreements.forEach((item) => {
+      setValue(`consent.${item.key}` as keyof IProps, checked);
+    });
+    if (checked) {
+      const idArray = agreements.map((el) => String(el.id));
+      setCheckItems(idArray);
+      const newConsent = agreements.reduce((acc, cur) => {
+        const key = cur.key as keyof IProps["consent"];
+        acc[key] = true;
+        return acc;
+      }, {} as IProps["consent"]);
+      setConsent(newConsent);
+    } else {
+      setCheckItems([]);
+      setConsent({
+        overTwenty: false,
+        agreeOfTerm: false,
+        agreeOfPersonalInfo: false,
+        agreeOfMarketing: false,
+        etc: false,
+      });
+    }
+  };
 
   return (
     <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
@@ -259,7 +318,7 @@ const Signup = () => {
                 {agreements.map((item) => (
                   <Checkbox
                     type="checkbox"
-                    {...register(item.key as keyof IProps, {
+                    {...register(`consent.${item.key}` as keyof IProps, {
                       required: item.required
                         ? "This field is required."
                         : false,
