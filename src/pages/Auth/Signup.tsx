@@ -146,47 +146,32 @@ const Signup = () => {
               ariaInvalid={isDirty}
               labelText={"Confirm password"}
               type={"password"}
-              className={"mb-10"}
+              className={"mb-3"}
               autocomplete="off"
             />
 
-            <div
-              className={
-                "border peer rounded-lg py-2 px-4 border-gray-300 mb-4"
-              }
-            >
-              {/* {agreements.map((item) => (
-                <div
-                  className="flex items-center space-x-2 text-gray-500"
-                  key={item.id}
-                >
-                  <input
-                    type="checkbox"
-                    id={item.key}
-                    {...register(item.key as keyof IProps)}
-                    className="hidden peer"
-                  />
-                  <div className="flex items-center justify-center w-5 h-5 border-2 border-gray-400 rounded-lg peer-checked:bg-violet-500 peer-checked:border-violet-300" />
-                  <label htmlFor={item.key}>{item.label}</label>
-                </div>
-              ))} */}
+              <div
+                  className={
+                      "border peer rounded-lg py-2 px-4 border-gray-300 mb-4"
+                  }
+              >
+                  {agreements.map((item) => (
+                      <Checkbox
+                          type="checkbox"
+                          {...register(item.key as keyof IProps, {
+                              required: "Please provide a password",
+                          })}
+                          labelText={item.label}
+                          id={item.key}
+                          className={'mb-1'}
+                      />
+                  ))}
+              </div>
 
-              {agreements.map((item) => (
-                <Checkbox
-                  type="checkbox"
-                  {...register(item.key as keyof IProps, {
-                    required: "Please provide a password",
-                  })}
-                  labelText={item.label}
-                  id={item.key}
-                />
-              ))}
-            </div>
-
-            <Button
-              text={"Signup"}
-              disabled={isSubmitting}
-              className="rounded-lg bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+              <Button
+                  text={"Signup"}
+                  disabled={isSubmitting}
+                  className="rounded-lg bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
             />
           </form>
 
