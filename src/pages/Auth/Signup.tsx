@@ -1,292 +1,308 @@
-import {AuthImageContainer, Button, Input} from "components/ui";
-import {EMAIL_REGEX} from "data/Auth/authData";
-import {useForm} from "react-hook-form";
-import {Link, useNavigate} from "react-router-dom";
+import { AuthImageContainer, Button, Input } from "components/ui";
+import { EMAIL_REGEX } from "data/Auth/authData";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import Checkbox from "../../components/ui/Checkbox";
 import axios from "axios";
-import React, {useState} from "react";
+import { useState } from "react";
 
 interface IProps {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    code: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  code: string;
 
-    overTwenty: boolean;
-    agreeOfTerm: boolean;
-    agreeOfPersonalInfo: boolean;
-    agreeOfMarketing: boolean;
-    etc: boolean;
+  overTwenty: boolean;
+  agreeOfTerm: boolean;
+  agreeOfPersonalInfo: boolean;
+  agreeOfMarketing: boolean;
+  etc: boolean;
 }
 
 const Signup = () => {
-    const [isSentEmail, setIsSentEmail] = useState(false);
-    const [isCheckedEmail, setIsCheckedEmail] = useState(false)
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const navigate = useNavigate();
+  const [isSentEmail, setIsSentEmail] = useState(false);
+  const [isCheckedEmail, setIsCheckedEmail] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-    const {
-        register,
-        handleSubmit,
-        formState: {isSubmitting, isDirty, errors},
-        setError,
-    } = useForm<IProps>({
-        mode: "onSubmit",
-        defaultValues: {
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            code: "",
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { isSubmitting, isDirty, errors },
+    setError,
+  } = useForm<IProps>({
+    mode: "onSubmit",
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      code: "",
 
-            overTwenty: false,
-            agreeOfTerm: false,
-            agreeOfPersonalInfo: false,
-            agreeOfMarketing: false,
-            etc: false,
-        },
-    });
+      overTwenty: false,
+      agreeOfTerm: false,
+      agreeOfPersonalInfo: false,
+      agreeOfMarketing: false,
+      etc: false,
+    },
+  });
 
-    const sendEmailHandler = async (data: any) => {
-        const userInput = {
-            email: data.email,
-        }
-
-        console.log('sendemalhamdler', userInput)
-        setIsSentEmail(true)
-    }
-
-    const checkEmailHandler = async (data: any) => {
-        const userInput = {
-            email: data.email,
-            code: data.code,
-        }
-
-        console.log('checkemalhamdler', userInput)
-        setIsCheckedEmail(true)
-    }
-
-
-    const submit = async (data: IProps) => {
-        console.log(data);
-        try {
-            // const userInput = {
-            //     username: data.username,
-            //     email: data.email,
-            //     password: data.password,
-            // }
-            const url = "http://localhost:8000/api/auth/signup";
-            const {status} = await axios.post(url, data);
-            if (status === 201) {
-                alert("signup ss");
-                navigate("/login");
-            }
-        } catch (e) {
-            console.log("errorrrr", e);
-        }
+  const sendEmailHandler = async (data: any) => {
+    const userInput = {
+      email: data.email,
     };
 
-    const agreements = [
-        {id: 1, label: "14세 이상입니다 (필수)", key: "overTwenty", required: true},
-        {id: 2, label: "이용약관(필수)", key: "agreeOfTerm", required: true},
-        {
-            id: 3,
-            label: "개인정보수집 및 이용동의 (필수)",
-            key: "agreeOfPersonalInfo", required: true
-        },
-        {
-            id: 4,
-            label: "개인정보 마케팅 활용 동의 (선택)",
-            key: "agreeOfMarketing", required: false
-        },
-        {id: 5, label: "이벤트, 특가 알림 및 SMS 등 수신 (선택)", key: "etc", required: false},
-    ];
+    console.log("sendemalhamdler", userInput);
+    setIsSentEmail(true);
+  };
 
-    return (
-        <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
-            <div
-                className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
-                <div className="mb-6 mt-4 flex-col items-center text-center">
-                    <h2 className="mb-2 text-3xl font-bold">Welcome!</h2>
-                    <p className="text-slate-500">for your first visit! </p>
-                </div>
-                <div className="flex w-full flex-col items-center">
+  const checkEmailHandler = async (data: any) => {
+    const userInput = {
+      email: data.email,
+      code: data.code,
+    };
 
+    console.log("checkemalhamdler", userInput);
+    setIsCheckedEmail(true);
+  };
 
-                    {!isCheckedEmail ? (
-                        !isSentEmail ? (
-                            <form
-                                onSubmit={handleSubmit(sendEmailHandler)}
-                                className="flex w-full max-w-sm flex-col"
-                            >
-                                <Input
-                                    {...register("email", {
-                                        required: "Please provide an email",
-                                        pattern: {
-                                            value: EMAIL_REGEX,
-                                            message: "Please provide a properly formatted email address",
-                                        },
-                                    })}
-                                    error={errors.code?.message}
-                                    ariaInvalid={isDirty}
-                                    labelText="Email"
-                                    type="email"
-                                    className="mb-3"
-                                    autoComplete="on"
-                                    autoFocus
-                                />
-                                <Button
-                                    text={"Send Email"}
-                                    type="submit"
-                                    className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
-                                />
-                            </form>
-                        ) : (
-                            <form
-                                onSubmit={handleSubmit(checkEmailHandler)}
-                                className="flex w-full max-w-sm flex-col"
-                            >
-                                <Input
-                                    {...register("email")}
-                                    ariaInvalid={isDirty}
-                                    labelText="Email"
-                                    type="email"
-                                    className="mb-3"
-                                    disabled
-                                />
-                                <Input
-                                    {...register("code", {
-                                        required: "Please provide a code",
-                                    })}
-                                    error={errors.code?.message}
-                                    ariaInvalid={isDirty}
-                                    labelText="Code"
-                                    type="text"
-                                    className="mb-3"
-                                />
-                                <Button
-                                    text={"Verify Email"}
-                                    type="submit"
-                                    className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
-                                />
-                            </form>
-                        )
-                    ) : (
-                        <form
-                            className="flex w-full max-w-sm flex-col"
-                            onSubmit={handleSubmit(submit)}
-                        >
-                            <div className={'flex justify-end text-blue-300 mb-1 mr-1'}>Your email has been
-                                successfully verified
-                            </div>
+  const submit = async (data: IProps) => {
+    console.log(data);
+    try {
+      // const userInput = {
+      //     username: data.username,
+      //     email: data.email,
+      //     password: data.password,
+      // }
+      const url = "http://localhost:8000/api/auth/signup";
+      const { status } = await axios.post(url, data);
+      if (status === 201) {
+        alert("signup ss");
+        navigate("/login");
+      }
+    } catch (e) {
+      console.log("errorrrr", e);
+    }
+  };
 
-                            <Input
-                                {...register("email")}
-                                ariaInvalid={isDirty}
-                                labelText="Email"
-                                type="email"
-                                className="mb-3"
-                                disabled
-                            />
+  const agreements = [
+    {
+      id: 1,
+      label: "14세 이상입니다 (필수)",
+      key: "overTwenty",
+      required: true,
+    },
+    { id: 2, label: "이용약관(필수)", key: "agreeOfTerm", required: true },
+    {
+      id: 3,
+      label: "개인정보수집 및 이용동의 (필수)",
+      key: "agreeOfPersonalInfo",
+      required: true,
+    },
+    {
+      id: 4,
+      label: "개인정보 마케팅 활용 동의 (선택)",
+      key: "agreeOfMarketing",
+      required: false,
+    },
+    {
+      id: 5,
+      label: "이벤트, 특가 알림 및 SMS 등 수신 (선택)",
+      key: "etc",
+      required: false,
+    },
+  ];
 
-                            <Input
-                                {...register("username", {
-                                    required: "Please provide a Username",
-                                })}
-                                error={errors.username?.message}
-                                ariaInvalid={isDirty}
-                                labelText="Username"
-                                type="text"
-                                className={"mb-3"}
-                                autoComplete="on"
-                            />
+  return (
+    <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
+      <div className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
+        <div className="mb-6 mt-4 flex-col items-center text-center">
+          <h2 className="mb-2 text-3xl font-bold">Welcome!</h2>
+          <p className="text-slate-500">for your first visit! </p>
+        </div>
+        <div className="flex w-full flex-col items-center">
+          {!isCheckedEmail ? (
+            !isSentEmail ? (
+              <form
+                onSubmit={handleSubmit(sendEmailHandler)}
+                className="flex w-full max-w-sm flex-col"
+              >
+                <Input
+                  {...register("email", {
+                    required: "Please provide an email",
+                    pattern: {
+                      value: EMAIL_REGEX,
+                      message:
+                        "Please provide a properly formatted email address",
+                    },
+                  })}
+                  error={errors.code?.message}
+                  ariaInvalid={isDirty}
+                  labelText="Email"
+                  type="email"
+                  className="mb-3"
+                  autoComplete="on"
+                  autoFocus
+                />
+                <Button
+                  text={"Send Email"}
+                  type="submit"
+                  className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+                />
+              </form>
+            ) : (
+              <form
+                onSubmit={handleSubmit(checkEmailHandler)}
+                className="flex w-full max-w-sm flex-col"
+              >
+                <Input
+                  {...register("email")}
+                  ariaInvalid={isDirty}
+                  labelText="Email"
+                  type="email"
+                  className="mb-3"
+                  disabled
+                />
+                <Input
+                  {...register("code", {
+                    required: "Please provide a code",
+                  })}
+                  error={errors.code?.message}
+                  ariaInvalid={isDirty}
+                  labelText="Code"
+                  type="text"
+                  className="mb-3"
+                />
+                <Button
+                  text={"Verify Email"}
+                  type="submit"
+                  className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+                />
+              </form>
+            )
+          ) : (
+            <form
+              className="flex w-full max-w-sm flex-col"
+              onSubmit={handleSubmit(submit)}
+            >
+              <div className={"flex justify-end text-blue-300 mb-1 mr-1"}>
+                Your email has been successfully verified
+              </div>
 
-                            <Input
-                                {...register("password", {
-                                    required: "Please provide a password",
-                                    minLength: {
-                                        value: 6,
-                                        message: "Password needs to be between 6 to 20 characters",
-                                    },
-                                    maxLength: {
-                                        value: 20,
-                                        message: "Password needs to be between 6 to 20 characters",
-                                    },
-                                })}
-                                error={errors.password?.message}
-                                ariaInvalid={isDirty}
-                                labelText="Password"
-                                type="password"
-                                className="mb-3"
-                                autoComplete="off"
-                            />
+              <Input
+                {...register("email")}
+                ariaInvalid={isDirty}
+                labelText="Email"
+                type="email"
+                className="mb-3"
+                disabled
+              />
 
-                            <Input
-                                {...register("confirmPassword", {
-                                    required: "Please provide a confirm password",
-                                })}
-                                error={errors.confirmPassword?.message}
-                                ariaInvalid={isDirty}
-                                labelText={"Confirm password"}
-                                type={"password"}
-                                className={"mb-3"}
-                                autoComplete="off"
-                            />
+              <Input
+                {...register("username", {
+                  required: "Please provide a Username",
+                })}
+                error={errors.username?.message}
+                ariaInvalid={isDirty}
+                labelText="Username"
+                type="text"
+                className={"mb-3"}
+                autoComplete="on"
+              />
 
-                            <div className={`border peer rounded-lg py-2 px-4 border-gray-300 ${
+              <Input
+                {...register("password", {
+                  required: "Please provide a password",
+                  minLength: {
+                    value: 6,
+                    message: "Password needs to be between 6 to 20 characters",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Password needs to be between 6 to 20 characters",
+                  },
+                })}
+                error={errors.password?.message}
+                ariaInvalid={isDirty}
+                labelText="Password"
+                type="password"
+                className="mb-3"
+                autoComplete="off"
+              />
 
-                                isSubmitted && Object.keys(errors).length > 0 ? "border-red-500" : ""
-                            } `}>
-                                {agreements.map((item) => (
-                                    <Checkbox
-                                        type="checkbox"
-                                        {...register(item.key as keyof IProps, {
-                                            required: item.required ? "This field is required." : false,
-                                        })}
-                                        labelText={item.label}
-                                        id={item.key}
-                                        key={item.key}
-                                        className={'mb-1'}
-                                    />
-                                ))}
+              <Input
+                {...register("confirmPassword", {
+                  required: "Please provide a confirm password",
+                  validate: (val: string) => {
+                    if (watch("password") !== val) {
+                      return "Please check your password";
+                    }
+                  },
+                })}
+                error={errors.confirmPassword?.message}
+                ariaInvalid={isDirty}
+                labelText={"Confirm password"}
+                type={"password"}
+                className={"mb-3"}
+                autoComplete="off"
+              />
 
-                            </div>
+              <div
+                className={`border peer rounded-lg py-2 px-4 border-gray-300 ${
+                  isSubmitted && Object.keys(errors).length > 0
+                    ? "border-red-500"
+                    : ""
+                } `}
+              >
+                {agreements.map((item) => (
+                  <Checkbox
+                    type="checkbox"
+                    {...register(item.key as keyof IProps, {
+                      required: item.required
+                        ? "This field is required."
+                        : false,
+                    })}
+                    labelText={item.label}
+                    id={item.key}
+                    key={item.key}
+                    className={"mb-1"}
+                  />
+                ))}
+              </div>
 
-                            {isSubmitted && Object.keys(errors).length > 0 && (
-                                <small
-                                    role="alert"
-                                    className={`animate-shake text-red-500`}
-                                >
-                                    check please
-                                </small>)}
+              {isSubmitted && Object.keys(errors).length > 0 && (
+                <small role="alert" className={`animate-shake text-red-500`}>
+                  check please
+                </small>
+              )}
 
-                            <Button
-                                type="submit"
-                                onClick={() => setIsSubmitted(true)}
-                                text={"Signup"}
-                                disabled={isSubmitting}
-                                className="rounded-lg bg-violet-500 mt-4 py-4 font-semibold text-white hover:bg-violet-500"
-                            />
-                        </form>
-                    )}
+              <Button
+                type="submit"
+                onClick={() => setIsSubmitted(true)}
+                text={"Signup"}
+                disabled={isSubmitting}
+                className="rounded-lg bg-violet-500 mt-4 py-4 font-semibold text-white hover:bg-violet-500"
+              />
+            </form>
+          )}
 
-
-                    <div className={"mt-10 text-slate-500"}>
-                        Already have an account?
-                        <Link to={"/login"} className={"p-2 font-semibold text-violet-500"}>
-                            Log in
-                        </Link>
-                    </div>
-                </div>
-            </div>
-            <AuthImageContainer
-                image={"/images/register.webp"}
-                firstText="shop smarter"
-                secondText="Signup here"
-            />
-        </section>
-    );
+          <div className={"mt-10 text-slate-500"}>
+            Already have an account?
+            <Link to={"/login"} className={"p-2 font-semibold text-violet-500"}>
+              Log in
+            </Link>
+          </div>
+        </div>
+      </div>
+      <AuthImageContainer
+        image={"/images/register.webp"}
+        firstText="shop smarter"
+        secondText="Signup here"
+      />
+    </section>
+  );
 };
 
 export default Signup;
