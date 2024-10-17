@@ -52,43 +52,54 @@ const Signup = () => {
     },
   });
 
-  const sendEmailHandler = async (data: any) => {
+  const sendEmailHandler = async (data: IProps) => {
     const userInput = {
       email: data.email,
     };
+    try {
+      // const url = "dd";
+      // const { status } = await axios.post(url, userInput);
+      // if (status === 200) {
+      //   alert("Email has been sent successfully");
+      // }
 
-    console.log("sendemalhamdler", userInput);
-    setIsSentEmail(true);
+      console.log("send email data", userInput);
+      setIsSentEmail(true);
+    } catch (e) {
+      console.log("send email errorrrr", e);
+    }
   };
 
-  const checkEmailHandler = async (data: any) => {
+  const checkEmailHandler = async (data: IProps) => {
     const userInput = {
       email: data.email,
       code: data.code,
     };
+    try {
+      // const url = "dd";
+      // const { status } = await axios.post(url, userInput);
+      // if (status === 200) {
+      //   alert("Your email has been successfully verified");
+      // }
 
-    console.log("checkemalhamdler", userInput);
-    setIsCheckedEmail(true);
+      console.log("checkemalhamdler", userInput);
+      setIsCheckedEmail(true);
+    } catch (e) {
+      console.log("check email errorrrr", e);
+    }
   };
 
   const submit = async (data: IProps) => {
-    const { email, password, username, consent } = data;
-    console.log(data);
-
+    console.log("signup data", data);
     try {
-      // const userInput = {
-      //     username: data.username,
-      //     email: data.email,
-      //     password: data.password,
-      // }
       const url = "http://localhost:8000/api/auth/signup";
       const { status } = await axios.post(url, data);
       if (status === 201) {
-        alert("signup ss");
+        alert("Sign up successful");
         navigate("/login");
       }
     } catch (e) {
-      console.log("errorrrr", e);
+      console.log("signup errorrrr", e);
     }
   };
 
@@ -123,7 +134,7 @@ const Signup = () => {
   const watchConsent = watch("consent");
   const selectAllChecked = Object.values(watchConsent).every((data) => data);
 
-  const [checkItems, setCheckItems] = useState<string[]>([]);
+  const [checkItems, setCheckItems] = useState<number[]>([]);
   const [consent, setConsent] = useState<IProps["consent"]>({
     overTwenty: false,
     agreeOfTerm: false,
@@ -132,7 +143,7 @@ const Signup = () => {
     etc: false,
   });
 
-  const handleSingleCheck = (checked: any, id: any, key: any) => {
+  const handleSingleCheck = (checked: any, id: number, key: any) => {
     setValue(`consent.${key}` as keyof IProps, checked);
     if (checked) {
       setCheckItems((prev) => [...prev, id]);
@@ -154,7 +165,7 @@ const Signup = () => {
       setValue(`consent.${item.key}` as keyof IProps, checked);
     });
     if (checked) {
-      const idArray = agreements.map((el) => String(el.id));
+      const idArray = agreements.map((el) => Number(el.id));
       setCheckItems(idArray);
       const newConsent = agreements.reduce((acc, cur) => {
         const key = cur.key as keyof IProps["consent"];
@@ -315,6 +326,16 @@ const Signup = () => {
                     : ""
                 } `}
               >
+                <div className="border-b border-gray-300 pb-3 mb-3">
+                  <Checkbox
+                    type="checkbox"
+                    labelText={"전체 동의"}
+                    id="check-all"
+                    onChange={(e) => handleAllCheck(e.target.checked)}
+                    checked={checkItems.length === agreements.length}
+                  />
+                </div>
+
                 {agreements.map((item) => (
                   <Checkbox
                     type="checkbox"
@@ -327,6 +348,10 @@ const Signup = () => {
                     id={item.key}
                     key={item.key}
                     className={"mb-1"}
+                    onChange={(e) =>
+                      handleSingleCheck(e.target.checked, item.id, item.key)
+                    }
+                    checked={checkItems.includes(item.id)}
                   />
                 ))}
               </div>
@@ -357,7 +382,7 @@ const Signup = () => {
       </div>
       <AuthImageContainer
         image={"/images/register.webp"}
-        firstText="shop smarter"
+        firstText="Create your Account"
         secondText="Signup here"
       />
     </section>
