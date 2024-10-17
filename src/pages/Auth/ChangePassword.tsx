@@ -45,7 +45,7 @@ const ChangePassword = () => {
             const url = 'http://localhost:8000/api/auth/change/password'
             const {status} =await axios.put(url, userInput)
             if(status === 200){
-                alert('Password changed successfully')
+                alert('Password has been changed successfully')
             }
         }catch(e){
             console.log('errorrrrr',e)

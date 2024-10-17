@@ -15,7 +15,7 @@ export default function AuthImageContainer({
     <div className="col-span-6 hidden h-full w-full items-center bg-slate-50 p-4 lg:flex">
       <div className="flex h-full w-full flex-col items-center justify-center">
         <h1 className={`relative z-10 text-4xl font-bold `}>{firstText}</h1>
-        <h1 className="relative z-10  mt-2 mb-8 text-4xl font-bold text-violet-500">
+        <h1 className="relative z-10 mt-2 mb-8 text-4xl font-bold text-violet-500">
           {secondText}
         </h1>
         <LazyLoadImage
