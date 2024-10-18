@@ -274,7 +274,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
 
                         <div className="hidden lg:ml-8 lg:flex">
                             <img
-                                src="https://tailwindui.com/img/flags/flag-canada.svg"
+                                src="/images/canada.png"
                                 alt=""
                                 className="block h-auto w-5 shrink-0"
                             />
