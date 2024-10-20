@@ -8,12 +8,12 @@ interface ProductCardProps {
     price: number;
     category: string;
     id?: number;
-    image?: string | string[];
+    image?:  string[];
     description: string;
     highlights?: string[];
     details?: string;
     tags?: string;
-    // colors?: string[];
+    colors?: string[];
     options: string;
 }
 
@@ -26,7 +26,7 @@ const ProductCard3 = ({
                           description,
                           highlights,
                           details,
-                          // colors,
+                          colors,
                           tags
                       }: ProductCardProps) => {
     if (!id) {

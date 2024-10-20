@@ -30,11 +30,11 @@ export interface ProductType {
     subCategory?: string;
     tags: string;
     registrationDate?:number;
-    // color: string[];
+    colors: string[];
     description: string;
     options: string;
     id: number;
-    image: string;
+    image: string[];
     details?: string;
     highlights?: string[];
 }
