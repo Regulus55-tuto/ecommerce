@@ -21,3 +21,20 @@ export interface FilterProps {
     params: string | null;
     searchParams: URLSearchParams;
 }
+
+// prodcts
+export interface ProductType {
+    title: string;
+    price: number;
+    category: string;
+    subCategory?: string;
+    tags: string;
+    registrationDate?:number;
+    // color: string[];
+    description: string;
+    options: string;
+    id: number;
+    image: string;
+    details?: string;
+    highlights?: string[];
+}
