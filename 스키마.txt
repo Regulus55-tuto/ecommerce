@@ -1,0 +1,45 @@
+
+
+Category 스키마
+
+{
+  "id": "003",
+  "name": "Z-Series",
+  "slug": "z-series",
+  "products": ["123", "124", "125"]
+}
+
+컬렉션 URL : 
+/gu-shop/collections/smartphone/a-series
+		                 /s-series
+		                 /flip-series
+		                 /fold-series
+
+/gu-shop/collections/computer/book-series
+		              /tab-series
+
+/gu-shop/collections/accessory/watch-series
+		              /buzz-series
+		              /ring
+
+
+
+
+
+Product 스키마
+
+{
+  "category": "Z-Series",
+  "id": "126",
+  "name": "Z-5",
+  "price": 1200,
+  "stock": 50,
+  "colors": ["black", "violet", "mint", "cream"],
+  "images": ["/images/z5-front.jpg", "/images/z5-back.jpg"],
+  "slug": "galaxy-flip5"
+}
+
+프로덕트 URL : (상품 클릭시)
+/gu-shop/product/galaxy-s24?color=black
+/gu-shop/product/galaxy-flip5?color=cream
+
