@@ -100,7 +100,6 @@ const ProductCard3 = ({
             //   style={{ border: `2px solid ${color}` }}
             // >
             <div
-              onClick={(e) => e.stopPropagation}
               className="text-center rounded-lg h-8 border-2 mx-1 "
               style={{ backgroundColor: color }}
             />
@@ -135,7 +134,7 @@ const ProductCard3 = ({
             >
               Promotional Price
             </span>
-            <p className={"text-xl font-bold text-gray-700"}>
+            <p className={"text-xl font-bold text-blue-500"}>
               ₩ {formattedPromotionalPrice}
             </p>
           </div>

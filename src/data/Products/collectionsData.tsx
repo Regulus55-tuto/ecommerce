@@ -263,7 +263,7 @@ export const smartphone = {
       image: [
         "/productimg/smartphone/flip6blue.webp",
         "/productimg/smartphone/flip6mint.webp",
-        "/productimg/smartphone/flip6silver.webp",
+        "/productimg/smartphone/flip6silvershadow.webp",
         "/productimg/smartphone/flip6yellow.webp",
       ],
       highlights: [

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { classNames, removeCollectionsPrefix } from "../utiles/utiles";
 import { FreeMode, Thumbs } from "swiper";
@@ -9,6 +9,7 @@ import { RadioGroup } from "@headlessui/react";
 import sizeFilter from "../components/Product/SizeFilter";
 import { Button } from "../components/ui";
 import { accessory, computer, smartphone } from "data/Products/collectionsData";
+import { PiArrowFatRightThin } from "react-icons/pi";
 
 const ProductDetail = () => {
   const { pathname } = useLocation();
@@ -38,6 +39,13 @@ const ProductDetail = () => {
   const productWithCurrentId = products.find(
     (products) => products.id === detailProductId
   ); // products의 id 가 현재 params 의 주소가 같은걸 뽑아줌.  products 를 뽑아줌.
+
+  // console.log("ffff", productWithCurrentId.colorbuttons);
+
+  const formattedReferencePrice =
+    productWithCurrentId?.referencePrice.toLocaleString();
+  const formattedPromotionalPrice =
+    productWithCurrentId?.promotionalPrice.toLocaleString();
 
   const checkCartItem = ({ id, image, title, price }: any) => {};
 
@@ -104,24 +112,59 @@ const ProductDetail = () => {
               <div className=" lg:border-gray-200 lg:pr-8">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                   {productWithCurrentId?.title}
+                  <h4 className="text-sm text-gray-500 mt-1">
+                    {productWithCurrentId?.model}
+                  </h4>
                 </h1>
               </div>
 
               {/* Options */}
               <div className="mt-4 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
-                <p className="mt-4 text-3xl tracking-tight text-gray-900">
-                  ${productWithCurrentId?.referencePrice}
-                </p>
+
+                {/* 가격부분 */}
+                <div className={"flex items-center justify-center pt-8"}>
+                  <div
+                    className={
+                      "relative rounded-lg border-2 border-gray-400 px-2 py-1 text-center "
+                    }
+                  >
+                    <span className={"text-xl text-gray-400 whitespace-nowrap"}>
+                      Reference Price
+                    </span>
+                    <p
+                      className={
+                        "text-xl text-gray-400 leading-tight line-through"
+                      }
+                    >
+                      ₩ {formattedReferencePrice}
+                    </p>
+                  </div>
+                  <PiArrowFatRightThin className="text-5xl text-gray-700 mx-6" />
+                  <div
+                    className={
+                      "relative rounded-lg border-2 font-bold border-gray-500 p-1 bg-white text-center"
+                    }
+                  >
+                    <span
+                      className={
+                        "px-2 text-2xl text-gray-700 whitespace-nowrap"
+                      }
+                    >
+                      Promotional Price
+                    </span>
+                    <p className={"text-3xl font-bold text-blue-500"}>
+                      ₩ {formattedPromotionalPrice}
+                    </p>
+                  </div>
+                </div>
 
                 <div className={"mt-10"}>
                   {/*colors*/}
-                  <div className={"mt-10"}>
-                    <div className={"flex items-center justify-between"}>
-                      <h3 className={"text-sm font-medium text-gray-900"}>
-                        Color
-                      </h3>
-                    </div>
+                  <div className={"flex items-center justify-between"}>
+                    <h3 className={"text-sm font-medium text-gray-900"}>
+                      Color
+                    </h3>
                   </div>
                 </div>
 
@@ -134,64 +177,85 @@ const ProductDetail = () => {
                     Choose a color{" "}
                   </RadioGroup.Label>
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                    {productWithCurrentId?.colors?.map((color: string) => (
-                      <RadioGroup.Option
-                        key={color}
-                        value={color}
-                        disabled={!color}
-                        className={({ active }) =>
-                          classNames(
-                            color
-                              ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                              : "cursor-not-allowed bg-gray-50 text-gray-200",
-                            active ? "ring-2 ring-violet-500" : "",
-                            "group relative flex max-h-[44px] items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 "
-                          )
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <RadioGroup.Label as="span">
-                              {color}
-                            </RadioGroup.Label>
-                            {color ? (
-                              <span
+                    {productWithCurrentId?.colors?.map(
+                      (color: string, i: number) => (
+                        <RadioGroup.Option
+                          key={color}
+                          value={color}
+                          disabled={!color}
+                          style={{
+                            border: `5px solid ${
+                              productWithCurrentId?.colorbuttons
+                                ? productWithCurrentId?.colorbuttons[i]
+                                : "gray"
+                            }`,
+                          }}
+                          className={({ active }) =>
+                            classNames(
+                              // 버튼안쪽 css
+                              color
+                                ? "cursor-pointer bg-white text-gray-900 shadow-sm"
+                                : "cursor-not-allowed bg-gray-50 text-gray-200",
+                              active ? "ring-2 ring-blue-500" : "",
+                              "group relative flex max-h-[44px] text-center items-center justify-center rounded-xl border py-6 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 "
+                            )
+                          }
+                        >
+                          {/* 선택시 */}
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="span"
                                 className={classNames(
-                                  active ? "border" : "border-2",
+                                  active ? "" : "",
                                   checked
-                                    ? "border-violet-500"
-                                    : "border-transparent",
-                                  "pointer-events-none absolute -inset-px rounded-md"
+                                    ? "text-gray-700 font-bold scale-110"
+                                    : "text-gray-500",
+                                  "z-10"
                                 )}
-                                aria-hidden="true"
-                              />
-                            ) : (
-                              <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
                               >
-                                <svg
-                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                  viewBox="0 0 100 100"
-                                  preserveAspectRatio="none"
-                                  stroke="currentColor"
+                                <div>{color}</div>
+                              </RadioGroup.Label>
+                              {color ? (
+                                <span
+                                  className={classNames(
+                                    active ? "border" : "border-4",
+                                    checked
+                                      ? "border-white bg-gray-200 rounded-lg z-0"
+                                      : "border-transparent",
+                                    "pointer-events-none absolute -inset-px"
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <span
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute -inset-px rounded-xl border-2 border-gray-200"
                                 >
-                                  <line
-                                    x1={0}
-                                    y1={100}
-                                    x2={100}
-                                    y2={0}
-                                    vectorEffect="non-scaling-stroke"
-                                  />
-                                </svg>
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
+                                  <svg
+                                    className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                    viewBox="0 0 100 100"
+                                    preserveAspectRatio="none"
+                                    stroke="currentColor"
+                                  >
+                                    <line
+                                      x1={0}
+                                      y1={100}
+                                      x2={100}
+                                      y2={0}
+                                      vectorEffect="non-scaling-stroke"
+                                    />
+                                  </svg>
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                      )
+                    )}
                   </div>
                 </RadioGroup>
+
                 <Button
                   text="Add to bag"
                   // onClick={() => {
@@ -206,7 +270,7 @@ const ProductDetail = () => {
                   //         price,
                   //     });
                   // }}
-                  className="mt-10 flex max-h-[44px] w-full items-center justify-center rounded-md border border-transparent bg-violet-500 py-2 px-8 text-base font-medium leading-7 text-white hover:bg-violet-600"
+                  className="mt-10 flex max-h-[44px] w-full items-center justify-center rounded-md border border-transparent bg-blue-500 py-2 px-8 text-base font-medium leading-7 text-white hover:bg-blue-600"
                 />
               </div>
               <div className={"py-10 lg:border-gray-200 lg:pt-6 lg:pb-16"}>
@@ -215,21 +279,21 @@ const ProductDetail = () => {
                   <h3 className={"sr-only"}>Description</h3>
 
                   <div className={"space-y-6"}>
-                    <p className={"text-base text-gray-900"}>
+                    <p className={"text-md text-gray-900"}>
                       {productWithCurrentId?.description}
                     </p>
                   </div>
                 </div>
 
-                <div className={"mt-10"}>
-                  <h3 className={"text-sm font-medium text-gray-900"}>
+                <div className={"mt-8"}>
+                  <h3 className={"text-md font-medium text-gray-900"}>
                     Highlights
                   </h3>
                 </div>
 
-                <div className={"mt-4"}>
+                <div className={"mt-3"}>
                   <ul
-                    className={"list-disc space-y-2 pl-4 text-sm"}
+                    className={"list-disc space-y-2 pl-4 text-md"}
                     role={"list"}
                   >
                     {productWithCurrentId?.highlights?.map((data) => (
@@ -239,17 +303,18 @@ const ProductDetail = () => {
                     ))}
                   </ul>
                 </div>
-                <div className={"mt-10"}>
+
+                {/* detail */}
+                {/* <div className={"mt-10"}>
                   <h2 className={"text-sm font-medium text-gray-900"}>
                     Details
                   </h2>
-
                   <div className={"mt-4 space-y-6"}>
                     <p className={"text-sm text-gray-600"}>
                       {productWithCurrentId?.details}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
