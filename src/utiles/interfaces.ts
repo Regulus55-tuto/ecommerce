@@ -26,14 +26,14 @@ export interface FilterProps {
 export interface ProductType {
   title: string; // Galaxy Flip6
   model: string; // IJSF23-FAIONSD
-  storage?: string; // 128GB
-  referencePrice: number | number[]; // 130000
-  promotionalPrice: number | number[]; // 1300000
+  referencePrice: number; // 130000
+  promotionalPrice: number; // 1300000
   category: string; // smartphone
   subCategory?: string;
   tags: string; // flip-series
   registrationDate?: number;
   colors: string[]; // ["black", "white", "violet"],
+  colorbuttons?: string[]; // ["#694956", "#c0d1a5", "#3c3d3f"]
   description: string; // The latest flip-serires
   options?: string;
   id: number; // 1

@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { TagIcon } from "@heroicons/react/16/solid";
+import { ProductType } from "utiles/interfaces";
+import { smartphone } from "data/Products/collectionsData";
 
 interface ProductCardProps {
   title: string;
   model: string;
-  storage?: string;
-  referencePrice: number | number[];
-  promotionalPrice?: number | number[];
+  referencePrice: number;
+  promotionalPrice: number;
   category: string;
   id?: number;
   image?: string[];
@@ -17,13 +18,13 @@ interface ProductCardProps {
   details?: string;
   tags?: string;
   colors?: string[];
+  colorbuttons?: string[];
   options?: string;
 }
 
 const ProductCard3 = ({
   title,
   model,
-  storage,
   referencePrice,
   promotionalPrice,
   category,
@@ -33,8 +34,12 @@ const ProductCard3 = ({
   highlights,
   details,
   colors,
+  colorbuttons,
   tags,
 }: ProductCardProps) => {
+  const formattedReferencePrice = referencePrice.toLocaleString();
+  const formattedPromotionalPrice = promotionalPrice.toLocaleString();
+
   if (!id) {
     return <h1>Product Empty</h1>;
   }
@@ -44,7 +49,6 @@ const ProductCard3 = ({
       state={{
         title,
         model,
-        storage,
         referencePrice,
         promotionalPrice,
         category,
@@ -79,40 +83,57 @@ const ProductCard3 = ({
         </h3>
         <h5 className="text-center text-xs text-gray-500">{model}</h5>
 
-        <div className="grid grid-cols-3">
-          <div className="text-center rounded-lg border-2 border-violet-500">
-            dd
-          </div>
-          <div className="text-center rounded-lg border-2 border-violet-500">
-            dd
-          </div>
-          <div className="text-center rounded-lg border-2 border-violet-500">
-            dd
-          </div>
+        <div
+          className={`grid my-2 ${
+            colors?.length === 1
+              ? "grid-cols-1"
+              : colors?.length === 2
+              ? "grid-cols-2"
+              : colors?.length === 3
+              ? "grid-cols-3"
+              : "grid-cols-4"
+          }`}
+        >
+          {colorbuttons?.map((color) => (
+            // <div
+            //   className="border-2 rounded-lg bg-white mx-1 py-1"
+            //   style={{ border: `2px solid ${color}` }}
+            // >
+            <div
+              onClick={(e) => e.stopPropagation}
+              className="text-center rounded-lg h-8 border-2 mx-1 "
+              style={{ backgroundColor: color }}
+            />
+            // </div>
+          ))}
         </div>
 
-        <div className={"flex items-center justify-center pt-5 "}>
+        <div className={"flex items-center justify-center pt-8 "}>
           <div
             className={
-              "relative rounded-lg border-2 border-violet-500 px-2 py-1"
+              "relative rounded-lg border-2 border-gray-400 h-8 w-auto max-w-40 px-2"
             }
           >
-            <span
-              className={
-                "absolute -top-3 bg-white px-2 text-xs text-violet-400"
-              }
-            >
-              Price
+            <span className={"absolute bottom-9 px-2 text-xs text-gray-400"}>
+              Reference Price
             </span>
-            <p className={"text-lg font-bold text-violet-500"}>
-              ${referencePrice}.00
+            <p className={"text-lg  text-gray-500"}>
+              ₩ {formattedReferencePrice}
             </p>
           </div>
 
-          <p className={"flex items-center text-sm text-gray-500"}>
-            <TagIcon className={"mr-2 h-4 w-4"} />
-            {tags}
-          </p>
+          <div
+            className={
+              "relative rounded-lg border-2 border-violet-500 px-2 py-1 ml-4"
+            }
+          >
+            <span className={"absolute bottom-10 px-2 text-xs text-violet-400"}>
+              Promotional Price
+            </span>
+            <p className={"text-lg font-bold text-violet-500"}>
+              ₩ {formattedPromotionalPrice}
+            </p>
+          </div>
         </div>
       </div>
     </Link>

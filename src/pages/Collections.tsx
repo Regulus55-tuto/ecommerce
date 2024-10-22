@@ -14,12 +14,20 @@ const Collections = () => {
   const { query, searchParams, setSortParams, deleteSortParams } =
     useSortParams();
 
+  console.log(computer.tablet);
   // Get Filter Options
   const [colors, setColors] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [products, setProducts] = useState<ProductType[]>([
     ...smartphone.aSeries,
     ...smartphone.sSeries,
+    ...smartphone.flipSeries,
+    ...smartphone.foldSeries,
+    ...computer.tablet,
+    ...computer.laptop,
+    ...accessory.watch,
+    ...accessory.buds,
+    ...accessory.ring,
   ]);
 
   return (
@@ -99,7 +107,6 @@ const Collections = () => {
                     >
                       <ProductCard3
                         image={product.image}
-                        storage={product.storage}
                         model={product.model}
                         title={product.title}
                         id={product.id}
@@ -108,6 +115,7 @@ const Collections = () => {
                         category={product.category}
                         tags={product.tags}
                         colors={product.colors}
+                        colorbuttons={product.colorbuttons}
                         description={product.description}
                         details={product.details}
                       />

@@ -19,7 +19,7 @@ Category 스키마
 		              /tab-series
 
 /gu-shop/collections/accessory/watch-series
-		              /buzz-series
+		              /buds-series
 		              /ring
 
 

@@ -15,7 +15,7 @@ export const headerData = {
           name: "Basic Tees",
           href: "/collections/Tops",
 
-          imageSrc: "images/buzz3.png",
+          imageSrc: "images/buds3.png",
           imageAlt: "black tees",
         },
       ],
@@ -50,7 +50,7 @@ export const headerData = {
 
           items: [
             { name: "Watch series", href: "/collections/galaxyWatch" },
-            { name: "Buzz series", href: "/collections/galaxyBuzz" },
+            { name: "Buds series", href: "/collections/galaxyBuds" },
             { name: "Ring", href: "/collections/galaxyRing" },
           ],
         },
@@ -166,9 +166,9 @@ export const productData = [
   },
   {
     id: 5,
-    title: "Galaxy Buzz3",
+    title: "Galaxy Buds3",
     price: 250,
-    img: "/images/buzz3.png",
+    img: "/images/buds3.png",
   },
   {
     id: 6,
