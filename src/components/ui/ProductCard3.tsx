@@ -78,7 +78,7 @@ const ProductCard3 = ({
       </div>
 
       <div className={"p-5"}>
-        <h3 className={"text-center text-lg font-bold text-gray-900"}>
+        <h3 className={"text-center text-2xl font-bold text-gray-900 mb-1"}>
           {title}
         </h3>
         <h5 className="text-center text-xs text-gray-500">{model}</h5>
@@ -108,29 +108,34 @@ const ProductCard3 = ({
           ))}
         </div>
 
-        <div className={"flex items-center justify-center pt-8 "}>
+        {/* 가격 */}
+        <div className={"flex items-center justify-center pt-5"}>
           <div
             className={
-              "relative rounded-lg border-2 border-gray-400 h-8 w-auto max-w-40 px-2"
+              "relative rounded-lg border-2 border-gray-400 px-2 py-0.5 text-center -mt-10"
             }
           >
-            <span className={"absolute bottom-9 px-2 text-xs text-gray-400"}>
+            <span className={"text-xs text-gray-400 whitespace-nowrap"}>
               Reference Price
             </span>
-            <p className={"text-lg  text-gray-500"}>
+            <p className={"text-sm text-gray-400 leading-tight line-through"}>
               ₩ {formattedReferencePrice}
             </p>
           </div>
 
           <div
             className={
-              "relative rounded-lg border-2 border-violet-500 px-2 py-1 ml-4"
+              "relative rounded-lg border-2 border-gray-700 px-1 py-1 bg-white -ml-8  text-center"
             }
           >
-            <span className={"absolute bottom-10 px-2 text-xs text-violet-400"}>
+            <span
+              className={
+                "px-2 text-lg text-gray-700 font-bold whitespace-nowrap"
+              }
+            >
               Promotional Price
             </span>
-            <p className={"text-lg font-bold text-violet-500"}>
+            <p className={"text-xl font-bold text-gray-700"}>
               ₩ {formattedPromotionalPrice}
             </p>
           </div>

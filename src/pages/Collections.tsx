@@ -102,7 +102,7 @@ const Collections = () => {
                     <li
                       key={product.id}
                       className={
-                        "group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
+                        "group border border-slate-100 cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
                       }
                     >
                       <ProductCard3
