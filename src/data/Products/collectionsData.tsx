@@ -3,11 +3,11 @@ export const smartphone = {
     {
       title: "Galaxy A24",
       model: "SM-A245NDRNKOO",
-      storage: "128GB",
       referencePrice: 396000,
       promotionalPrice: 348400,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "A smartphone that maximizes value with excellent performance and a great camera.",
       tags: "Aseries",
       colors: ["Dark Red", "Light Green", "Black"],
       colorbuttons: ["#694956", "#c0d1a5", "#3c3d3f"],
@@ -26,11 +26,11 @@ export const smartphone = {
     {
       title: "Galaxy A25",
       model: "SM-A256NLBAKOO",
-      storage: "128GB",
       referencePrice: 449900,
       promotionalPrice: 382000,
       category: "smartphone",
-      description: "super AMOLED display",
+      description:
+        "Upgraded camera and fast processing speed make everyday life more convenient.",
       tags: "Aseries",
       colors: ["Light Blue", "Yellow", "Blue Black"],
       colorbuttons: ["#dde6ed", "#e7eaa5", "#3f4251"],
@@ -48,11 +48,11 @@ export const smartphone = {
     {
       title: "Galaxy A35",
       model: "SM-A356NZKWKOD",
-      storage: "128GB",
       referencePrice: 499400,
       promotionalPrice: 449900,
       category: "smartphone",
-      description: "excellent performance",
+      description:
+        "With a large screen and powerful battery, it's the best choice for enjoying anywhere, anytime.",
       tags: "Aseries",
       colors: ["Awesome Navy", "Awesome Light Blue", "Awesome Lilac"],
       colorbuttons: ["#3e424b", "#ccdae7", "#c0bdd1"],
@@ -74,18 +74,18 @@ export const smartphone = {
     {
       title: "Galaxy S23",
       model: "SM-S911NZEEKOO",
-      storage: "256GB / 512GB",
       referencePrice: 1155000,
       promotionalPrice: 981700,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "A premium smartphone combining innovative technology and sophisticated design.",
       tags: "SSeries",
       colors: ["Cream", "Phantom Black", "Green", "Lavender"],
       colorbuttons: ["#f1eae0", "#201e15", "#5e645a", "#d4c7d9"],
       id: 121,
       image: [
         "/productimg/smartphone/s23cream.webp",
-        "/productimg/smartphone/s23black.webp",
+        "/productimg/smartphone/s23phantomblack.webp",
         "/productimg/smartphone/s23green.webp",
         "/productimg/smartphone/s23lavender.webp",
       ],
@@ -98,18 +98,18 @@ export const smartphone = {
     {
       title: "Galaxy S23+",
       model: "SM-S916NLIAKOO",
-      storage: "256GB / 512GB",
       referencePrice: 1353000,
       promotionalPrice: 1177000,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "Larger screen and enhanced performance for smooth handling of all tasks.",
       tags: "SSeries",
       colors: ["Lavender", "Phantom Black", "Cream", "Green"],
       colorbuttons: ["#d4c7d9", "#221e16", "#f1eae1", "#5e645a"],
       id: 122,
       image: [
         "/productimg/smartphone/s23+lavender.webp",
-        "/productimg/smartphone/s23+black.webp",
+        "/productimg/smartphone/s23+phantomblack.webp",
         "/productimg/smartphone/s23+cream.webp",
         "/productimg/smartphone/s23+green.webp",
       ],
@@ -122,11 +122,11 @@ export const smartphone = {
     {
       title: "Galaxy S23 Ultra",
       model: "SM-S918NZGEKOO",
-      storage: "256GB / 512GB / 1TB",
       referencePrice: 1599400,
       promotionalPrice: 1439400,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "A flagship model boasting the best camera performance and overwhelming specs.",
       tags: "SSeries",
       colors: ["Green", "Phantom Black", "Cream", "Lavender"],
       colorbuttons: ["#5e645a", "#211e15", "#f0eae0", "#d4c7d9"],
@@ -147,11 +147,11 @@ export const smartphone = {
     {
       title: "Galaxy S24",
       model: "SM-S921NZYEKOD",
-      storage: "256GB / 512GB",
       referencePrice: 1155000,
       promotionalPrice: 981700,
       category: "smartphone",
-      description: "A new way of communication with AI",
+      description:
+        "A smartphone equipped with the latest technology, with all features upgraded.",
       tags: "SSeries",
       colors: ["Amber Yellow", "Cobalt Violet", "Marble Gray", "Onyx Black"],
       colorbuttons: ["#f1ebd5", "#51566c", "#c5c3c4", "#4a4a4c"],
@@ -171,20 +171,20 @@ export const smartphone = {
     {
       title: "Galaxy S24+",
       model: "SM-S926NZVAKOD",
-      storage: "256GB / 512GB",
       referencePrice: 1353000,
       promotionalPrice: 1177000,
       category: "smartphone",
-      description: "A new way of communication with AI",
+      description:
+        "Excellent display and performance enhance the user experience.",
       tags: "SSeries",
       colors: ["Amber Yellow", "Cobalt Violet", "Marble Gray", "Onyx Black"],
       colorbuttons: ["#f1ebd5", "#52556c", "#c5c3c4", "#4a4a4c"],
       id: 125,
       image: [
         "/productimg/smartphone/s24+amberyellow.webp",
-        "/productimg/smartphone/s24p+cobaltvioletviolet.webp",
-        "/productimg/smartphone/s24p+marblegray.webp",
-        "/productimg/smartphone/s24p+onyxblack.webp",
+        "/productimg/smartphone/s24+cobaltviolet.webp",
+        "/productimg/smartphone/s24+marblegray.webp",
+        "/productimg/smartphone/s24+onyxblack.webp",
       ],
       highlights: [
         "A new way of communication with AI",
@@ -195,11 +195,11 @@ export const smartphone = {
     {
       title: "Galaxy S24 Ultra",
       model: "SM-S928NZTEKOD",
-      storage: "256GB / 512GB / 1TB",
       referencePrice: 1698400,
       promotionalPrice: 1528500,
       category: "smartphone",
-      description: "A new way of communication with AI",
+      description:
+        "The ultimate smartphone with cutting-edge technology that can capture everything.",
       tags: "SSeries",
       colors: [
         "Titanium Gray",
@@ -227,11 +227,11 @@ export const smartphone = {
     {
       title: "Galaxy Z Flip5",
       model: "SM-F731NLGAKOO",
-      storage: "256GB / 512GB",
       referencePrice: 1399200,
       promotionalPrice: 1245200,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "A smartphone with a sleek design and innovative foldable features.",
       tags: "FlipSeries",
       colors: ["Mint", "Graphite", "Cream", "Lavender"],
       colorbuttons: ["#cbd9d4", "#53575a", "#f1eae0", "#d4c7d9"],
@@ -251,11 +251,11 @@ export const smartphone = {
     {
       title: "Galaxy Z Flip6",
       model: "SM-F741NLBAKOO",
-      storage: "256GB / 512GB",
       referencePrice: 1485000,
       promotionalPrice: 1306800,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "Offers style and practicality with an even smoother folding design.",
       tags: "FlipSeries",
       colors: ["Blue", "Mint", "Silver Shadow", "Yellow"],
       colorbuttons: ["#bcd5eb", "#a5dfd3", "#7f7f7d", "#f8e599"],
@@ -278,18 +278,17 @@ export const smartphone = {
     {
       title: "Galaxy Z Fold5",
       model: "SM-F946NLBAKOO",
-      storage: "256GB / 512GB / 1TB",
       referencePrice: 2097700,
       promotionalPrice: 1845900,
       category: "smartphone",
-      description: "good choice",
+      description: "The best choice for multitasking on a large screen.",
       tags: "FoldSeries",
       colors: ["Ice Blue", "Phantom Black", "Cream"],
       colorbuttons: ["#a6aec1", "#211e15", "#f1eae0"],
       id: 141,
       image: [
         "/productimg/smartphone/fold5iceblue.webp",
-        "/productimg/smartphone/fold5black.webp",
+        "/productimg/smartphone/fold5phantomblack.webp",
         "/productimg/smartphone/fold5cream.webp",
       ],
       highlights: [
@@ -301,11 +300,11 @@ export const smartphone = {
     {
       title: "Galaxy Z Fold6",
       model: "SM-F956NZSAKOD",
-      storage: "256GB / 512GB / 1TB",
       referencePrice: 2229700,
       promotionalPrice: 1962100,
       category: "smartphone",
-      description: "good choice",
+      description:
+        "An innovative foldable smartphone that provides a new experience.",
       tags: "FoldSeries",
       colors: ["Pink", "Navy", "Silver Shadow"],
       colorbuttons: ["#f0dbe0", "#495168", "#7f7f7d"],
@@ -313,7 +312,7 @@ export const smartphone = {
       image: [
         "/productimg/smartphone/fold6pink.webp",
         "/productimg/smartphone/fold6navy.webp",
-        "/productimg/smartphone/fold6silver.webp",
+        "/productimg/smartphone/fold6silvershadow.webp",
       ],
       highlights: [
         "Flex window for easier expression and communication",
@@ -331,11 +330,11 @@ export const computer = {
       model: "SM-T735NZKNKOO",
       colors: ["Mystic Black", "Mystic Silver"],
       colorbuttons: ["#3d3e48", "#d0d0ce"],
-      storage: "64GB / 256GB",
       referencePrice: 809600,
       promotionalPrice: 543500,
       category: "computer",
-      description: "good choice",
+      description:
+        "A tablet that supports learning and work with its ample screen and outstanding performance.",
       tags: "tabSeries",
       highlights: [
         " A simple yet attractive design",
@@ -352,11 +351,11 @@ export const computer = {
       model: "SM-F956NZSAKOD",
       colors: ["Gray", "Silver", "Mint", "Lavender"],
       colorbuttons: ["#7f7c79", "#c9c9c7", "#c9d8d7", "#dbced8"],
-      storage: "128GB",
       referencePrice: 629200,
       promotionalPrice: 555200,
       category: "computer",
-      description: "good choice",
+      description:
+        "A tablet that allows for diverse content enjoyment with enhanced performance.",
       tags: "tabSeries",
       highlights: [
         "Attractive design with various colors",
@@ -364,7 +363,7 @@ export const computer = {
       ],
       image: [
         "/productimg/computer/tabS9fegray.webp",
-        "/productimg/computer/tabS9fesilversilver.webp",
+        "/productimg/computer/tabS9fesilver.webp",
         "/productimg/computer/tabS9femint.webp",
         "/productimg/computer/tabS9felavender.webp",
       ],
@@ -375,11 +374,11 @@ export const computer = {
       model: "SM-X510NZAAKOO",
       colors: ["Graphite", "Beige"],
       colorbuttons: ["#545456", "#dbd6ca"],
-      storage: "128GB",
       referencePrice: 998800,
       promotionalPrice: 938800,
       category: "computer",
-      description: "good choice",
+      description:
+        "Maximizes multimedia consumption with the best screen and performance.",
       tags: "tabSeries",
       highlights: [
         "Vivid and comfortable Dynamic AMOLED 2X display",
@@ -396,11 +395,11 @@ export const computer = {
       model: "SM-X826NZSAKOO",
       colors: ["Moonstone Gray", "Platinum Silver"],
       colorbuttons: ["#5f6e81", "#dad6ca"],
-      storage: "256GB",
       referencePrice: 1248500,
       promotionalPrice: 1141000,
       category: "computer",
-      description: "good choice",
+      description:
+        "A tablet that boosts productivity with a wide screen and cutting-edge technology.",
       tags: "tabSeries",
       highlights: [
         "Premium tablet made smarter with AI",
@@ -418,11 +417,10 @@ export const computer = {
       model: "SM-X826NZSAKOO",
       colors: ["Moonstone Gray", "Platinum Silver"],
       colorbuttons: ["#5f6e81", "#dad6ca"],
-      storage: "256GB",
       referencePrice: 1598300,
       promotionalPrice: 1491000,
       category: "computer",
-      description: "good choice",
+      description: "A tablet that handles all tasks easily with premium specs.",
       tags: "tabSeries",
       highlights: [
         "Premium tablet made smarter with AI",
@@ -443,11 +441,11 @@ export const computer = {
       model: "NT750XGK-KC51S",
       colors: ["Silver", "Gray"],
       colorbuttons: ["#c9c9c7", "#5f6267"],
-      storage: "512GB",
       referencePrice: 1520000,
       promotionalPrice: 1368000,
       category: "computer",
-      description: "good choice",
+      description:
+        "A slim design and powerful performance make it convenient for use anywhere.",
       tags: "bookSeries",
       highlights: [
         "Slim metal design that is thin and elegant",
@@ -465,11 +463,11 @@ export const computer = {
       model: "NT940XGK-KC50G",
       colors: ["Moonstone Gray", "Platinum Silver"],
       colorbuttons: ["#52555b", "#cfcfcd"],
-      storage: "256GB",
       referencePrice: 2090000,
       promotionalPrice: 1672000,
       category: "computer",
-      description: "good choice",
+      description:
+        "Excellent battery life and performance support professional tasks.",
       tags: "bookSeries",
       highlights: [
         "Near-complete display combining high resolution and touch features with Dynamic AMOLED touchscreen",
@@ -494,7 +492,8 @@ export const accessory = {
       colorbuttons: ["#404146", "#867e74"],
       referencePrice: 499000,
       promotionalPrice: 179000,
-      description: "good choice",
+      description:
+        "A smartwatch that helps manage daily life with various features and health monitoring.",
       category: "accessory",
       tags: "GalaxyWatch",
       id: 311,
@@ -515,7 +514,8 @@ export const accessory = {
       colorbuttons: ["#404144", "#c7c8ca"],
       referencePrice: 429000,
       promotionalPrice: 369000,
-      description: "good choice",
+      description:
+        "A smartwatch with a luxurious design and cutting-edge functionality.",
       category: "accessory",
       tags: "GalaxyWatch",
       id: 312,
@@ -536,7 +536,7 @@ export const accessory = {
       colorbuttons: ["#6d6d63", "#bec0bf"],
       referencePrice: 389000,
       promotionalPrice: 349500,
-      description: "good choice",
+      description: "Optimizes exercise and health management in a smartwatch.",
       category: "accessory",
       tags: "GalaxyWatch",
       id: 313,
@@ -557,7 +557,8 @@ export const accessory = {
       colorbuttons: ["#535257", "#b3ab9e", "#c8cac9"],
       referencePrice: 899800,
       promotionalPrice: 816800,
-      description: "good choice",
+      description:
+        "A powerful smartwatch suitable for both sports and everyday life.",
       category: "accessory",
       tags: "GalaxyWatch",
       id: 314,
@@ -582,7 +583,8 @@ export const accessory = {
       colorbuttons: ["#a3ad9c", "#494c53", "#eff0f2", "#2f2e2c"],
       referencePrice: 149000,
       promotionalPrice: 134000,
-      description: "good choice",
+      description:
+        "Wireless earbuds that provide rich music enjoyment with high-quality sound.",
       category: "accessory",
       tags: "GalaxyBuds",
       id: 321,
@@ -605,7 +607,8 @@ export const accessory = {
       colorbuttons: ["#b1a0cd", "#404146", "#f1f0ec"],
       referencePrice: 193000,
       promotionalPrice: 173700,
-      description: "good choice",
+      description:
+        "Active noise canceling allows you to immerse yourself in music without distractions.",
       category: "accessory",
       tags: "GalaxyBuds",
       id: 322,
@@ -627,7 +630,8 @@ export const accessory = {
       colorbuttons: ["#74787b", "#f6f8f5"],
       referencePrice: 219000,
       promotionalPrice: 193600,
-      description: "good choice",
+      description:
+        "Offers a personalized sound experience for the best listening enjoyment.",
       category: "accessory",
       tags: "GalaxyBuds",
       id: 323,
@@ -648,7 +652,8 @@ export const accessory = {
       colorbuttons: ["#74787b", "#f6f8f5"],
       referencePrice: 319000,
       promotionalPrice: 286600,
-      description: "good choice",
+      description:
+        "Wireless earbuds that boast premium sound quality and comfortable fit.",
       category: "accessory",
       tags: "GalaxyBuds",
       id: 324,
@@ -672,7 +677,8 @@ export const accessory = {
       colorbuttons: ["#353432", "#c89403", "#898d8f"],
       referencePrice: 499400,
       promotionalPrice: 469400,
-      description: "good choice",
+      description:
+        "A smart ring for health and fitness management, providing a new experience away from the wrist.",
       category: "accessory",
       tags: "GalaxyRing",
       id: 331,
