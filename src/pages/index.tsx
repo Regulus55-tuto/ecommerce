@@ -6,7 +6,8 @@ import NotFound from "./NotFound";
 import ProductDetail from "./ProductDetail";
 import ForgotEmail from "./Auth/ForgotEmail";
 import ForgotPassword from "./Auth/ForgotPassword";
-import AdminPage from "./AdminPage";
+import AdminList from "./AdminList";
+import AdminEdit from "./AdminEdit";
 import Collections from "./Collections";
 
 export {
@@ -18,6 +19,7 @@ export {
   AllProducts,
   NotFound,
   ProductDetail,
-  AdminPage,
-  Collections
+  AdminList,
+  AdminEdit,
+  Collections,
 };

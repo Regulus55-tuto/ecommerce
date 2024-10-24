@@ -43,6 +43,7 @@ const ProductCard3 = ({
   if (!id) {
     return <h1>Product Empty</h1>;
   }
+
   return (
     <Link
       to={`/products/${id}`}

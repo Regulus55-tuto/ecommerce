@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import {
-  AdminPage,
-  AllProducts, Collections,
+  AdminEdit,
+  AdminList,
+  AllProducts,
+  Collections,
   ForgotEmail,
   ForgotPassword,
   Home,
@@ -44,21 +46,25 @@ const router = createBrowserRouter([
         element: <AllProducts />,
       },
       {
-        path: "/Products/:id",
+        path: "/products/:id",
         element: <ProductDetail />,
       },
       {
-        path: '/Product/new',
-        element: <AdminPage/>
+        path: "/product/new",
+        element: <AdminList />,
       },
       {
-        path: '/collections',
-        element: <Collections/>
+        path: "/product/new/:id",
+        element: <AdminEdit />,
       },
       {
-        path: '/change/password',
-        element: <ChangePassword/>
-      }
+        path: "/collections",
+        element: <Collections />,
+      },
+      {
+        path: "/change/password",
+        element: <ChangePassword />,
+      },
     ],
   },
 ]);

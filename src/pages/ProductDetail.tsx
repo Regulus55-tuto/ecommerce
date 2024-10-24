@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { classNames, removeCollectionsPrefix } from "../utiles/utiles";
 import { FreeMode, Thumbs } from "swiper";
@@ -52,6 +52,10 @@ const ProductDetail = () => {
   const handleInputChange = (value: string) => {};
 
   const handleClick = () => {};
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

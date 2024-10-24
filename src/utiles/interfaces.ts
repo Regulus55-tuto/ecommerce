@@ -29,7 +29,7 @@ export interface ProductType {
   referencePrice: number; // 130000
   promotionalPrice: number; // 1300000
   category: string; // smartphone
-  subCategory?: string;
+  subCategory?: string; // flipSeries
   tags: string; // flip-series
   registrationDate?: number;
   colors: string[]; // ["black", "white", "violet"],
