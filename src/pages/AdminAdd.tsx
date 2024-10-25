@@ -1,10 +1,7 @@
 import { Icon } from "@iconify/react";
 import ProductTitle from "components/ui/ProductTitle";
-import { accessory, computer, smartphone } from "data/Products/collectionsData";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { ProductType } from "utiles/interfaces";
 
 interface AdminProps {
   title?: string;
@@ -17,7 +14,7 @@ interface AdminProps {
   colors?: string[];
 }
 
-const AdminEdit = ({
+const AdminAdd = ({
   title,
   referencePrice,
   promotionalPrice,
@@ -27,26 +24,9 @@ const AdminEdit = ({
   colors,
   tags,
 }: AdminProps) => {
-  const [products, setProducts] = useState<ProductType[]>([
-    ...smartphone.aSeries,
-    ...smartphone.sSeries,
-    ...smartphone.flipSeries,
-    ...smartphone.foldSeries,
-    ...computer.tablet,
-    ...computer.laptop,
-    ...accessory.watch,
-    ...accessory.buds,
-    ...accessory.ring,
-  ]);
-  const params = useParams();
-  const productInfo: ProductType | undefined = products.find(
-    (product: any) => product.id === Number(params.id)
-  );
-  console.log("productId", productInfo);
-
   const adminTitle = ["title", "model", "id", "inventory"];
   const admininput = ["referencePrice", "promotionalPrice"];
-  const [photoImg, setPhotoImg] = useState<string>("");
+  const [photoImg, setPhotoImg] = useState("/images/default_image.webp");
   const {
     register,
     handleSubmit,
@@ -56,15 +36,8 @@ const AdminEdit = ({
   const watchImage = watch("image");
 
   useEffect(() => {
-    if (productInfo) {
-      //ProductInfo 가 있으면 (아이템의 세부정보가있으면)
-      setPhotoImg(productInfo.image[0]); // 사진이미지에 아이템 사진을 넣음
-    } else {
-      setPhotoImg("/images/default_image.webp"); // 없으면 암것도없음
-    }
     if (watchImage && watchImage.length > 0) {
-      // 유저가 이미지 넣은거 있으면
-      setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
+      setPhotoImg(URL.createObjectURL(watchImage[0]));
     }
   }, [watchImage]);
 
@@ -74,7 +47,7 @@ const AdminEdit = ({
         {/* Title, Breadcrumbs, Sort */}
         <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
           <div className="flex flex-col">
-            <ProductTitle title={"Edit Product"} />
+            <ProductTitle title={"Add Product"} />
           </div>
         </div>
 
@@ -94,26 +67,13 @@ const AdminEdit = ({
             </div>
 
             <div className="col-span-6 flex flex-col justify-evenly">
-              {adminTitle.map((item, index) => (
-                <div className="flex w-full px-5" key={item}>
+              {adminTitle.map((item) => (
+                <div className="flex w-full px-5">
                   <div className="w-60 font-bold text-2xl text-gray-700">
                     {item}
                   </div>
                   <div className="w-full">
-                    <input
-                      className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                      placeholder={
-                        productInfo
-                          ? item === "title"
-                            ? productInfo.title
-                            : item === "model"
-                            ? productInfo.model
-                            : item === "id"
-                            ? productInfo.id.toString()
-                            : "item"
-                          : "item"
-                      }
-                    />
+                    <input className="h-12 w-full border-2 border-gray-300 rounded-lg" />
                   </div>
                 </div>
               ))}
@@ -121,7 +81,7 @@ const AdminEdit = ({
           </div>
 
           {admininput.map((input) => (
-            <div className="flex w-full p-3" key={input}>
+            <div className="flex w-full p-3">
               <div className="w-80 mr-10 font-bold text-2xl text-gray-700">
                 {input}
               </div>
@@ -136,4 +96,4 @@ const AdminEdit = ({
   );
 };
 
-export default AdminEdit;
+export default AdminAdd;

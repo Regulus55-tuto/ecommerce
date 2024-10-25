@@ -7,6 +7,7 @@ import ProductDetail from "./ProductDetail";
 import ForgotEmail from "./Auth/ForgotEmail";
 import ForgotPassword from "./Auth/ForgotPassword";
 import AdminList from "./AdminList";
+import AdminAdd from "./AdminAdd";
 import AdminEdit from "./AdminEdit";
 import Collections from "./Collections";
 
@@ -20,6 +21,7 @@ export {
   NotFound,
   ProductDetail,
   AdminList,
+  AdminAdd,
   AdminEdit,
   Collections,
 };

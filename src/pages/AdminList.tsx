@@ -58,6 +58,12 @@ const AdminList = ({
             <ProductTitle title={"Product List"} />
           </div>
           <div className={"flex items-center"}>
+            <Link to="/product/add/:id">
+              <button className="bg-gray-300 border-gray-500 rounded-lg p-2 mr-8">
+                Add Product
+              </button>
+            </Link>
+
             <Menu as={"div"} className={"relative inline-block text-left"}>
               <div>
                 <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
@@ -126,7 +132,7 @@ const AdminList = ({
                   <div>
                     <div>
                       <Link
-                        to={`/product/new/${item.id}`}
+                        to={`/product/edit/${item.id}`}
                         state={{
                           title,
                           referencePrice,

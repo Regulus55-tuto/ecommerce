@@ -14,6 +14,7 @@ import {
   Signup,
 } from "./pages";
 import ChangePassword from "./pages/Auth/ChangePassword";
+import AdminAdd from "pages/AdminAdd";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,7 +55,11 @@ const router = createBrowserRouter([
         element: <AdminList />,
       },
       {
-        path: "/product/new/:id",
+        path: "/product/add/:id",
+        element: <AdminAdd />,
+      },
+      {
+        path: "/product/edit/:id",
         element: <AdminEdit />,
       },
       {
