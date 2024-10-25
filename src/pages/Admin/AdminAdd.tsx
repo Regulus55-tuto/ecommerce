@@ -73,7 +73,7 @@ const AdminAdd = ({
                     {item}
                   </div>
                   <div className="w-full">
-                    <input className="h-12 w-full border-2 border-gray-300 rounded-lg" />
+                    <input className="h-12 w-full border-2 border-gray-300 rounded-lg" placeholder={item}/>
                   </div>
                 </div>
               ))}
@@ -82,11 +82,11 @@ const AdminAdd = ({
 
           {admininput.map((input) => (
             <div className="flex w-full p-3">
-              <div className="w-80 mr-10 font-bold text-2xl text-gray-700">
+              <div className="w-80 mr-10 font-bold text-2xl text-gray-700" >
                 {input}
               </div>
               <div className="w-full">
-                <input className="h-12 w-full border-2 border-gray-300 rounded-lg" />
+                <input className="h-12 w-full border-2 border-gray-300 rounded-lg" placeholder={input}/>
               </div>
             </div>
           ))}

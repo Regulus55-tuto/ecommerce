@@ -6,9 +6,10 @@ export const smartphone = {
       referencePrice: 396000,
       promotionalPrice: 348400,
       category: "smartphone",
+      subCategory: "A series",
       description:
         "A smartphone that maximizes value with excellent performance and a great camera.",
-      tags: "Aseries",
+      tags: ["#GalaxyA24", "#Smartphone", "#Affordable"],
       colors: ["Dark Red", "Light Green", "Black"],
       colorbuttons: ["#694956", "#c0d1a5", "#3c3d3f"],
       id: 111,
@@ -22,6 +23,7 @@ export const smartphone = {
         "High-resolution camera with OIS support",
         "Large 5,000 mAh battery",
       ],
+      inventory: 152
     },
     {
       title: "Galaxy A25",
@@ -29,9 +31,10 @@ export const smartphone = {
       referencePrice: 449900,
       promotionalPrice: 382000,
       category: "smartphone",
+      subCategory: "A series",
       description:
         "Upgraded camera and fast processing speed make everyday life more convenient.",
-      tags: "Aseries",
+      tags: ["#GalaxyA25", "#Smartphone", "#Value"],
       colors: ["Light Blue", "Yellow", "Blue Black"],
       colorbuttons: ["#dde6ed", "#e7eaa5", "#3f4251"],
       id: 112,
@@ -44,6 +47,7 @@ export const smartphone = {
         "Super AMOLED 120 Hz display",
         "High-resolution ultra-wide camera with OIS support",
       ],
+      inventory: 231
     },
     {
       title: "Galaxy A35",
@@ -51,9 +55,10 @@ export const smartphone = {
       referencePrice: 499400,
       promotionalPrice: 449900,
       category: "smartphone",
+      subCategory: "A series",
       description:
         "With a large screen and powerful battery, it's the best choice for enjoying anywhere, anytime.",
-      tags: "Aseries",
+      tags: ["#GalaxyA35", "#Smartphone", "#Performance"],
       colors: ["Awesome Navy", "Awesome Light Blue", "Awesome Lilac"],
       colorbuttons: ["#3e424b", "#ccdae7", "#c0bdd1"],
       id: 113,
@@ -67,6 +72,7 @@ export const smartphone = {
         "50 MP high-resolution ultra-wide camera",
         "Large 5,000 mAh battery with up to 25W charging",
       ],
+      inventory: 122
     },
   ],
 
@@ -77,9 +83,10 @@ export const smartphone = {
       referencePrice: 1155000,
       promotionalPrice: 981700,
       category: "smartphone",
+      subCategory: "S series",
       description:
         "A premium smartphone combining innovative technology and sophisticated design.",
-      tags: "SSeries",
+      tags: ["#GalaxyS23", "#Smartphone", "#Performance"],
       colors: ["Cream", "Phantom Black", "Green", "Lavender"],
       colorbuttons: ["#f1eae0", "#201e15", "#5e645a", "#d4c7d9"],
       id: 121,
@@ -94,6 +101,7 @@ export const smartphone = {
         "Bright selfies even in low light",
         "Design that completes the identity of Galaxy",
       ],
+      inventory: 319
     },
     {
       title: "Galaxy S23+",
@@ -101,9 +109,10 @@ export const smartphone = {
       referencePrice: 1353000,
       promotionalPrice: 1177000,
       category: "smartphone",
+      subCategory: "S series",
       description:
         "Larger screen and enhanced performance for smooth handling of all tasks.",
-      tags: "SSeries",
+      tags: ["#GalaxyS23Plus", "#Smartphone", "#Photography"],
       colors: ["Lavender", "Phantom Black", "Cream", "Green"],
       colorbuttons: ["#d4c7d9", "#221e16", "#f1eae1", "#5e645a"],
       id: 122,
@@ -118,6 +127,7 @@ export const smartphone = {
         "Bright selfies even in low light",
         "Design that completes the identity of Galaxy",
       ],
+      inventory: 217
     },
     {
       title: "Galaxy S23 Ultra",
@@ -125,9 +135,10 @@ export const smartphone = {
       referencePrice: 1599400,
       promotionalPrice: 1439400,
       category: "smartphone",
+      subCategory: "S series",
       description:
         "A flagship model boasting the best camera performance and overwhelming specs.",
-      tags: "SSeries",
+      tags: ["#GalaxyS23Ultra", "#Smartphone", "#Flagship"],
       colors: ["Green", "Phantom Black", "Cream", "Lavender"],
       colorbuttons: ["#5e645a", "#211e15", "#f0eae0", "#d4c7d9"],
       id: 123,
@@ -142,6 +153,7 @@ export const smartphone = {
         "Clear photos with 200MP and stable zoom up to 100x",
         "S Pen for a smarter everyday experience",
       ],
+      inventory: 53
     },
 
     {
@@ -150,9 +162,10 @@ export const smartphone = {
       referencePrice: 1155000,
       promotionalPrice: 981700,
       category: "smartphone",
+      subCategory: "S series",
       description:
         "A smartphone equipped with the latest technology, with all features upgraded.",
-      tags: "SSeries",
+      tags: ["#GalaxyS24", "#Smartphone", "#Innovation"],
       colors: ["Amber Yellow", "Cobalt Violet", "Marble Gray", "Onyx Black"],
       colorbuttons: ["#f1ebd5", "#51566c", "#c5c3c4", "#4a4a4c"],
       id: 124,
@@ -167,6 +180,7 @@ export const smartphone = {
         "A next-level camera experience enhanced with AI editing",
         "Colors inspired by minerals",
       ],
+      inventory: 165
     },
     {
       title: "Galaxy S24+",
@@ -174,9 +188,10 @@ export const smartphone = {
       referencePrice: 1353000,
       promotionalPrice: 1177000,
       category: "smartphone",
+      subCategory: "S series",
       description:
         "Excellent display and performance enhance the user experience.",
-      tags: "SSeries",
+      tags: ["#GalaxyS24Plus", "#Smartphone", "#Versatility"],
       colors: ["Amber Yellow", "Cobalt Violet", "Marble Gray", "Onyx Black"],
       colorbuttons: ["#f1ebd5", "#52556c", "#c5c3c4", "#4a4a4c"],
       id: 125,
@@ -191,6 +206,7 @@ export const smartphone = {
         "A next-level camera experience enhanced with AI editing",
         "Colors inspired by minerals",
       ],
+      inventory: 98
     },
     {
       title: "Galaxy S24 Ultra",
@@ -198,9 +214,10 @@ export const smartphone = {
       referencePrice: 1698400,
       promotionalPrice: 1528500,
       category: "smartphone",
+      subCategory: "S series",
       description:
         "The ultimate smartphone with cutting-edge technology that can capture everything.",
-      tags: "SSeries",
+      tags: ["#GalaxyS24Ultra", "#Smartphone", "#HighEnd"],
       colors: [
         "Titanium Gray",
         "Titanium Yellow",
@@ -220,7 +237,9 @@ export const smartphone = {
         "A next-level camera experience enhanced with AI editing and 200MP",
         "Powerful performance for high-end gaming",
       ],
+      inventory: 74
     },
+
   ],
 
   flipSeries: [
@@ -230,9 +249,10 @@ export const smartphone = {
       referencePrice: 1399200,
       promotionalPrice: 1245200,
       category: "smartphone",
+      subCategory: "Flip series",
       description:
         "A smartphone with a sleek design and innovative foldable features.",
-      tags: "FlipSeries",
+      tags: ["#GalaxyZFlip5", "#Foldable", "#Compact"],
       colors: ["Mint", "Graphite", "Cream", "Lavender"],
       colorbuttons: ["#cbd9d4", "#53575a", "#f1eae0", "#d4c7d9"],
       id: 131,
@@ -247,6 +267,7 @@ export const smartphone = {
         "Flexcam for capturing moments effortlessly",
         "Compact design that fits in various pockets",
       ],
+      inventory: 177
     },
     {
       title: "Galaxy Z Flip6",
@@ -254,9 +275,10 @@ export const smartphone = {
       referencePrice: 1485000,
       promotionalPrice: 1306800,
       category: "smartphone",
+      subCategory: "Flip series",
       description:
         "Offers style and practicality with an even smoother folding design.",
-      tags: "FlipSeries",
+      tags: ["#GalaxyZFlip6", "#Foldable", "#Style"],
       colors: ["Blue", "Mint", "Silver Shadow", "Yellow"],
       colorbuttons: ["#bcd5eb", "#a5dfd3", "#7f7f7d", "#f8e599"],
       id: 132,
@@ -271,6 +293,7 @@ export const smartphone = {
         "High-quality flexcam that automatically finds the best angle",
         "Enhanced hardware performance for a powerful experience",
       ],
+      inventory: 149,
     },
   ],
 
@@ -281,8 +304,9 @@ export const smartphone = {
       referencePrice: 2097700,
       promotionalPrice: 1845900,
       category: "smartphone",
+      subCategory: "Fold series",
       description: "The best choice for multitasking on a large screen.",
-      tags: "FoldSeries",
+      tags: ["#GalaxyZFold5", "#Foldable", "#Smartphone"],
       colors: ["Ice Blue", "Phantom Black", "Cream"],
       colorbuttons: ["#a6aec1", "#211e15", "#f1eae0"],
       id: 141,
@@ -296,6 +320,7 @@ export const smartphone = {
         "Flexcam for capturing moments effortlessly",
         "Compact design that fits in various pockets",
       ],
+      inventory: 38
     },
     {
       title: "Galaxy Z Fold6",
@@ -303,9 +328,10 @@ export const smartphone = {
       referencePrice: 2229700,
       promotionalPrice: 1962100,
       category: "smartphone",
+      subCategory: "Fold series",
       description:
         "An innovative foldable smartphone that provides a new experience.",
-      tags: "FoldSeries",
+      tags: ["#GalaxyZFold6", "#Foldable", "#Versatile"],
       colors: ["Pink", "Navy", "Silver Shadow"],
       colorbuttons: ["#f0dbe0", "#495168", "#7f7f7d"],
       id: 142,
@@ -319,8 +345,9 @@ export const smartphone = {
         "High-quality flexcam that automatically finds the best angle",
         "Enhanced hardware performance for a powerful experience",
       ],
-    },
-  ],
+      inventory: 152
+    }
+  ]
 };
 
 export const computer = {
@@ -333,9 +360,10 @@ export const computer = {
       referencePrice: 809600,
       promotionalPrice: 543500,
       category: "computer",
+      subCategory: "Tab series",
       description:
         "A tablet that supports learning and work with its ample screen and outstanding performance.",
-      tags: "tabSeries",
+      tags: ["#GalaxyTabS7FE", "#Tablet", "#Efficiency"],
       highlights: [
         " A simple yet attractive design",
         "Excellent work efficiency showcased on a large display",
@@ -345,6 +373,7 @@ export const computer = {
         "/productimg/computer/tabS7femysticsilver.webp",
       ],
       id: 211,
+      inventory: 149,
     },
     {
       title: "Galaxy Tab S9 FE",
@@ -354,9 +383,10 @@ export const computer = {
       referencePrice: 629200,
       promotionalPrice: 555200,
       category: "computer",
+      subCategory: "Tab series",
       description:
         "A tablet that allows for diverse content enjoyment with enhanced performance.",
-      tags: "tabSeries",
+      tags: ["#GalaxyTabS9FE", "#Tablet", "#Durability"],
       highlights: [
         "Attractive design with various colors",
         "Water and dust resistance for improved durability",
@@ -368,6 +398,7 @@ export const computer = {
         "/productimg/computer/tabS9felavender.webp",
       ],
       id: 212,
+      inventory: 57,
     },
     {
       title: "Galaxy Tab S9",
@@ -377,9 +408,10 @@ export const computer = {
       referencePrice: 998800,
       promotionalPrice: 938800,
       category: "computer",
+      subCategory: "Tab series",
       description:
         "Maximizes multimedia consumption with the best screen and performance.",
-      tags: "tabSeries",
+      tags: ["#GalaxyTabS9", "#Tablet", "#Display"],
       highlights: [
         "Vivid and comfortable Dynamic AMOLED 2X display",
         "First water and dust resistant in the Galaxy Tab 5 series",
@@ -389,6 +421,7 @@ export const computer = {
         "/productimg/computer/tabS9beige.webp",
       ],
       id: 213,
+      inventory: 64,
     },
     {
       title: "Galaxy Tab S10+",
@@ -398,9 +431,10 @@ export const computer = {
       referencePrice: 1248500,
       promotionalPrice: 1141000,
       category: "computer",
+      subCategory: "Tab series",
       description:
         "A tablet that boosts productivity with a wide screen and cutting-edge technology.",
-      tags: "tabSeries",
+      tags: ["#GalaxyTabS10Plus", "#Tablet", "#AI"],
       highlights: [
         "Premium tablet made smarter with AI",
         "Ultimate viewing experience with anti-reflective coating and dialogue boost",
@@ -411,6 +445,7 @@ export const computer = {
         "/productimg/computer/tabS10+platinumsilver.webp",
       ],
       id: 214,
+      inventory: 84,
     },
     {
       title: "Galaxy Tab S10 Ultra",
@@ -420,8 +455,9 @@ export const computer = {
       referencePrice: 1598300,
       promotionalPrice: 1491000,
       category: "computer",
+      subCategory: "Tab series",
       description: "A tablet that handles all tasks easily with premium specs.",
-      tags: "tabSeries",
+      tags: ["#GalaxyTabS10Ultra", "#Tablet", "#Premium"],
       highlights: [
         "Premium tablet made smarter with AI",
         "Ultimate viewing experience with anti-reflective coating and dialogue boost",
@@ -432,6 +468,7 @@ export const computer = {
         "/productimg/computer/tabS10ultraplatinumsilver.webp",
       ],
       id: 215,
+      inventory: 114,
     },
   ],
 
@@ -444,9 +481,10 @@ export const computer = {
       referencePrice: 1520000,
       promotionalPrice: 1368000,
       category: "computer",
+      subCategory: "Tab series",
       description:
         "A slim design and powerful performance make it convenient for use anywhere.",
-      tags: "bookSeries",
+      tags: ["#GalaxyBook4", "#Laptop", "#Performance"],
       highlights: [
         "Slim metal design that is thin and elegant",
         "Intel Core processor supporting smooth multitasking",
@@ -457,6 +495,7 @@ export const computer = {
         "/productimg/computer/book4gray.webp",
       ],
       id: 221,
+      inventory: 177,
     },
     {
       title: "Galaxy Book 4 Pro",
@@ -466,9 +505,10 @@ export const computer = {
       referencePrice: 2090000,
       promotionalPrice: 1672000,
       category: "computer",
+      subCategory: "Tab series",
       description:
         "Excellent battery life and performance support professional tasks.",
-      tags: "bookSeries",
+      tags: ["#GalaxyBook4Pro", "#Laptop", "#Productivity"],
       highlights: [
         "Near-complete display combining high resolution and touch features with Dynamic AMOLED touchscreen",
         "Seamless AI performance with the latest processor, Intel Core Ultra Processor",
@@ -479,6 +519,7 @@ export const computer = {
         "/productimg/computer/book4proplatinumsilver.webp",
       ],
       id: 222,
+      inventory: 61,
     },
   ],
 };
@@ -495,7 +536,8 @@ export const accessory = {
       description:
         "A smartwatch that helps manage daily life with various features and health monitoring.",
       category: "accessory",
-      tags: "GalaxyWatch",
+      subCategory: "Watch series",
+      tags: ["#GalaxyWatch5Pro", "#Smartwatch", "#Fitness"],
       id: 311,
       image: [
         "/productimg/accessory/watch5problacktitanium.webp",
@@ -506,6 +548,7 @@ export const accessory = {
         "Double the battery capacity for worry-free use",
         "Smart navigation optimized for outdoor activities",
       ],
+      inventory: 71,
     },
     {
       title: "Galaxy Watch6 Classic",
@@ -517,7 +560,8 @@ export const accessory = {
       description:
         "A smartwatch with a luxurious design and cutting-edge functionality.",
       category: "accessory",
-      tags: "GalaxyWatch",
+      subCategory: "Watch series",
+      tags: ["#GalaxyWatch6Classic", "#Smartwatch", "#Style"],
       id: 312,
       image: [
         "/productimg/accessory/watch6classicblack.webp",
@@ -528,6 +572,7 @@ export const accessory = {
         "Constant health monitoring",
         "#WorkOutComplete with the watch",
       ],
+      inventory: 92,
     },
     {
       title: "Galaxy Watch7",
@@ -538,7 +583,8 @@ export const accessory = {
       promotionalPrice: 349500,
       description: "Optimizes exercise and health management in a smartwatch.",
       category: "accessory",
-      tags: "GalaxyWatch",
+      subCategory: "Watch series",
+      tags: ["#GalaxyWatch7", "#Smartwatch", "#Innovation"],
       id: 313,
       image: [
         "/productimg/accessory/watch7green.webp",
@@ -549,6 +595,7 @@ export const accessory = {
         "Faster and stronger performance",
         "Galaxy AI-based health insights",
       ],
+      inventory: 48,
     },
     {
       title: "Galaxy Watch7 Ultra",
@@ -560,7 +607,8 @@ export const accessory = {
       description:
         "A powerful smartwatch suitable for both sports and everyday life.",
       category: "accessory",
-      tags: "GalaxyWatch",
+      subCategory: "Watch series",
+      tags: ["#GalaxyWatch7Ultra", "#Smartwatch", "#Premium"],
       id: 314,
       image: [
         "/productimg/accessory/watch7ultratitaniumgray.webp",
@@ -572,6 +620,7 @@ export const accessory = {
         "Maximum battery life of up to 100 hours for long outdoor exercises",
         "Galaxy AI-based health insights",
       ],
+      inventory: 80,
     },
   ],
 
@@ -586,7 +635,8 @@ export const accessory = {
       description:
         "Wireless earbuds that provide rich music enjoyment with high-quality sound.",
       category: "accessory",
-      tags: "GalaxyBuds",
+      subCategory: "Buds series",
+      tags: ["#GalaxyBuds2", "#Earbuds", "#SoundQuality"],
       id: 321,
       image: [
         "/productimg/accessory/buds2olive.webp",
@@ -599,6 +649,7 @@ export const accessory = {
         "Noise cancellation for focused music enjoyment",
         "Improved call quality with noise reduction solutions",
       ],
+      inventory: 48,
     },
     {
       title: "Galaxy Buds2 Pro",
@@ -610,7 +661,8 @@ export const accessory = {
       description:
         "Active noise canceling allows you to immerse yourself in music without distractions.",
       category: "accessory",
-      tags: "GalaxyBuds",
+      subCategory: "Buds series",
+      tags: ["#GalaxyBuds2Pro", "#Earbuds", "#NoiseCancelling"],
       id: 322,
       image: [
         "/productimg/accessory/buds2proborapurple.webp",
@@ -622,6 +674,7 @@ export const accessory = {
         "Powerful noise cancellation and conversation detection",
         "Immersive 360 audio experience",
       ],
+      inventory: 149,
     },
     {
       title: "Galaxy Buds3",
@@ -633,7 +686,8 @@ export const accessory = {
       description:
         "Offers a personalized sound experience for the best listening enjoyment.",
       category: "accessory",
-      tags: "GalaxyBuds",
+      subCategory: "Buds series",
+      tags: ["#GalaxyBuds3", "#Earbuds", "#Comfort"],
       id: 323,
       image: [
         "/productimg/accessory/buds3silver.webp",
@@ -644,6 +698,7 @@ export const accessory = {
         "Captivating high-quality audio experience",
         "Listening mode supports AI real-time translation",
       ],
+      inventory: 184,
     },
     {
       title: "Galaxy Buds3 Pro",
@@ -655,7 +710,8 @@ export const accessory = {
       description:
         "Wireless earbuds that boast premium sound quality and comfortable fit.",
       category: "accessory",
-      tags: "GalaxyBuds",
+      subCategory: "Buds series",
+      tags: ["#GalaxyBuds3Pro", "#Earbuds", "#Premium"],
       id: 324,
       image: [
         "/productimg/accessory/buds3prosilver.webp",
@@ -666,6 +722,7 @@ export const accessory = {
         "Dual amp, 2-way speaker, ultra-high quality audio",
         "Listening mode supports AI real-time translation",
       ],
+      inventory: 60,
     },
   ],
 
@@ -680,7 +737,8 @@ export const accessory = {
       description:
         "A smart ring for health and fitness management, providing a new experience away from the wrist.",
       category: "accessory",
-      tags: "GalaxyRing",
+      subCategory: "Ring series",
+      tags: ["#GalaxyRing", "#SmartRing", "#HealthTracking"],
       id: 331,
       image: [
         "/productimg/accessory/ringtitaniumblack.webp",
@@ -692,6 +750,7 @@ export const accessory = {
         "Battery lasts up to 7 days",
         "Galaxy AI health insights that understand you better",
       ],
+      inventory: 171,
     },
   ],
 };

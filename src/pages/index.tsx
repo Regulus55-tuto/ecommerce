@@ -6,9 +6,9 @@ import NotFound from "./NotFound";
 import ProductDetail from "./ProductDetail";
 import ForgotEmail from "./Auth/ForgotEmail";
 import ForgotPassword from "./Auth/ForgotPassword";
-import AdminList from "./AdminList";
-import AdminAdd from "./AdminAdd";
-import AdminEdit from "./AdminEdit";
+import AdminList from "./Admin/AdminList";
+import AdminAdd from "./Admin/AdminAdd";
+import AdminEdit from "./Admin/AdminEdit";
 import Collections from "./Collections";
 
 export {

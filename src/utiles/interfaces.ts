@@ -29,8 +29,8 @@ export interface ProductType {
   referencePrice: number; // 130000
   promotionalPrice: number; // 1300000
   category: string; // smartphone
-  subCategory?: string; // flipSeries
-  tags: string; // flip-series
+  subCategory?: string; // A series
+  tags?: string[]; // #good #choice
   registrationDate?: number;
   colors: string[]; // ["black", "white", "violet"],
   colorbuttons?: string[]; // ["#694956", "#c0d1a5", "#3c3d3f"]
@@ -40,4 +40,5 @@ export interface ProductType {
   image: string[]; // [~,~,~]
   details?: string;
   highlights?: string[]; // [~,~,~]
+  inventory?: number;
 }

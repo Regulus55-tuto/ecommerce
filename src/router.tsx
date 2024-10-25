@@ -14,7 +14,7 @@ import {
   Signup,
 } from "./pages";
 import ChangePassword from "./pages/Auth/ChangePassword";
-import AdminAdd from "pages/AdminAdd";
+import AdminAdd from "pages/Admin/AdminAdd";
 const router = createBrowserRouter([
   {
     path: "/",
