@@ -57,6 +57,10 @@ const AdminEdit = ({
     } = useForm();
     const watchImage = watch("image");
 
+    const submit = (data: any) => {
+        console.log('data',data)
+    }
+
     useEffect(() => {
         if (productInfo) {
             //ProductInfo 가 있으면 (아이템의 세부정보가있으면)
@@ -74,7 +78,7 @@ const AdminEdit = ({
 
     return (
         <div className={"bg-white"}>
-            <form className={"mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8"}>
+            <form onSubmit={handleSubmit(submit)} className={"mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8"}>
                 {/* Title, Breadcrumbs, Sort */}
                 <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
                     <div className="flex flex-col">
@@ -106,6 +110,7 @@ const AdminEdit = ({
                                     <div className="w-full">
                                         <input
                                             className="h-12 w-full border-2 border-gray-300 rounded-lg"
+                                            {...register(`item`)}
                                             placeholder={
                                                 productInfo
                                                     ? item === "title"
@@ -148,6 +153,9 @@ const AdminEdit = ({
                             </div>
                         </div>
                     ))}
+                        <button type={'submit'} className="bg-gray-300 border-gray-500 rounded-lg text-2xl p-4 mt-6">
+                            Edit Product
+                        </button>
                 </div>
             </form>
         </div>
