@@ -23,7 +23,7 @@ export const smartphone = {
         "High-resolution camera with OIS support",
         "Large 5,000 mAh battery",
       ],
-      inventory: 152
+      inventory: 152,
     },
     {
       title: "Galaxy A25",
@@ -47,7 +47,7 @@ export const smartphone = {
         "Super AMOLED 120 Hz display",
         "High-resolution ultra-wide camera with OIS support",
       ],
-      inventory: 231
+      inventory: 231,
     },
     {
       title: "Galaxy A35",
@@ -72,7 +72,7 @@ export const smartphone = {
         "50 MP high-resolution ultra-wide camera",
         "Large 5,000 mAh battery with up to 25W charging",
       ],
-      inventory: 122
+      inventory: 122,
     },
   ],
 
@@ -101,7 +101,7 @@ export const smartphone = {
         "Bright selfies even in low light",
         "Design that completes the identity of Galaxy",
       ],
-      inventory: 319
+      inventory: 319,
     },
     {
       title: "Galaxy S23+",
@@ -127,7 +127,7 @@ export const smartphone = {
         "Bright selfies even in low light",
         "Design that completes the identity of Galaxy",
       ],
-      inventory: 217
+      inventory: 217,
     },
     {
       title: "Galaxy S23 Ultra",
@@ -153,7 +153,7 @@ export const smartphone = {
         "Clear photos with 200MP and stable zoom up to 100x",
         "S Pen for a smarter everyday experience",
       ],
-      inventory: 53
+      inventory: 53,
     },
 
     {
@@ -180,7 +180,7 @@ export const smartphone = {
         "A next-level camera experience enhanced with AI editing",
         "Colors inspired by minerals",
       ],
-      inventory: 165
+      inventory: 165,
     },
     {
       title: "Galaxy S24+",
@@ -206,7 +206,7 @@ export const smartphone = {
         "A next-level camera experience enhanced with AI editing",
         "Colors inspired by minerals",
       ],
-      inventory: 98
+      inventory: 98,
     },
     {
       title: "Galaxy S24 Ultra",
@@ -237,9 +237,8 @@ export const smartphone = {
         "A next-level camera experience enhanced with AI editing and 200MP",
         "Powerful performance for high-end gaming",
       ],
-      inventory: 74
+      inventory: 74,
     },
-
   ],
 
   flipSeries: [
@@ -267,7 +266,7 @@ export const smartphone = {
         "Flexcam for capturing moments effortlessly",
         "Compact design that fits in various pockets",
       ],
-      inventory: 177
+      inventory: 177,
     },
     {
       title: "Galaxy Z Flip6",
@@ -320,7 +319,7 @@ export const smartphone = {
         "Flexcam for capturing moments effortlessly",
         "Compact design that fits in various pockets",
       ],
-      inventory: 38
+      inventory: 38,
     },
     {
       title: "Galaxy Z Fold6",
@@ -345,9 +344,9 @@ export const smartphone = {
         "High-quality flexcam that automatically finds the best angle",
         "Enhanced hardware performance for a powerful experience",
       ],
-      inventory: 152
-    }
-  ]
+      inventory: 152,
+    },
+  ],
 };
 
 export const computer = {
@@ -481,7 +480,7 @@ export const computer = {
       referencePrice: 1520000,
       promotionalPrice: 1368000,
       category: "computer",
-      subCategory: "Tab series",
+      subCategory: "Book series",
       description:
         "A slim design and powerful performance make it convenient for use anywhere.",
       tags: ["#GalaxyBook4", "#Laptop", "#Performance"],
@@ -505,7 +504,7 @@ export const computer = {
       referencePrice: 2090000,
       promotionalPrice: 1672000,
       category: "computer",
-      subCategory: "Tab series",
+      subCategory: "Book series",
       description:
         "Excellent battery life and performance support professional tasks.",
       tags: ["#GalaxyBook4Pro", "#Laptop", "#Productivity"],
