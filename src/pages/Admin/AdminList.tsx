@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Link, useParams} from "react-router-dom";
 import {ProductType} from "utiles/interfaces";
+import axios from "axios";
 
 interface AdminProps {
     title?: string;
@@ -40,7 +41,7 @@ const AdminList = ({
         useSortParams();
     // const { id } = useParams();
 
-    const [products, setProducts] = useState<ProductType[]>([
+    const [productss, setProductss] = useState<ProductType[]>([
         ...smartphone.aSeries,
         ...smartphone.sSeries,
         ...smartphone.flipSeries,
@@ -51,10 +52,17 @@ const AdminList = ({
         ...accessory.buds,
         ...accessory.ring,
     ]);
+    const getItemData = async () => {
+        const {data} = await axios.get('http://localhost:8000/api/product')
+        console.log('result', data.body)
+        setProductData(data.body)
+    }
+    const [productData, setProductData] = useState<any>([]);
 
-    useEffect(()=>{
-        window.scrollTo(0,0)
-    },[])
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        getItemData()
+    }, [])
 
     return (
         <div className={"bg-white"}>
@@ -108,34 +116,38 @@ const AdminList = ({
                     <table className="table-auto w-full">
                         <tr className="text-start font-bold text-xl text-gray-700 border-y-4 border-gray-500">
                             {/*제목부분 */}
-                            <td className="p-2">ID</td>
+                            <td className="p-2">NO.</td>
                             <td className="p-2 pl-12">Product</td>
                             <td className="p-2">Price</td>
                             <td className="p-2">Inventory</td>
                             <td className="p-2">Edit</td>
                             <td className="p-2">Delete</td>
                         </tr>
-                        {/* {실제 아이템} */}
-                        {products?.map((item) => (
-                            <tr className="text-start">
+
+                        {/*실제 아이템 데이터*/}
+                        {productData?.map((item: any, i: number) => (
+                            <tr className="text-start" key={i}>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    {item.id}
+                                    {i + 1}
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     <div className="flex items-center justify-start">
                                         <LazyLoadImage
-                                            src={item.image[0]}
+                                            src={item?.productImgs[0]}
                                             alt={title}
                                             className={"h-32 w-32"}
                                         />
-                                        {item.title}
+                                        {/*{console.log('numberrrrr',item?.productImgs[0])}*/}
+                                        {item.name}
                                     </div>
                                 </td>
+
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    {item.promotionalPrice.toLocaleString()}
+                                    {item.price}
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    {item.inventory}
+                                    {/*{item.inventory}*/}
+                                    152
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     <div>
@@ -158,17 +170,77 @@ const AdminList = ({
                                         </div>
                                     </div>
                                 </td>
+
                                 <td className="border-y border-gray-500 p-2 text-lg text-gray-700 font-bold">
                                     <div>
                                         <Icon
                                             icon="fluent:delete-24-regular"
                                             className="cursor-pointer"
                                             width="36"
+                                            onClick={()=>console.log(`${item.id} delete?`)}
                                         />
+                                        {/*쓰레기통*/}
                                     </div>
                                 </td>
                             </tr>
                         ))}
+
+                        {/* {목데이터 아이템} */}
+                        {/*{products?.map((item,i) => (*/}
+                        {/*    <tr className="text-start" key={i}>*/}
+                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
+                        {/*            {item.id}*/}
+                        {/*        </td>*/}
+                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
+                        {/*            <div className="flex items-center justify-start">*/}
+                        {/*                <LazyLoadImage*/}
+                        {/*                    src={item.image[0]}*/}
+                        {/*                    alt={title}*/}
+                        {/*                    className={"h-32 w-32"}*/}
+                        {/*                />*/}
+                        {/*                {item.title}*/}
+                        {/*            </div>*/}
+                        {/*        </td>*/}
+                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
+                        {/*            {item.promotionalPrice.toLocaleString()}*/}
+                        {/*        </td>*/}
+                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
+                        {/*            {item.inventory}*/}
+                        {/*        </td>*/}
+                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
+                        {/*            <div>*/}
+                        {/*                <div>*/}
+                        {/*                    <Link*/}
+                        {/*                        to={`/product/edit/${item.id}`}*/}
+                        {/*                        state={{*/}
+                        {/*                            title,*/}
+                        {/*                            referencePrice,*/}
+                        {/*                            promotionalPrice,*/}
+                        {/*                            category,*/}
+                        {/*                            id,*/}
+                        {/*                            colors,*/}
+                        {/*                            image,*/}
+                        {/*                            tags,*/}
+                        {/*                        }}*/}
+                        {/*                    >*/}
+                        {/*                        <Icon icon="fluent:edit-16-regular" width="36" />*/}
+                        {/*                    </Link>*/}
+                        {/*                </div>*/}
+                        {/*            </div>*/}
+                        {/*        </td>*/}
+                        {/*        <td className="border-y border-gray-500 p-2 text-lg text-gray-700 font-bold">*/}
+                        {/*            <div>*/}
+                        {/*                <Icon*/}
+                        {/*                    icon="fluent:delete-24-regular"*/}
+                        {/*                    className="cursor-pointer"*/}
+                        {/*                    width="36"*/}
+                        {/*                    onClick={()=>console.log(`${item.id} delete?`)}*/}
+                        {/*                />*/}
+                        {/*                /!*쓰레기통*!/*/}
+                        {/*            </div>*/}
+                        {/*        </td>*/}
+                        {/*    </tr>*/}
+                        {/*))}*/}
                     </table>
                 </div>
             </main>

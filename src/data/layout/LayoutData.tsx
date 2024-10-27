@@ -8,14 +8,14 @@ export const headerData = {
         {
           name: "New Arrivals",
           href: "/collections",
-          imageSrc: "images/book4u.png",
+          imageSrc: "/productimg/computer/book4gray.webp",
           imageAlt: "Tote bag",
         },
         {
           name: "Basic Tees",
           href: "/collections/Tops",
 
-          imageSrc: "images/buds3.png",
+          imageSrc: "/productimg/accessory/buds2prographite.webp",
           imageAlt: "black tees",
         },
       ],
