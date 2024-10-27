@@ -29,16 +29,16 @@ export interface ProductType {
   referencePrice: number; // 130000
   promotionalPrice: number; // 1300000
   category: string; // smartphone
-  subCategory?: string; // A series
-  tags?: string[]; // #good #choice
-  registrationDate?: number;
+  subCategory: string; // A series
+  tags: string[]; // #good #choice
+  // registrationDate?: number;
   colors: string[]; // ["black", "white", "violet"],
-  colorbuttons?: string[]; // ["#694956", "#c0d1a5", "#3c3d3f"]
+  colorbuttons: string[]; // ["#694956", "#c0d1a5", "#3c3d3f"]
   description: string; // The latest flip-serires
-  options?: string;
+  // options?: string;
   id: number; // 1
-  image: string[]; // [~,~,~]
-  details?: string;
-  highlights?: string[]; // [~,~,~]
-  inventory?: number;
+  image: string[]; // ["aa","bb","cc"]
+  // details?: string;
+  highlights: string[]; // ["aza","bbb","ccc"]
+  inventory: number; // 152
 }

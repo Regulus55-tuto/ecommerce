@@ -117,7 +117,6 @@ const Collections = () => {
                         colors={product.colors}
                         colorbuttons={product.colorbuttons}
                         description={product.description}
-                        details={product.details}
                       />
                     </li>
                   ))}
