@@ -11,6 +11,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Link, useParams} from "react-router-dom";
 import {ProductType} from "utiles/interfaces";
 import axios from "axios";
+import Modal from "../../components/ui/Modal";
 
 interface AdminProps {
     title?: string;
@@ -54,10 +55,29 @@ const AdminList = ({
     ]);
     const getItemData = async () => {
         const {data} = await axios.get('http://localhost:8000/api/product')
-        console.log('result', data.body)
-        setProductData(data.body)
+        console.log('result', data.body.data)
+        setProductData(data.body.data)
     }
     const [productData, setProductData] = useState<any>([]);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
+
+    const openModal = (id: number) => {
+        setSelectedItemId(id);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleDelete = (id: number) => {
+        console.log(`Deleting item with id: ${id}`);
+        // 여기에서 실제 삭제 로직을 추가하세요 (예: 상태 업데이트 또는 API 호출 등)
+        closeModal();
+    };
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -177,8 +197,15 @@ const AdminList = ({
                                             icon="fluent:delete-24-regular"
                                             className="cursor-pointer"
                                             width="36"
-                                            onClick={()=>console.log(`${item.id} delete?`)}
+                                            onClick={() => openModal(item.id)}
                                         />
+                                        {isModalOpen && selectedItemId !== null && (
+                                            <Modal
+                                                onClose={closeModal}
+                                                onConfirm={handleDelete}
+                                                productId={selectedItemId}
+                                            />
+                                        )}
                                         {/*쓰레기통*/}
                                     </div>
                                 </td>
@@ -234,8 +261,15 @@ const AdminList = ({
                         {/*                    icon="fluent:delete-24-regular"*/}
                         {/*                    className="cursor-pointer"*/}
                         {/*                    width="36"*/}
-                        {/*                    onClick={()=>console.log(`${item.id} delete?`)}*/}
+                        {/*                    onClick={() => openModal(item.id)}*/}
                         {/*                />*/}
+                        {/*                {isModalOpen && selectedItemId !== null && (*/}
+                        {/*                    <Modal*/}
+                        {/*                        onClose={closeModal}*/}
+                        {/*                        onConfirm={handleDelete}*/}
+                        {/*                        itemId={selectedItemId}*/}
+                        {/*                         )}*/}
+                        {/*                    />*/}
                         {/*                /!*쓰레기통*!/*/}
                         {/*            </div>*/}
                         {/*        </td>*/}

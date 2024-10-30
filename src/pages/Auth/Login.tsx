@@ -38,14 +38,19 @@ const Login = () => {
         console.log("Naver login");
     };
 
-    const submit = async (data: IProps) => {
+
+    // const token = localStorage.getItem('token')
+    const submit = async (data: any) => {
         console.log(data);
         try {
             const url = 'http://localhost:8000/api/auth/login'
-            const {status} = await axios.post(url, data)
-            if (status === 200) {
+            const result = await axios.post(url, data)
+            if (result.status === 200) {
                 alert('login success')
-                navigate('/')
+                console.log('datatatata', result)
+                localStorage.setItem('token', result.data.accessToken)
+                // navigate('/')
+                localStorage.getItem('token')
             }
         } catch (e) {
             console.log('errorrrrrr', e)

@@ -28,7 +28,8 @@ export interface ProductType {
   model: string; // IJSF23-FAIONSD
   referencePrice: number; // 130000
   promotionalPrice: number; // 1300000
-  category: string; // smartphone
+  // category: {[key:string] : {value: string}}; // {name: "smartphone", id: "23f-23f42-23f4-23f-23f23f4"}
+  category: any;
   subCategory: string; // A series
   tags: string[]; // #good #choice
   // registrationDate?: number;

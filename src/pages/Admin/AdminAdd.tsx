@@ -35,27 +35,36 @@ const AdminAdd = ({
         formState: {isSubmitting, errors, isDirty},
     } = useForm();
     const navigate = useNavigate();
+    const token: any = localStorage.getItem('token')
 
     const watchImage = watch("image");
 
-    const categories: { [key: string]: string[] } = {
+    const categorySample: { [key: string]: string[] } = {
         smartphone: ["A series", "S series", "Flip series", "Fold series"],
         computer: ["Tab series", "Book series"],
         accessory: ["Watch series", "Buds series", "Ring series"],
     };
-    const [selectedCategory, setSelectedCategory] = useState("smartphone");
-    const options = Object.keys(categories[selectedCategory]);
+    const [selectedCategoryName, setSelectedCategoryName] = useState("smartphone");
+    const [selectedCategoryId, setSelectedCategoryId] = useState("d29c0fd1-bf4d-436a-b7c7-2e2e993bdeef");
+    const options = Object.keys(categorySample[selectedCategoryName]);
     const handleCategoryChange = (e: any) => {
-        setSelectedCategory(e.target.value);
+        setSelectedCategoryName(e.target.value);
+
+        // 선택된 category 의 id 찾기
+        const selectedCategoryInfo = categoryInfo.find(
+            (category) => category.name === e.target.value
+        );
+        if (selectedCategoryInfo) {
+            setSelectedCategoryId(selectedCategoryInfo.id);
+        }
     };
 
-    // const [colorsInput, setColorInput] = useState([]);
     const {fields: colorFields, append: appendColor} = useFieldArray({
         control,
         name: "colors",
     });
     const handleAddColor = () => {
-        appendColor(""); // 새로운 input 추가
+        appendColor("");
     };
     const {fields: colorbuttonFields, append: appendColorbutton} =
         useFieldArray({
@@ -63,7 +72,7 @@ const AdminAdd = ({
             name: "colorbuttons",
         });
     const handleAddColorbutton = () => {
-        appendColorbutton(""); // 새로운 input 추가
+        appendColorbutton("");
     };
 
     const {fields: highlightFields, append: appendHighlight} = useFieldArray({
@@ -71,7 +80,7 @@ const AdminAdd = ({
         name: "highlights",
     });
     const handleAddHighlight = () => {
-        appendHighlight(""); // 새로운 input 추가
+        appendHighlight("");
     };
 
     const {fields: tagFields, append: appendTag} = useFieldArray({
@@ -79,48 +88,53 @@ const AdminAdd = ({
         name: "tags",
     });
     const handleAddTag = () => {
-        appendTag(""); // 새로운 input 추가
+        appendTag("");
     };
 
-    const submit = async (data: any) => {
-        try{
-            const userInput = {
-                name: data.title,
-                description: data.description,
-                price: parseInt(data.promotionalPrice, 10),
-                options: "option one",
-                details: "detail one",
-                color: "color one",
-                tags: data.tags,
-                highlights: data.highlights,
-                productImgs: ["https://example.com/images/product1.png"],
-                category: "a926d6ae-a552-458b-a944-4afd3d9f9e68"
-            }
-            const result = await axios.post('http://localhost:8000/api/product',userInput)
-            console.log('result',userInput);
-            alert('데이터 추가 성공')
-            navigate('/product/new')
-        }catch(e){
-            console.log('submit errorrr',e)
-        }
-    };
-
-    const getData = async () => {
+    const getCategoryData = async () => {
         const {data} = await axios.get('http://localhost:8000/api/category')
         // console.log('mydata', data.body)
         setCategoryInfo(data.body)
     }
     const [categoryInfo, setCategoryInfo] = useState<any[]>([])
 
-    // console.log('cateinfo', categoryInfo)
+    const submit = async (data: any) => {
+        try {
+            const userInput = {
+                name: data.title,
+                description: data.description,
+                price: data.promotionalPrice,
+                options: "option",
+                details: "detail",
+                colors: data.colors,
+                tags: data.tags,
+                highlights: data.highlights,
+                productImgs: ["https://example.com/images/product1.png","https://example.com/images/product1.png"],
+                category: {
+                    name:selectedCategoryName,
+                    id:selectedCategoryId,
+                }
+            }
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const result = await axios.post('http://localhost:8000/api/product',userInput,config)
+            console.log('result', userInput);
+            alert('데이터 추가 성공')
+            // navigate('/product/new')
+        } catch (e) {
+            console.log('submit errorrr', e)
+        }
+    };
 
     useEffect(() => {
         if (watchImage && watchImage.length > 0) {
             // 유저가 이미지 넣은거 있으면
             setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
         }
-        getData() // 카테고리 정보 가져오는거
-
+        getCategoryData() // 카테고리 정보 가져오는거
     }, [watchImage]);
 
 
@@ -175,16 +189,16 @@ const AdminAdd = ({
                                 </div>
                             </div>
 
-                            <div className="flex w-full px-5">
-                                <h3 className="w-60 font-bold text-2xl text-gray-700">ID</h3>
-                                <div className="w-full">
-                                    <input
-                                        className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                        {...register("id")}
-                                        placeholder="id"
-                                    />
-                                </div>
-                            </div>
+                            {/*<div className="flex w-full px-5">*/}
+                            {/*    <h3 className="w-60 font-bold text-2xl text-gray-700">ID</h3>*/}
+                            {/*    <div className="w-full">*/}
+                            {/*        <input*/}
+                            {/*            className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
+                            {/*            {...register("id")}*/}
+                            {/*            placeholder="id"*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             <div className="flex w-full px-5">
                                 <h3 className="w-60 font-bold text-2xl text-gray-700">
@@ -250,14 +264,14 @@ const AdminAdd = ({
                                 className="h-12 w-full border-2 border-gray-300 rounded-lg"
                                 onChange={handleCategoryChange}
                             >
-                                {/*  {Object.keys(categories).map((category) => (*/}
+                                {/*  {Object.keys(categorySample).map((category) => (*/}
                                 {/*    <option key={category} value={category}>*/}
                                 {/*      {category}*/}
                                 {/*    </option>*/}
                                 {/*))}*/}
 
                                 {categoryInfo?.map((category) => (
-                                    <option key={category.name} value={category.name} disabled={category.name === 'Home Appliances' ? true : false}>
+                                    <option key={category.name} value={category.name}>
                                         {category.name}
                                     </option>
                                 ))}
@@ -278,7 +292,7 @@ const AdminAdd = ({
                             >
                                 {options.map((option: any) => (
                                     <option key={option} defaultValue={option}>
-                                        {categories[selectedCategory][option]}
+                                        {categorySample[selectedCategoryName][option]}
                                     </option>
                                 ))}
                             </select>

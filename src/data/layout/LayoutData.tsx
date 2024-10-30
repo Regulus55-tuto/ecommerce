@@ -12,11 +12,11 @@ export const headerData = {
           imageAlt: "Tote bag",
         },
         {
-          name: "Basic Tees",
+          name: "Standard",
           href: "/collections/Tops",
 
-          imageSrc: "/productimg/accessory/buds2prographite.webp",
-          imageAlt: "black tees",
+          imageSrc: "images/buds3.png",
+          imageAlt: "Standard",
         },
       ],
 

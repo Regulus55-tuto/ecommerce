@@ -1,13 +1,13 @@
 export const FILTERS = [
     {
-        name: 'Color',
+        name: "Color",
     },
-    {
-        name: 'Size',
-    },
+    //   {
+    //     name: "Color",
+    //   },
 ];
 
-export const COLLECTION = ['Accessories', 'Clothing'];
+export const COLLECTION = ["Smartphone", "Computer", "Accessory"];
 
 interface Category {
     type: string;
@@ -18,31 +18,31 @@ interface CategoryMap {
 }
 
 export const CATEGORIES: CategoryMap = {
-    Clothing: { type: 'category' },
-    Accessories: { type: 'category' },
-    Tops: { type: 'subCategory' },
-    Bags: { type: 'subCategory' },
+    Smartphone: { type: "category" },
+    Computer: { type: "category" },
+    Accessory: { type: "category" },
+    //   Bags: { type: "subCategory" },
 };
 
 export const SORT_OPTIONS = [
-    { name: 'Relevance', query: '' },
-    { name: 'Most Popular', query: 'likes' },
+    { name: "Relevance", query: "" },
+    //   { name: "Most Popular", query: "likes" },
+    //   {
+    //     name: "Newest",
+    //     query: "registrationDate",
+    //   },
     {
-        name: 'Newest',
-        query: 'registrationDate',
+        name: "Price: Low to High",
+        query: "priceAsc",
     },
     {
-        name: 'Price: Low to High',
-        query: 'priceAsc',
-    },
-    {
-        name: 'Price: High to Low',
-        query: 'priceDesc',
+        name: "Price: High to Low",
+        query: "priceDesc",
     },
 ];
 
 // nft
-export const FILTERITEM = ['Background', 'Body', 'Eyes', 'Hat', 'Nose'];
+export const FILTERITEM = ["Background", "Body", "Eyes", "Hat", "Nose"];
 export const LOADING_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
 
 // Cart
@@ -50,18 +50,18 @@ export const SHIPPING = 5;
 
 // Check out
 export const CANADA_STATE = [
-    '',
-    'Alberta',
-    'British Columbia',
-    'Manitoba',
-    'New Brunswick',
-    'Newfoundland and Larbrador',
-    'Northwest Territories',
-    'Nova Scotia',
-    'Nunavut',
-    'Ontario',
-    'Prince Edward Island',
-    'Quebec',
-    'Saskatchewan',
-    'Yukon',
+    "",
+    "Alberta",
+    "British Columbia",
+    "Manitoba",
+    "New Brunswick",
+    "Newfoundland and Larbrador",
+    "Northwest Territories",
+    "Nova Scotia",
+    "Nunavut",
+    "Ontario",
+    "Prince Edward Island",
+    "Quebec",
+    "Saskatchewan",
+    "Yukon",
 ];
