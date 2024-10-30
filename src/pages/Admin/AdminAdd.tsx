@@ -120,7 +120,7 @@ const AdminAdd = ({
                     Authorization: `Bearer ${token}`
                 }
             }
-            const result = await axios.post('http://localhost:8000/api/product',userInput,config)
+            // const result = await axios.post('http://localhost:8000/api/product',userInput,config)
             console.log('result', userInput);
             alert('데이터 추가 성공')
             // navigate('/product/new')
@@ -128,7 +128,7 @@ const AdminAdd = ({
             console.log('submit errorrr', e)
         }
     };
-
+console.log('token',token)
     useEffect(() => {
         if (watchImage && watchImage.length > 0) {
             // 유저가 이미지 넣은거 있으면

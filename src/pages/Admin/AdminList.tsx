@@ -5,7 +5,6 @@ import CategorySort from "components/Product/CategorySort";
 import ProductTitle from "components/ui/ProductTitle";
 import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import useSortParams from "hooks/useSortParams";
-import {AdminEdit} from "pages/index";
 import {useEffect, useState} from "react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Link, useParams} from "react-router-dom";
@@ -62,9 +61,12 @@ const AdminList = ({
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
+    const [selectedItemName, setSelectedItemName] = useState<string>('');
 
-    const openModal = (id: number) => {
+
+    const openModal = (id: number, name:string) => {
         setSelectedItemId(id);
+        setSelectedItemName(name)
         setIsModalOpen(true);
     };
 
@@ -197,13 +199,14 @@ const AdminList = ({
                                             icon="fluent:delete-24-regular"
                                             className="cursor-pointer"
                                             width="36"
-                                            onClick={() => openModal(item.id)}
+                                            onClick={() => openModal(item.id, item.name)}
                                         />
                                         {isModalOpen && selectedItemId !== null && (
                                             <Modal
                                                 onClose={closeModal}
                                                 onConfirm={handleDelete}
                                                 productId={selectedItemId}
+                                                productName={selectedItemName}
                                             />
                                         )}
                                         {/*쓰레기통*/}

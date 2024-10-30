@@ -2,11 +2,12 @@ import React from "react";
 
 interface ModalProps {
     onClose: () => void;
-    onConfirm: (id: number) => void; // 삭제 함수 전달
-    productId: number; // 삭제할 아이템의 id 전달
+    onConfirm: (id: number) => void;
+    productId: number;
+    productName: string;
 }
 
-const Modal: React.FC<ModalProps> = ({onClose, onConfirm, productId}) => {
+const Modal: React.FC<ModalProps> = ({onClose, onConfirm, productId, productName}) => {
     return (
         <div
             className="relative z-10"
@@ -27,11 +28,12 @@ const Modal: React.FC<ModalProps> = ({onClose, onConfirm, productId}) => {
                         <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                             <div className="text-center">
                                 <h3 className="text-base font-semibold text-gray-900">
-                                    ` Are you sure you want to delete?<br/>
-                                    pro ${productId}`
+                                    Are you sure you want to delete?<br/>
+                                   Product Name : <span className={'text-red-500'}>{productName}</span>
                                 </h3>
                             </div>
                         </div>
+
                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button
                                 type="button"
