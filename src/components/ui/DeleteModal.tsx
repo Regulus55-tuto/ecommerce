@@ -7,7 +7,7 @@ interface ModalProps {
     productName: string;
 }
 
-const Modal: React.FC<ModalProps> = ({onClose, onConfirm, productId, productName}) => {
+const DeleteModal: React.FC<ModalProps> = ({onClose, onConfirm, productId, productName}) => {
     return (
         <div
             className="relative z-10"
@@ -57,4 +57,4 @@ const Modal: React.FC<ModalProps> = ({onClose, onConfirm, productId, productName
     );
 };
 
-export default Modal;
+export default DeleteModal;

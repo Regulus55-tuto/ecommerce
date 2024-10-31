@@ -3,7 +3,7 @@ import ProductTitle from "components/ui/ProductTitle";
 import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import React, {useEffect, useState} from "react";
 import {useFieldArray, useForm} from "react-hook-form";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {ProductType} from "utiles/interfaces";
 import axios from "axios";
 
@@ -33,7 +33,7 @@ interface AdminProps {
 const AdminEdit = () => {
     const params = useParams();
     const token = localStorage.getItem("token");
-
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -196,6 +196,7 @@ const AdminEdit = () => {
             const result = await axios.put(url, userInput, config);
             if (result.status === 200) {
                 alert('수정성공')
+                navigate('/product/new')
             }
             console.log('resutlttt', result)
             console.log("data", userInput);

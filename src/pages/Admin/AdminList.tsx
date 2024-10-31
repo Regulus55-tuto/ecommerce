@@ -10,7 +10,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Link, useParams} from "react-router-dom";
 import {ProductType} from "utiles/interfaces";
 import axios from "axios";
-import Modal from "../../components/ui/Modal";
+import DeleteModal from "../../components/ui/DeleteModal";
 
 interface AdminProps {
     title?: string;
@@ -85,6 +85,7 @@ const AdminList = ({
             const result = await axios.delete(url, config)
             if (result.status === 200) {
                 alert(`${name} deletion successful`)
+                window.location.reload()
             }
         } catch (e) {
             console.log(e)
@@ -214,7 +215,7 @@ const AdminList = ({
                                             onClick={() => openModal(item.id, item.name)}
                                         />
                                         {isModalOpen && selectedItemId !== null && (
-                                            <Modal
+                                            <DeleteModal
                                                 onClose={closeModal}
                                                 onConfirm={() => handleDelete(selectedItemId, selectedItemName)}
                                                 productId={selectedItemId}
@@ -279,7 +280,7 @@ const AdminList = ({
                         {/*                    onClick={() => openModal(item.id)}*/}
                         {/*                />*/}
                         {/*                {isModalOpen && selectedItemId !== null && (*/}
-                        {/*                    <Modal*/}
+                        {/*                    <DeleteModal*/}
                         {/*                        onClose={closeModal}*/}
                         {/*                        onConfirm={handleDelete}*/}
                         {/*                        itemId={selectedItemId}*/}
