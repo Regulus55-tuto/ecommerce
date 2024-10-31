@@ -25,12 +25,23 @@ interface AdminProps {
     image?: string[];
     tags?: string[];
     colors?: string[];
+    highlights?: string[];
     colorbuttons?: string[];
     inventory?: number;
 }
 
 const AdminEdit = () => {
     const params = useParams();
+    const token = localStorage.getItem("token");
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        control,
+        setValue,
+        formState: {isSubmitting, errors, isDirty},
+    } = useForm();
 
     const getItemData = async () => {
         try {
@@ -47,11 +58,9 @@ const AdminEdit = () => {
     // Category
     const getCategoryData = async () => {
         const {data} = await axios.get('http://localhost:8000/api/category')
-        console.log('catego', data.body)
         setCategoryInfo(data.body)
     }
-    const [categoryInfo, setCategoryInfo] = useState<any[]>([])
-
+    const [categoryInfo, setCategoryInfo] = useState<CategoryType[]>([])
     const categorySample: { [key: string]: string[] } = {
         smartphone: ["A series", "S series", "Flip series", "Fold series"],
         computer: ["Tab series", "Book series"],
@@ -61,46 +70,81 @@ const AdminEdit = () => {
     const [selectedCategoryId, setSelectedCategoryId] = useState("fca15230-e867-4a9a-a17f-557c5f5e33d2");
     const options = selectedCategoryName ? Object.keys(categorySample[selectedCategoryName]) : [];
     const handleCategoryChange = (e: any) => {
-        setSelectedCategoryName(e.target.value);
+        // setSelectedCategoryName(e.target.value);
 
         // 선택된 category 의 id 찾기
         const selectedCategoryInfo = categoryInfo.find(
             (category) => category.name === e.target.value
         );
         if (selectedCategoryInfo) {
-            setSelectedCategoryId(selectedCategoryInfo.id);
+            setSelectedCategoryId("dd");
         }
     };
 
-    const [photoImg, setPhotoImg] = useState<string>("");
-    const {
-        register,
-        handleSubmit,
-        watch,
-        control,
-        setValue,
-        formState: {isSubmitting, errors, isDirty},
-    } = useForm();
+    const [photoImg, setPhotoImg] = useState<any>([]);
+    const [photoFile, setPhotoFile] = useState<any>([]);
+    // const files = watch("images");
+    // if (files && files.length > 0) {
+    //     const fileURL = URL.createObjectURL(files[0]);
+    //     if (fileURL !== photoImg) setPhotoFile(fileURL);
+    // }
+
 
     // input
     const watchImage = watch("image");
-    const {fields: colorFields, append: appendColor} = useFieldArray({
+    const watchFile = watch('productImgs')
+    console.log("와치치치치치ㅣ치칯",watch('productImgs'));
+    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+    const watchFiles = watch('productImgs');
+    useEffect(() => {
+        if (watchFiles && watchFiles.length > 0) {
+            // 이미지파일 변경되면 화면에 표시
+            const previews = Array.from(watchFiles).map(file => URL.createObjectURL(file as File));
+            setImagePreviews(previews);
+            
+            return () => {
+                previews.forEach(preview => URL.revokeObjectURL(preview));
+            };
+        }
+    }, [watchFiles]);
+
+    const {fields: colorFields, append: appendColor, remove: removeColor} = useFieldArray({
         control,
         name: "colors",
     });
-    const {fields: colorbuttonFields, append: appendColorbutton} =
-        useFieldArray({
-            control,
-            name: "colorbuttons",
-        });
-    const {fields: tagFields, append: appendTag} = useFieldArray({
+    const handleAddColor = () => {
+        appendColor("");
+    };
+    const handleRemoveColor = (index: number) => {
+        removeColor(index); // 인덱스에 해당하는 필드 제거
+    };
+
+    // const {fields: colorbuttonFields, append: appendColorbutton} =
+    //     useFieldArray({
+    //         control,
+    //         name: "colorbuttons",
+    //     });
+    const {fields: tagFields, append: appendTag, remove: removeTag} = useFieldArray({
         control,
         name: "tags",
     });
-    const {fields: highlightFields, append: appendHighlight} = useFieldArray({
+    const handleAddTag = () => {
+        appendTag("");
+    };
+    const handleRemoveTag = (index: number) => {
+        removeTag(index); // 인덱스에 해당하는 필드 제거
+    };
+
+    const {fields: highlightFields, append: appendHighlight, remove: removeHighlight} = useFieldArray({
         control,
         name: "highlights",
     });
+    const handleAddHighlight = () => {
+        appendHighlight("");
+    };
+    const handleRemoveHighlight = (index: number) => {
+        removeHighlight(index); // 인덱스에 해당하는 필드 제거
+    };
 
     // categories, subcategories
     const categories: { [key: string]: string[] } = {
@@ -124,52 +168,70 @@ const AdminEdit = () => {
     //   setSelectedSubCategory(e.target.value);
     // };
 
-    const submit = (data: any) => {
-        console.log("data", data);
+
+    const submit = async (data: any) => {
+        const userInput = {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            tags: data.tags,
+            options: 'options',
+            details: 'details',
+            colors: data.colors,
+            stock: 1,
+            highlights: data.highlights,
+            productImgs: photoFile,
+            category: JSON.parse(data.category),
+        }
+        console.log('라라라라라라',data.productImgs)
+
+
+        try{
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}` // Bearer 토큰을 헤더에 설정
+                }
+            }
+            const url = `http://localhost:8000/api/product/${params.id}`
+            const result = await axios.put(url, userInput,config);
+            console.log('resutlttt',result)
+            console.log("data", userInput);
+        }catch(e){
+            console.log(e)
+        }
     };
     useEffect(() => {
         getItemData()
         getCategoryData()
     }, [])
-    // useEffect(() => {
-    //   if (productInfo) {
-    //     //ProductInfo 가 있으면 (아이템의 세부정보가있으면)
-    //     setPhotoImg(productInfo.image[0]); // 사진이미지에 아이템 사진을 넣음
-    //   } else {
-    //     setPhotoImg("/images/default_image.webp"); // 없으면 암것도없음
-    //   }
-    //   if (watchImage && watchImage.length > 0) {
-    //     // 유저가 이미지 넣은거 있으면
-    //     setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
-    //   }
-    // }, [watchImage]);
-    // useEffect(() => {
-    //   if (productInfo) {
-    //     setValue("title", productInfo.title);
-    //     setValue("model", productInfo.model);
-    //     setValue(
-    //       "referencePrice",
-    //       `₩ ${productInfo.referencePrice.toLocaleString()}`
-    //     );
-    //     setValue(
-    //       "promotionalPrice",
-    //       `₩ ${productInfo.promotionalPrice.toLocaleString()}`
-    //     );
-    //     setValue("category", productInfo.category);
-    //     setValue("subCategory", productInfo.subCategory);
-    //     setValue("description", productInfo.description);
-    //     setValue("tags", productInfo.tags);
-    //     setValue("colors", productInfo.colors);
-    //     setValue("colorbuttons", productInfo.colorbuttons);
-    //     setValue("id", productInfo.id);
-    //     setValue("highlights", productInfo.highlights);
-    //     setValue("inventory", productInfo.inventory);
-    //   }
-    //   if (productInfo?.subCategory) {
-    //     setValue("subCategory", productInfo.subCategory);
-    //   }
-    //   window.scrollTo(0, 0);
-    // }, []);
+    useEffect(() => {
+        if (productData) {
+            setValue('colors', productData.colors);
+            setValue('highlights', productData.highlights)
+            setValue('tags',productData.tags)
+
+            setValue('name',productData.name)
+            setValue('id',productData.id)
+            setValue('price',productData.price)
+            setValue('description',productData.description)
+        }
+    }, [productData, setValue])
+    useEffect(() => {
+        if (productData && productData.image && productData.image.length > 0) {
+            setPhotoImg(productData.image[0]); // 첫 번째 이미지를 사용
+        } else {
+        setPhotoImg("/images/default_image.webp"); // 없으면 암것도없음
+      }
+      if (watchImage && watchImage.length > 0) {
+        // 유저가 이미지 넣은거 있으면
+        setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
+      }
+      if(watchFile && watchFile.length > 0){
+          setPhotoImg(Array.from(watchFile))
+      }
+    }, [watchImage, watchFile]);
+
 
     if (!productData) {
         return <div>Loading..</div>
@@ -192,12 +254,21 @@ const AdminEdit = () => {
                 <div className="flex flex-col items-center justify-center px-40 mt-10">
                     <div className="grid grid-cols-10 w-full">
                         <div className="col-span-4 flex flex-col items-center">
-                            <img src={photoImg} className="h-60 w-60"/>
+                            {/*<img src={photoImg} className="h-60 w-60"/>*/}
+                            {imagePreviews.map((preview, index) => (
+                                <img
+                                    key={index}
+                                    src={preview}
+                                    alt={`Preview ${index + 1}`}
+                                    className="h-30 w-30 object-cover" // Tailwind CSS 클래스 추가
+                                />
+                            ))}
                             <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
                                 <input
-                                    {...register("image")}
+                                    {...register("productImgs")}
                                     type="file"
                                     accept="image/png,image/jpeg,image/jpg,image/webp"
+                                    multiple
                                 />
                                 <div>JPG, JPEG, PNG, or WEBP</div>
                             </div>
@@ -231,9 +302,10 @@ const AdminEdit = () => {
                                 <h3 className="w-60 font-bold text-2xl text-gray-700">ID</h3>
                                 <div className="w-full">
                                     <textarea
-                                        className="h-20 w-full border-2 border-gray-300 rounded-lg"
+                                        className="h-14 w-full border-2 border-gray-300 rounded-lg"
                                         {...register("id")}
                                         placeholder={String(productData?.id)}
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -272,7 +344,8 @@ const AdminEdit = () => {
 
                     <div className="flex w-full p-3">
                         <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
-                            Promotional Price
+                            {/*Promotional */}
+                            Price
                         </h3>
                         <div className="w-full">
                             <input
@@ -306,11 +379,11 @@ const AdminEdit = () => {
                             <select
                                 {...register("category")}
                                 className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                // onChange={handleCategoryChange}
+                                onChange={handleCategoryChange}
                             >
-                                {Object.keys(categories).map((category) => (
-                                    <option key={category} value={category}>
-                                        {category}
+                                {categoryInfo?.map((category) => (
+                                    <option key={category.id} value={JSON.stringify({id: category.id, name: category.name})}>
+                                        {category.name}
                                     </option>
                                 ))}
                             </select>
@@ -342,13 +415,30 @@ const AdminEdit = () => {
                         </h3>
                         <div className="w-full">
                             {colorFields.map((field, index) => (
-                                <input
-                                    key={field.id}
-                                    {...register(`colors.${index}`)}
-                                    className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                    // placeholder={productData?.colors?.[index]}
-                                />
+                                <>
+                                    <input
+                                        key={field.id}
+                                        {...register(`colors.${index}`)}
+                                        className="h-12 w-2/3 border-2 border-gray-300 rounded-lg"
+                                        placeholder={productData?.colors?.[index] || 'New Color'}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveColor(index)}
+                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                    >
+                                        Remove
+                                    </button>
+                                </>
                             ))}
+                            <button
+                                type="button"
+                                onClick={handleAddColor}
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                            >
+                                Add Color
+                            </button>
+
                         </div>
                     </div>
 
@@ -357,14 +447,14 @@ const AdminEdit = () => {
                             Color Buttons
                         </h3>
                         <div className="w-full">
-                            {colorbuttonFields.map((field, index) => (
-                                <input
-                                    key={field.id}
-                                    {...register(`colorbuttons.${index}`)}
-                                    className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                    // placeholder={productInfo?.colorbuttons?.[index]}
-                                />
-                            ))}
+                            {/*{colorbuttonFields.map((field, index) => (*/}
+                            {/*    <input*/}
+                            {/*        key={field.id}*/}
+                            {/*        {...register(`colorbuttons.${index}`)}*/}
+                            {/*        className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
+                            {/*        placeholder={productInfo?.colorbuttons?.[index]}*/}
+                            {/*    />*/}
+                            {/*))}*/}
                         </div>
                     </div>
 
@@ -374,13 +464,29 @@ const AdminEdit = () => {
                         </h3>
                         <div className="w-full">
                             {highlightFields.map((field, index) => (
-                                <input
-                                    key={field.id}
-                                    {...register(`highlights.${index}`)}
-                                    className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                    // placeholder={productInfo?.highlights?.[index]}
-                                />
+                                <>
+                                    <textarea
+                                        key={field.id}
+                                        {...register(`highlights.${index}`)}
+                                        className="h-20 w-2/3  border-2 border-gray-300 rounded-lg"
+                                        placeholder={productData?.highlights?.[index] || 'New Highlight'}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveHighlight(index)}
+                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                    >
+                                        Remove
+                                    </button>
+                                </>
                             ))}
+                            <button
+                                type="button"
+                                onClick={handleAddHighlight}
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                            >
+                                Add Highlight
+                            </button>
                         </div>
                     </div>
 
@@ -390,13 +496,29 @@ const AdminEdit = () => {
                         </h3>
                         <div className="w-full">
                             {tagFields.map((field, index) => (
-                                <input
-                                    key={field.id}
-                                    {...register(`tags.${index}`)}
-                                    className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                    // placeholder={productInfo?.tags?.[index]}
-                                />
+                                <>
+                                    <input
+                                        key={field.id}
+                                        {...register(`tags.${index}`)}
+                                        className="h-12 w-2/3 border-2 border-gray-300 rounded-lg"
+                                        placeholder={productData?.tags?.[index]}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveTag(index)}
+                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                    >
+                                        Remove
+                                    </button>
+                                </>
                             ))}
+                            <button
+                                type="button"
+                                onClick={handleAddTag}
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                            >
+                                Add Highlight
+                            </button>
                         </div>
                     </div>
 
