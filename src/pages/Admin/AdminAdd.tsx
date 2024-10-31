@@ -45,7 +45,7 @@ const AdminAdd = ({
         accessory: ["Watch series", "Buds series", "Ring series"],
     };
     const [selectedCategoryName, setSelectedCategoryName] = useState("smartphone");
-    const [selectedCategoryId, setSelectedCategoryId] = useState("d29c0fd1-bf4d-436a-b7c7-2e2e993bdeef");
+    const [selectedCategoryId, setSelectedCategoryId] = useState("fca15230-e867-4a9a-a17f-557c5f5e33d2");
     const options = Object.keys(categorySample[selectedCategoryName]);
     const handleCategoryChange = (e: any) => {
         setSelectedCategoryName(e.target.value);
@@ -109,7 +109,7 @@ const AdminAdd = ({
                 colors: data.colors,
                 tags: data.tags,
                 highlights: data.highlights,
-                productImgs: ["https://example.com/images/product1.png","https://example.com/images/product1.png"],
+                productImgs: ["http://localhost:9000/samsung/product/2024-10-30_21-05-31/1e51939ec5a12a4fa5f0b50b47e9da80.png"],
                 category: {
                     name:selectedCategoryName,
                     id:selectedCategoryId,
@@ -128,7 +128,7 @@ const AdminAdd = ({
             console.log('submit errorrr', e)
         }
     };
-console.log('token',token)
+console.log('category',categoryInfo)
     useEffect(() => {
         if (watchImage && watchImage.length > 0) {
             // 유저가 이미지 넣은거 있으면

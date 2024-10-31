@@ -53,7 +53,8 @@ const AdminList = ({
         ...accessory.ring,
     ]);
     const getItemData = async () => {
-        const {data} = await axios.get('http://localhost:8000/api/product')
+        const url = "http://localhost:8000/api/product?order=ASC&page=1&take=10"
+        const {data} = await axios.get(url)
         console.log('result', data.body.data)
         setProductData(data.body.data)
     }
@@ -63,7 +64,7 @@ const AdminList = ({
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
     const [selectedItemName, setSelectedItemName] = useState<string>('');
 
-
+console.log('itemdata',productData)
     const openModal = (id: number, name:string) => {
         setSelectedItemId(id);
         setSelectedItemName(name)
@@ -169,7 +170,8 @@ const AdminList = ({
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     {/*{item.inventory}*/}
-                                    152
+                                    {/*152*/}
+                                    {item.id}
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     <div>
