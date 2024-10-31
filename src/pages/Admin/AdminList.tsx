@@ -39,7 +39,7 @@ const AdminList = ({
                    }: AdminProps) => {
     const {query, searchParams, setSortParams, deleteSortParams} =
         useSortParams();
-    // const { id } = useParams();
+    const token = localStorage.getItem('token')
 
     const [productss, setProductss] = useState<ProductType[]>([
         ...smartphone.aSeries,
@@ -55,7 +55,6 @@ const AdminList = ({
     const getItemData = async () => {
         const url = "http://localhost:8000/api/product?order=ASC&page=1&take=10"
         const {data} = await axios.get(url)
-        console.log('result', data.body.data)
         setProductData(data.body.data)
     }
     const [productData, setProductData] = useState<any>([]);
@@ -64,8 +63,8 @@ const AdminList = ({
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
     const [selectedItemName, setSelectedItemName] = useState<string>('');
 
-console.log('itemdata',productData)
-    const openModal = (id: number, name:string) => {
+    console.log('ProductData', productData)
+    const openModal = (id: number, name: string) => {
         setSelectedItemId(id);
         setSelectedItemName(name)
         setIsModalOpen(true);
@@ -75,9 +74,21 @@ console.log('itemdata',productData)
         setIsModalOpen(false);
     };
 
-    const handleDelete = (id: number) => {
-        console.log(`Deleting item with id: ${id}`);
-        // 여기에서 실제 삭제 로직을 추가하세요 (예: 상태 업데이트 또는 API 호출 등)
+    const handleDelete = async (id: number, name: string) => {
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const url = `http://localhost:8000/api/product/${id}`
+            const result = await axios.delete(url, config)
+            if (result.status === 200) {
+                alert(`${name} deletion successful`)
+            }
+        } catch (e) {
+            console.log(e)
+        }
         closeModal();
     };
 
@@ -160,7 +171,6 @@ console.log('itemdata',productData)
                                             alt={title}
                                             className={"h-32 w-32"}
                                         />
-                                        {/*{console.log('numberrrrr',item?.productImgs[0])}*/}
                                         {item.name}
                                     </div>
                                 </td>
@@ -206,7 +216,7 @@ console.log('itemdata',productData)
                                         {isModalOpen && selectedItemId !== null && (
                                             <Modal
                                                 onClose={closeModal}
-                                                onConfirm={handleDelete}
+                                                onConfirm={() => handleDelete(selectedItemId, selectedItemName)}
                                                 productId={selectedItemId}
                                                 productName={selectedItemName}
                                             />

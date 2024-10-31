@@ -90,10 +90,7 @@ const AdminEdit = () => {
     // }
 
 
-    // input
-    const watchImage = watch("image");
-    const watchFile = watch('productImgs')
-    console.log("와치치치치치ㅣ치칯",watch('productImgs'));
+    // 이미지
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     const watchFiles = watch('productImgs');
     useEffect(() => {
@@ -101,13 +98,14 @@ const AdminEdit = () => {
             // 이미지파일 변경되면 화면에 표시
             const previews = Array.from(watchFiles).map(file => URL.createObjectURL(file as File));
             setImagePreviews(previews);
-            
+
             return () => {
                 previews.forEach(preview => URL.revokeObjectURL(preview));
             };
         }
     }, [watchFiles]);
 
+    // input
     const {fields: colorFields, append: appendColor, remove: removeColor} = useFieldArray({
         control,
         name: "colors",
@@ -170,6 +168,9 @@ const AdminEdit = () => {
 
 
     const submit = async (data: any) => {
+        const productImgsArray = Array.from(data.productImgs)
+        // 이미지파일을 array로 만듦
+
         const userInput = {
             id: data.id,
             name: data.name,
@@ -181,26 +182,29 @@ const AdminEdit = () => {
             colors: data.colors,
             stock: 1,
             highlights: data.highlights,
-            productImgs: photoFile,
+            productImgs: productImgsArray,
             category: JSON.parse(data.category),
         }
-        console.log('라라라라라라',data.productImgs)
 
-
-        try{
+        try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${token}` // Bearer 토큰을 헤더에 설정
+                    Authorization: `Bearer ${token}`
                 }
             }
             const url = `http://localhost:8000/api/product/${params.id}`
-            const result = await axios.put(url, userInput,config);
-            console.log('resutlttt',result)
+            const result = await axios.put(url, userInput, config);
+            if (result.status === 200) {
+                alert('수정성공')
+            }
+            console.log('resutlttt', result)
             console.log("data", userInput);
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
     };
+
+    // 데이터 가져오고 넣기
     useEffect(() => {
         getItemData()
         getCategoryData()
@@ -209,34 +213,19 @@ const AdminEdit = () => {
         if (productData) {
             setValue('colors', productData.colors);
             setValue('highlights', productData.highlights)
-            setValue('tags',productData.tags)
+            setValue('tags', productData.tags)
 
-            setValue('name',productData.name)
-            setValue('id',productData.id)
-            setValue('price',productData.price)
-            setValue('description',productData.description)
+            setValue('name', productData.name)
+            setValue('id', productData.id)
+            setValue('price', productData.price)
+            setValue('description', productData.description)
         }
     }, [productData, setValue])
-    useEffect(() => {
-        if (productData && productData.image && productData.image.length > 0) {
-            setPhotoImg(productData.image[0]); // 첫 번째 이미지를 사용
-        } else {
-        setPhotoImg("/images/default_image.webp"); // 없으면 암것도없음
-      }
-      if (watchImage && watchImage.length > 0) {
-        // 유저가 이미지 넣은거 있으면
-        setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
-      }
-      if(watchFile && watchFile.length > 0){
-          setPhotoImg(Array.from(watchFile))
-      }
-    }, [watchImage, watchFile]);
 
 
     if (!productData) {
         return <div>Loading..</div>
     }
-
     return (
         <div className={"bg-white"}>
             <form
@@ -260,7 +249,7 @@ const AdminEdit = () => {
                                     key={index}
                                     src={preview}
                                     alt={`Preview ${index + 1}`}
-                                    className="h-30 w-30 object-cover" // Tailwind CSS 클래스 추가
+                                    className="h-60 w-60 object-cover" // Tailwind CSS 클래스 추가
                                 />
                             ))}
                             <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
@@ -382,7 +371,8 @@ const AdminEdit = () => {
                                 onChange={handleCategoryChange}
                             >
                                 {categoryInfo?.map((category) => (
-                                    <option key={category.id} value={JSON.stringify({id: category.id, name: category.name})}>
+                                    <option key={category.id}
+                                            value={JSON.stringify({id: category.id, name: category.name})}>
                                         {category.name}
                                     </option>
                                 ))}
