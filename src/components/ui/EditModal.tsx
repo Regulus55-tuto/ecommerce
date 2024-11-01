@@ -2,12 +2,11 @@ import React from "react";
 
 interface ModalProps {
     onClose: () => void;
-    onConfirm: (id: string) => void;
-    productId: string;
+    onConfirm: () => void;
+
 }
 
-const EditModal: React.FC<ModalProps> = ({onClose, onConfirm, productId}) => {
-    console.log('에디디디디디프로덕트 아디',productId)
+const EditModal: React.FC<ModalProps> = ({onClose, onConfirm}) => {
     return (
         <div
             className="relative z-10"
@@ -36,7 +35,7 @@ const EditModal: React.FC<ModalProps> = ({onClose, onConfirm, productId}) => {
                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button
                                 type="button"
-                                onClick={() => onConfirm(productId)}
+                                onClick={onConfirm}
                                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                             >
                                 Edit

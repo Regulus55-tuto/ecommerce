@@ -49,7 +49,7 @@ const AdminEdit = () => {
         try {
             const url = `http://localhost:8000/api/product/${params.id}`
             const {data} = await axios.get(url)
-            console.log('result', data.body)
+            console.log('Item Data', data.body)
             setProductData(data.body)
         } catch (e) {
             console.log('eeeeee', e)
@@ -170,18 +170,10 @@ const AdminEdit = () => {
 
 
     // 모달
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [productId, setProductId] = useState<string | undefined>(undefined);
-
-    const openModal = (id:string) => {
-        setProductId(id);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setProductId(undefined)
-        setIsModalOpen(false);
-    };
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+    // const example = () =>{
+    //     console.log('모달확ㅇ;ㄴ')
+    // }
 
     // 제출
     const submit = async (data: any) => {
@@ -210,17 +202,17 @@ const AdminEdit = () => {
                 }
             }
             const url = `http://localhost:8000/api/product/${params.id}`
-            // const result = await axios.put(url, userInput, config);
-            // if (result.status === 200) {
-            //     alert('수정성공')
-            //     navigate('/product/new')
-            // }
-            // console.log('resutlttt', result)
-            console.log("data", userInput);
+            const result = await axios.put(url, userInput, config);
+            if (result.status === 200) {
+                alert('수정성공')
+                navigate('/product/new')
+            }
+            console.log('resutlttt', result)
         } catch (e) {
             console.log(e)
         }
     };
+
 
     // 데이터 가져오고 넣기
     useEffect(() => {
@@ -532,16 +524,15 @@ const AdminEdit = () => {
 
                     <button
                         type={'submit'}
-                        // onClick={()=>openModal(productData.id as string)}
+                        // onClick={()=>setIsModalOpen(true)}
                         className="bg-gray-300 border-gray-500 rounded-lg text-2xl p-4 mt-6 hover:cursor-pointer"
                     >
                         Edit Product
                     </button>
-                    {/*{isModalOpen && productId !== null && (*/}
+                    {/*{isModalOpen && (*/}
                     {/*    <EditModal*/}
-                    {/*        onClose={closeModal}*/}
-                    {/*        onConfirm={() => submit(productId)}*/}
-                    {/*        productId={productId as string}*/}
+                    {/*        onClose={() => setIsModalOpen(false)}*/}
+                    {/*        onConfirm={example}*/}
                     {/*    />*/}
                     {/*)}*/}
                 </div>
