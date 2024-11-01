@@ -1,6 +1,6 @@
 import {AuthImageContainer, Button, Input} from "components/ui";
 import {EMAIL_REGEX} from "data/Auth/authData";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {FcGoogle} from "react-icons/fc";
 import {Link, useNavigate} from "react-router-dom";
@@ -39,7 +39,6 @@ const Login = () => {
     };
 
 
-    // const token = localStorage.getItem('token')
     const submit = async (data: any) => {
         console.log(data);
         try {
@@ -49,13 +48,20 @@ const Login = () => {
                 alert('login success')
                 console.log('datatatata', result)
                 localStorage.setItem('token', result.data.accessToken)
-                // navigate('/')
-                localStorage.getItem('token')
+                navigate('/')
+                window.location.reload()
             }
         } catch (e) {
             console.log('errorrrrrr', e)
         }
     };
+
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'))
+    useEffect(()=>{
+        if(isLoggedIn){
+            navigate('/')
+        }
+    },[isLoggedIn])
 
     return (
         <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
