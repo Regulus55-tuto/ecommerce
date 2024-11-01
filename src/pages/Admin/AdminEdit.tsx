@@ -6,6 +6,8 @@ import {useFieldArray, useForm} from "react-hook-form";
 import {useNavigate, useParams} from "react-router-dom";
 import {ProductType} from "utiles/interfaces";
 import axios from "axios";
+import {EditModal} from "../../components/ui";
+import DeleteModal from "../../components/ui/DeleteModal";
 
 interface CategoryType {
     name: string;
@@ -21,7 +23,7 @@ interface AdminProps {
     description?: string;
     category?: CategoryType;
     subCategory?: string;
-    id?: number;
+    id?: string;
     image?: string[];
     tags?: string[];
     colors?: string[];
@@ -167,9 +169,24 @@ const AdminEdit = () => {
     // };
 
 
+    // 모달
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [productId, setProductId] = useState<string | undefined>(undefined);
+
+    const openModal = (id:string) => {
+        setProductId(id);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setProductId(undefined)
+        setIsModalOpen(false);
+    };
+
+    // 제출
     const submit = async (data: any) => {
-        const productImgsArray = Array.from(data.productImgs)
-        // 이미지파일을 array로 만듦
+        const productImgsArray = Array.from(data.productImgs || []);
+        // 이미지파일을 array로 만듦, undefined 대비해 빈배열 || 로 만듦
 
         const userInput = {
             id: data.id,
@@ -183,7 +200,7 @@ const AdminEdit = () => {
             stock: 1,
             highlights: data.highlights,
             productImgs: productImgsArray,
-            category: JSON.parse(data.category),
+            category: data.category ? JSON.parse(data.category) : null,
         }
 
         try {
@@ -193,12 +210,12 @@ const AdminEdit = () => {
                 }
             }
             const url = `http://localhost:8000/api/product/${params.id}`
-            const result = await axios.put(url, userInput, config);
-            if (result.status === 200) {
-                alert('수정성공')
-                navigate('/product/new')
-            }
-            console.log('resutlttt', result)
+            // const result = await axios.put(url, userInput, config);
+            // if (result.status === 200) {
+            //     alert('수정성공')
+            //     navigate('/product/new')
+            // }
+            // console.log('resutlttt', result)
             console.log("data", userInput);
         } catch (e) {
             console.log(e)
@@ -514,11 +531,19 @@ const AdminEdit = () => {
                     </div>
 
                     <button
-                        type={"submit"}
-                        className="bg-gray-300 border-gray-500 rounded-lg text-2xl p-4 mt-6"
+                        type={'submit'}
+                        // onClick={()=>openModal(productData.id as string)}
+                        className="bg-gray-300 border-gray-500 rounded-lg text-2xl p-4 mt-6 hover:cursor-pointer"
                     >
                         Edit Product
                     </button>
+                    {/*{isModalOpen && productId !== null && (*/}
+                    {/*    <EditModal*/}
+                    {/*        onClose={closeModal}*/}
+                    {/*        onConfirm={() => submit(productId)}*/}
+                    {/*        productId={productId as string}*/}
+                    {/*    />*/}
+                    {/*)}*/}
                 </div>
             </form>
         </div>

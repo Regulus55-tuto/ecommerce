@@ -59,11 +59,12 @@ const AdminList = ({
     }
     const [productData, setProductData] = useState<any>([]);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
     const [selectedItemName, setSelectedItemName] = useState<string>('');
 
     console.log('ProductData', productData)
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = (id: number, name: string) => {
         setSelectedItemId(id);
         setSelectedItemName(name)
