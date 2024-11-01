@@ -10,6 +10,7 @@ import {
   ForgotPassword,
   ChangePassword,
   Profile,
+  EditProfile,
   Home,
   Login,
   NotFound,
@@ -37,8 +38,12 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/profile',
-        element: <Profile/>
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/edit/profile",
+        element: <EditProfile />,
       },
       {
         path: "/forgot/email",

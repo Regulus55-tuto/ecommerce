@@ -12,6 +12,7 @@ import AdminAdd from "./Admin/AdminAdd";
 import AdminEdit from "./Admin/AdminEdit";
 import Collections from "./Collections";
 import Profile from "./Auth/Profile";
+import EditProfile from "./Auth/EditProfile";
 
 export {
   Home,
@@ -21,6 +22,7 @@ export {
   ForgotPassword,
   ChangePassword,
   Profile,
+  EditProfile,
   AllProducts,
   NotFound,
   ProductDetail,
