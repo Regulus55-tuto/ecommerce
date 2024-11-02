@@ -150,17 +150,16 @@ const AdminAdd = () => {
     // const example = () =>{
     //     console.log('모달확ㅇ;ㄴ')
     // }
-
+// console.log('vmfh',categoryInfo)
     // 제출
     const submit = async (data: any) => {
         const productImgsArray = Array.from(data.productImgs || []);
         // 이미지파일을 array로 만듦, undefined 대비해 빈배열 || 로 만듦
 
         const userInput = {
-            id: data.id,
             name: data.name,
             description: data.description,
-            price: data.price,
+            price: parseInt(data.price),
             tags: data.tags,
             options: 'options',
             details: 'details',
@@ -168,7 +167,7 @@ const AdminAdd = () => {
             stock: 1,
             highlights: data.highlights,
             productImgs: productImgsArray,
-            category: data.category ? JSON.parse(data.category) : null,
+            category: data.category ? JSON.parse(data.category) : categoryInfo[0],
         }
 
         try {
@@ -178,11 +177,11 @@ const AdminAdd = () => {
                 }
             }
             const url = `http://localhost:8000/api/product/${params.id}`
-            // const result = await axios.put(url, userInput, config);
-            // if (result.status === 200) {
-            //   alert('Product added successfully')
-            //   navigate('/product/new')
-            // }
+            const result = await axios.put(url, userInput, config);
+            if (result.status === 200) {
+              alert('Product added successfully')
+              navigate('/product/new')
+            }
             console.log('resutlttt', userInput)
         } catch (e) {
             console.log(e)
@@ -205,7 +204,7 @@ const AdminAdd = () => {
                 {/* Title, Breadcrumbs, Sort */}
                 <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
                     <div className="flex flex-col">
-                        <ProductTitle title={"Edit Product"}/>
+                        <ProductTitle title={"Add Product"}/>
                     </div>
                 </div>
 
@@ -308,7 +307,7 @@ const AdminAdd = () => {
                         <div className="w-full">
                             <input
                                 className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                {...register("promotionalPrice")}
+                                {...register("price")}
                                 placeholder='Price'
                             />
                         </div>
