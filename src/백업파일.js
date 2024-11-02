@@ -332,35 +332,35 @@
 //             </div>
 //           </div>
 //
-//           <div className="flex w-full p-3">
-//             <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
-//               Colors
-//             </h3>
-//             <div className="w-full">
-//               {colorFields.length === 0 && (
-//                 <input
-//                   {...register(`colors.0`)}
-//                   className="h-12 w-full border-2 border-gray-300 rounded-lg mb-2"
-//                   placeholder="Color 1"
-//                 />
-//               )}
-//               {colorFields.map((field, index) => (
-//                 <input
-//                   key={field.id}
-//                   {...register(`colors.${index}`)}
-//                   className="h-12 w-full border-2 border-gray-300 rounded-lg"
-//                   placeholder={`Color ${index + 1}`}
-//                 />
-//               ))}
-//               <button
-//                 type="button"
-//                 onClick={handleAddColor}
-//                 className="bg-gray-500 text-white p-2 rounded-lg mt-2"
-//               >
-//                 Add Color
-//               </button>
-//             </div>
-//           </div>
+          <div className="flex w-full p-3">
+            <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+              Colors
+            </h3>
+            <div className="w-full">
+              {colorFields.length === 0 && (
+                <input
+                  {...register(`colors.0`)}
+                  className="h-12 w-full border-2 border-gray-300 rounded-lg mb-2"
+                  placeholder="Color 1"
+                />
+              )}
+              {colorFields.map((field, index) => (
+                <input
+                  key={field.id}
+                  {...register(`colors.${index}`)}
+                  className="h-12 w-full border-2 border-gray-300 rounded-lg"
+                  placeholder={`Color ${index + 1}`}
+                />
+              ))}
+              <button
+                type="button"
+                onClick={handleAddColor}
+                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+              >
+                Add Color
+              </button>
+            </div>
+          </div>
 //
 //           <div className="flex w-full p-3">
 //             <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">

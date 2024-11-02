@@ -13,6 +13,12 @@ interface profileType {
 const Profile = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if(localStorage.getItem('token') === null){
+      navigate('/login')
+    }
+  }, []);
+
   // 프로파일정보
   const [profileInfo, setProfileInfo] = useState<profileType | null>(null);
   const getProfileData = async () => {
@@ -100,8 +106,7 @@ const Profile = () => {
           </div>
           <input
             type="text"
-            // value={profileInfo?.username}
-            value="Ahri"
+            value={profileInfo?.username}
             disabled
             className="col-span-3 bg-white border-none w-full p-2 rounded text-2xl md:text-3xl lg:text-3xl text-gray-700 font-bold"
           />
@@ -118,8 +123,7 @@ const Profile = () => {
           </div>
           <input
             type="text"
-            // value={profileInfo?.username}
-            value="abc@abc.com"
+            value={profileInfo?.email}
             disabled
             className="col-span-3 bg-white border-none w-full p-2 rounded text-2xl md:text-3xl lg:text-3xl text-gray-700 font-bold"
           />

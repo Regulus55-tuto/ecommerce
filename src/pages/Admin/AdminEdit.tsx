@@ -93,7 +93,7 @@ const AdminEdit = () => {
 
 
     // 이미지
-    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+    const [imagePreviews, setImagePreviews] = useState<string[]>(['/images/default_image.webp']);
     const watchFiles = watch('productImgs');
     useEffect(() => {
         if (watchFiles && watchFiles.length > 0) {
@@ -229,6 +229,7 @@ const AdminEdit = () => {
             setValue('id', productData.id)
             setValue('price', productData.price)
             setValue('description', productData.description)
+            // setValue('productImgs',productData?.productImgs[0])
         }
     }, [productData, setValue])
 
@@ -285,17 +286,17 @@ const AdminEdit = () => {
                                 </div>
                             </div>
 
-                            <div className="flex w-full px-5">
-                                <h3 className="w-60 font-bold text-2xl text-gray-700">Model</h3>
-                                <div className="w-full">
-                                    <input
-                                        className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                        {...register("model")}
-                                        // placeholder={productData?.model}
-                                        placeholder={'Model'}
-                                    />
-                                </div>
-                            </div>
+                            {/*<div className="flex w-full px-5">*/}
+                            {/*    <h3 className="w-60 font-bold text-2xl text-gray-700">Model</h3>*/}
+                            {/*    <div className="w-full">*/}
+                            {/*        <input*/}
+                            {/*            className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
+                            {/*            {...register("model")}*/}
+                            {/*            // placeholder={productData?.model}*/}
+                            {/*            placeholder={'Model'}*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             <div className="flex w-full px-5">
                                 <h3 className="w-60 font-bold text-2xl text-gray-700">ID</h3>
@@ -325,21 +326,21 @@ const AdminEdit = () => {
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
-                            Reference Price
-                        </h3>
-                        <div className="w-full">
-                            <input
-                                className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                {...register("referencePrice")}
-                                // placeholder={`₩ ${productInfo?.referencePrice
-                                //   .toLocaleString()
-                                //   .toString()}`}
-                                placeholder={'Reference Price'}
-                            />
-                        </div>
-                    </div>
+                    {/*<div className="flex w-full p-3">*/}
+                    {/*    <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">*/}
+                    {/*        Reference Price*/}
+                    {/*    </h3>*/}
+                    {/*    <div className="w-full">*/}
+                    {/*        <input*/}
+                    {/*            className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
+                    {/*            {...register("referencePrice")}*/}
+                    {/*            // placeholder={`₩ ${productInfo?.referencePrice*/}
+                    {/*            //   .toLocaleString()*/}
+                    {/*            //   .toString()}`}*/}
+                    {/*            placeholder={'Reference Price'}*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div className="flex w-full p-3">
                         <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
@@ -390,24 +391,24 @@ const AdminEdit = () => {
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
-                            SubCategory
-                        </h3>
-                        <div className="w-full">
-                            <select
-                                {...register("subCategory")}
-                                className="h-12 w-full border-2 border-gray-300 rounded-lg"
-                                // onChange={handleSubCategoryChange}
-                            >
-                                {/*{options.map((option: any) => (*/}
-                                {/*  <option key={option} defaultValue={option}>*/}
-                                {/*    {categories[selectedCategory][option]}*/}
-                                {/*  </option>*/}
-                                {/*))}*/}
-                            </select>
-                        </div>
-                    </div>
+                    {/*<div className="flex w-full p-3">*/}
+                    {/*    <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">*/}
+                    {/*        SubCategory*/}
+                    {/*    </h3>*/}
+                    {/*    <div className="w-full">*/}
+                    {/*        <select*/}
+                    {/*            {...register("subCategory")}*/}
+                    {/*            className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
+                    {/*            // onChange={handleSubCategoryChange}*/}
+                    {/*        >*/}
+                    {/*            /!*{options.map((option: any) => (*!/*/}
+                    {/*            /!*  <option key={option} defaultValue={option}>*!/*/}
+                    {/*            /!*    {categories[selectedCategory][option]}*!/*/}
+                    {/*            /!*  </option>*!/*/}
+                    {/*            /!*))}*!/*/}
+                    {/*        </select>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div className="flex w-full p-3">
                         <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
@@ -419,7 +420,7 @@ const AdminEdit = () => {
                                     <input
                                         key={field.id}
                                         {...register(`colors.${index}`)}
-                                        className="h-12 w-2/3 border-2 border-gray-300 rounded-lg"
+                                        className="h-12 w-3/4 border-2 border-gray-300 rounded-lg"
                                         placeholder={productData?.colors?.[index] || 'New Color'}
                                     />
                                     <button
@@ -468,7 +469,7 @@ const AdminEdit = () => {
                                     <textarea
                                         key={field.id}
                                         {...register(`highlights.${index}`)}
-                                        className="h-20 w-2/3  border-2 border-gray-300 rounded-lg"
+                                        className="h-20 w-3/4  border-2 border-gray-300 rounded-lg"
                                         placeholder={productData?.highlights?.[index] || 'New Highlight'}
                                     />
                                     <button
@@ -500,7 +501,7 @@ const AdminEdit = () => {
                                     <input
                                         key={field.id}
                                         {...register(`tags.${index}`)}
-                                        className="h-12 w-2/3 border-2 border-gray-300 rounded-lg"
+                                        className="h-12 w-3/4 border-2 border-gray-300 rounded-lg"
                                         placeholder={productData?.tags?.[index]}
                                     />
                                     <button
