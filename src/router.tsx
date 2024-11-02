@@ -78,6 +78,10 @@ const router = createBrowserRouter([
         element: <Collections />,
       },
       {
+        path: "/allproducts",
+        element: <AllProducts />,
+      },
+      {
         path: "/change/password",
         element: <ChangePassword />,
       },

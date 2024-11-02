@@ -364,7 +364,7 @@ export const computer = {
         "A tablet that supports learning and work with its ample screen and outstanding performance.",
       tags: ["#GalaxyTabS7FE", "#Tablet", "#Efficiency"],
       highlights: [
-        " A simple yet attractive design",
+        "A simple yet attractive design",
         "Excellent work efficiency showcased on a large display",
       ],
       image: [
@@ -569,7 +569,7 @@ export const accessory = {
       highlights: [
         "Large display with thinner rotating bezel",
         "Constant health monitoring",
-        "#WorkOutComplete with the watch",
+        "WorkOutComplete with the watch",
       ],
       inventory: 92,
     },

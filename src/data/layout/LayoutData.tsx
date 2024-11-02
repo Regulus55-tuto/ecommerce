@@ -59,7 +59,7 @@ export const headerData = {
   ],
   pages: [
     { name: "Shop All", href: "/collections" },
-    { name: "New Arrivals", href: "/collections" },
+    { name: "New Arrivals", href: "/allproducts" },
   ],
 };
 
