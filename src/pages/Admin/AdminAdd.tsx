@@ -11,7 +11,7 @@ interface AdminProps {
   promotionalPrice?: number;
   category?: string;
   id?: number;
-  image?: any;
+  productImgs?: any;
   //   image?: (string | Blob | File)[];
   tags?: string;
   colors?: string[];
@@ -23,7 +23,7 @@ const AdminAdd = ({
   promotionalPrice,
   category,
   id,
-  image,
+  productImgs,
   colors,
   tags,
 }: AdminProps) => {
@@ -94,24 +94,40 @@ const AdminAdd = ({
 
   const getCategoryData = async () => {
     const { data } = await axios.get("http://localhost:8000/api/category");
-    // console.log('mydata', data.body)
     setCategoryInfo(data.body);
   };
   const [categoryInfo, setCategoryInfo] = useState<any[]>([]);
 
   //   이미지
-  const watchImage = watch("image");
-  const [photoImg, setPhotoImg] = useState("/images/default_image.webp");
+  // const watchImage = watch("image");
+  // const [photoImg, setPhotoImg] = useState("/images/default_image.webp");
+  // useEffect(() => {
+  //   if (watchImage && watchImage.length > 0) {
+  //     // 유저가 이미지 넣은거 있으면
+  //     setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
+  //   }
+  //   getCategoryData(); // 카테고리 정보 가져오는거
+  // }, [watchImage]);
+
+  // 이미지
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const watchFiles = watch('productImgs');
   useEffect(() => {
-    if (watchImage && watchImage.length > 0) {
-      // 유저가 이미지 넣은거 있으면
-      setPhotoImg(URL.createObjectURL(watchImage[0])); // 유저의 이미지를 사진에 넣는다
+    if (watchFiles && watchFiles.length > 0) {
+      // 이미지파일 변경되면 화면에 표시
+      const previews = Array.from(watchFiles).map(file => URL.createObjectURL(file as File));
+      setImagePreviews(previews);
+
+      return () => {
+        previews.forEach(preview => URL.revokeObjectURL(preview));
+      };
     }
-    getCategoryData(); // 카테고리 정보 가져오는거
-  }, [watchImage]);
+  }, [watchFiles]);
 
   //    제출
   const submit = async (data: any) => {
+    const productImgsArray = Array.from(data.productImgs || [])
+
     try {
       const userInput = {
         name: data.title,
@@ -122,9 +138,7 @@ const AdminAdd = ({
         colors: data.colors,
         tags: data.tags,
         highlights: data.highlights,
-        productImgs: [
-          "http://localhost:9000/samsung/product/2024-10-30_21-05-31/1e51939ec5a12a4fa5f0b50b47e9da80.png",
-        ],
+        productImgs: productImgsArray,
         category: {
           name: selectedCategoryName,
           id: selectedCategoryId,
@@ -135,7 +149,7 @@ const AdminAdd = ({
           Authorization: `Bearer ${token}`,
         },
       };
-      // const result = await axios.post('http://localhost:8000/api/product',userInput,config)
+      const result = await axios.post('http://localhost:8000/api/product',userInput,config)
       console.log("result", userInput);
       alert("데이터 추가 성공");
       // navigate('/product/new')
@@ -143,7 +157,10 @@ const AdminAdd = ({
       console.log("submit errorrr", e);
     }
   };
-  console.log("category", categoryInfo);
+
+  useEffect(()=>{
+    getCategoryData(); // 카테고리 정보 가져오는거
+  },[categoryInfo])
 
   return (
     <div className={"bg-white"}>
@@ -162,12 +179,21 @@ const AdminAdd = ({
         <div className="flex flex-col items-center justify-center px-40 mt-10">
           <div className="grid grid-cols-10 w-full">
             <div className="col-span-4 flex flex-col items-center">
-              <img src={photoImg} className="h-60 w-60" />
+              {/*<img src={photoImg} className="h-60 w-60" />*/}
+              {imagePreviews.map((preview, index) => (
+                  <img
+                      key={index}
+                      src={preview}
+                      alt={`Preview ${index + 1}`}
+                      className="h-60 w-60 object-cover"
+                  />
+              ))}
               <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
                 <input
-                  {...register("image")}
+                  {...register("productImgs")}
                   type="file"
                   accept="image/png,image/jpeg,image/jpg,image/webp"
+                  multiple
                 />
                 <div>JPG, JPEG, PNG, or WEBP</div>
               </div>

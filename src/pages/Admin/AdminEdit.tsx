@@ -259,7 +259,7 @@ const AdminEdit = () => {
                                     key={index}
                                     src={preview}
                                     alt={`Preview ${index + 1}`}
-                                    className="h-60 w-60 object-cover" // Tailwind CSS 클래스 추가
+                                    className="h-60 w-60 object-cover"
                                 />
                             ))}
                             <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
@@ -436,7 +436,7 @@ const AdminEdit = () => {
                                 onClick={handleAddColor}
                                 className="bg-gray-500 text-white p-2 rounded-lg mt-2"
                             >
-                                Add Color
+                                Add
                             </button>
 
                         </div>
@@ -485,7 +485,7 @@ const AdminEdit = () => {
                                 onClick={handleAddHighlight}
                                 className="bg-gray-500 text-white p-2 rounded-lg mt-2"
                             >
-                                Add Highlight
+                                Add
                             </button>
                         </div>
                     </div>
@@ -517,7 +517,7 @@ const AdminEdit = () => {
                                 onClick={handleAddTag}
                                 className="bg-gray-500 text-white p-2 rounded-lg mt-2"
                             >
-                                Add Highlight
+                                Add
                             </button>
                         </div>
                     </div>
