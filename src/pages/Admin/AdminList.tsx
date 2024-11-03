@@ -110,7 +110,7 @@ const AdminList = ({
                         <ProductTitle title={"Product List"}/>
                     </div>
                     <div className={"flex items-center"}>
-                        <Link to="/product/add/:id">
+                        <Link to="/product/add">
                             <button className="bg-gray-300 border-gray-500 rounded-lg p-2 mr-8">
                                 Add Product
                             </button>
@@ -178,12 +178,12 @@ const AdminList = ({
                                 </td>
 
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    {item.price}
+                                    ₩ {Math.floor(item.price)?.toLocaleString()}
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     {/*{item.inventory}*/}
                                     {/*152*/}
-                                    {item.id}
+                                    {item.stock}
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     <div>

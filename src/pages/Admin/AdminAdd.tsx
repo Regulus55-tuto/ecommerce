@@ -151,10 +151,43 @@ const AdminAdd = () => {
     //     console.log('모달확ㅇ;ㄴ')
     // }
 // console.log('vmfh',categoryInfo)
+
+
     // 제출
     const submit = async (data: any) => {
-        const productImgsArray = Array.from(data.productImgs || []);
+        // const productImgsArray = Array.from(data.productImgs || []);
         // 이미지파일을 array로 만듦, undefined 대비해 빈배열 || 로 만듦
+        // const files = data?.productImgs
+
+        if(data.productImgs){
+            const productImgsArray = Array.from(data.productImgs);
+
+
+        const formData = new FormData()
+        const myData = productImgsArray.forEach((file: any) => formData.append("productImgs", file));
+// const
+
+        console.log('myData', myData);
+        // const myFormData = formData.append('files', files)
+        // console.log('filsse', files)
+        // console.log('myFormData', myFormData)
+        //
+        // // let jsonData = JSON.stringify({ title: "jsonTitle", tag: "jsonTag", content: "jsonContent" });
+        // // let arrayData = ["arrayTitle", "arrayTag", "arrayContent"];
+        // //
+        // // formData.append("jsonData", jsonData);
+        // // formData.append("arrayData", arrayData as any);
+        // //
+        // // console.log('++++',jsonData)
+        // // console.log('====',arrayData)
+        //
+        // const blob = new Blob([JSON.stringify(productImgsArray)], {
+        //     // type에 JSON 타입 지정
+        //     type: 'application/json',
+        // });
+        // formData.append('info', blob);
+        // console.log('blob', blob)
+
 
         const userInput = {
             name: data.name,
@@ -167,25 +200,28 @@ const AdminAdd = () => {
             stock: 1,
             highlights: data.highlights,
             productImgs: productImgsArray,
+            // productImgs: files,
             category: data.category ? JSON.parse(data.category) : categoryInfo[0],
         }
 
         try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type' : 'multipart/form-data'
                 }
             }
-            const url = `http://localhost:8000/api/product/${params.id}`
-            const result = await axios.put(url, userInput, config);
+            const url = `http://localhost:8000/api/product`
+            const result = await axios.post(url, userInput, config);
             if (result.status === 200) {
-              alert('Product added successfully')
-              navigate('/product/new')
+                alert('Product added successfully')
+                navigate('/product/new')
+                console.log('result', result)
             }
-            console.log('resutlttt', userInput)
+            console.log('userInput', userInput)
         } catch (e) {
             console.log(e)
-        }
+        }}
     };
 
 
@@ -255,17 +291,17 @@ const AdminAdd = () => {
                             {/*    </div>*/}
                             {/*</div>*/}
 
-                            <div className="flex w-full px-5">
-                                <h3 className="w-60 font-bold text-2xl text-gray-700">ID</h3>
-                                <div className="w-full">
-                                    <textarea
-                                        className="h-14 w-full border-2 border-gray-300 rounded-lg"
-                                        {...register("id")}
-                                        placeholder='ID'
-                                        disabled
-                                    />
-                                </div>
-                            </div>
+                            {/*<div className="flex w-full px-5">*/}
+                            {/*    <h3 className="w-60 font-bold text-2xl text-gray-700">ID</h3>*/}
+                            {/*    <div className="w-full">*/}
+                            {/*        <textarea*/}
+                            {/*            className="h-14 w-full border-2 border-gray-300 rounded-lg"*/}
+                            {/*            {...register("id")}*/}
+                            {/*            placeholder='ID'*/}
+                            {/*            disabled*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             <div className="flex w-full px-5">
                                 <h3 className="w-60 font-bold text-2xl text-gray-700">
@@ -503,7 +539,7 @@ const AdminAdd = () => {
                         // onClick={()=>setIsModalOpen(true)}
                         className="bg-gray-300 border-gray-500 rounded-lg text-2xl p-4 mt-6 hover:cursor-pointer"
                     >
-                        Edit Product
+                        Add Product
                     </button>
                     {/*{isModalOpen && (*/}
                     {/*    <EditModal*/}

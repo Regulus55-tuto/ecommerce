@@ -45,11 +45,11 @@ const AdminEdit = () => {
         formState: {isSubmitting, errors, isDirty},
     } = useForm();
 
-    const getItemData = async () => {
+    const getProductData = async () => {
         try {
             const url = `http://localhost:8000/api/product/${params.id}`
             const {data} = await axios.get(url)
-            console.log('Item Data', data.body)
+            console.log('product Data', data.body)
             setProductData(data.body)
         } catch (e) {
             console.log('eeeeee', e)
@@ -201,13 +201,14 @@ const AdminEdit = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const url = `http://localhost:8000/api/product/${params.id}`
-            const result = await axios.put(url, userInput, config);
-            if (result.status === 200) {
-                alert('수정성공')
-                navigate('/product/new')
-            }
-            console.log('resutlttt', result)
+            // const url = `http://localhost:8000/api/product/${params.id}`
+            // const result = await axios.put(url, userInput, config);
+            // if (result.status === 200) {
+            //     alert('수정성공')
+            //     navigate('/product/new')
+            // }
+            // console.log('resutlttt', result)
+            console.log('edit userInput',userInput)
         } catch (e) {
             console.log(e)
         }
@@ -216,7 +217,7 @@ const AdminEdit = () => {
 
     // 데이터 가져오고 넣기
     useEffect(() => {
-        getItemData()
+        getProductData()
         getCategoryData()
     }, [])
     useEffect(() => {

@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element: <AdminList />,
       },
       {
-        path: "/product/add/:id",
+        path: "/product/add",
         element: <AdminAdd />,
       },
       {
