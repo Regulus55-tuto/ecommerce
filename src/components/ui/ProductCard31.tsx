@@ -17,6 +17,7 @@ interface ProductCardProps {
     subCategory?: string;
     id?: number;
     image?: string[];
+    productImgs?: string[];
     description: string;
     highlights?: string[];
     details?: string;
@@ -38,6 +39,7 @@ const ProductCard31 = ({
                            subCategory,
                            id,
                            image,
+                           productImgs,
                            description,
                            highlights,
                            details,
@@ -90,12 +92,17 @@ const ProductCard31 = ({
             >
                 <div className={"absolute inset-0 translate-x-1/2 translate-y-1/2"}>
                     <LazyLoadImage
-                        src={image && Array.isArray(image) ? image[0] : image}
+                        src={productImgs?.[0]}
                         alt={title}
                         className={
                             "absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75 "
                         }
                     />
+                    {/*<LazyLoadImage*/}
+                    {/*    src={item?.productImgs[0]}*/}
+                    {/*    alt={title}*/}
+                    {/*    className={"h-32 w-32"}*/}
+                    {/*/>*/}
                 </div>
             </div>
 

@@ -18,13 +18,18 @@ const AllProducts = () => {
 
   const [productData, setProductData] = useState<ProductType[]>([]);
   const getProductData = async () => {
-    const url = "http://localhost:8000/api/product?order=ASC&page=1&take=10"
-    const result = await axios.get(url)
-    setProductData(result.data.body.data)
+    try{
+      const url = "http://localhost:8000/api/product?order=ASC&page=1&take=10"
+      const result = await axios.get(url)
+      setProductData(result.data.body.data)
+    }catch(e){
+      console.log(e)
+    }
   }
   useEffect(()=>{
     getProductData()
   },[productData])
+  // console.log('product data',productData)
 
   // Get Filter Options
   const [colors, setColors] = useState<string[]>([]);
@@ -130,6 +135,7 @@ const AllProducts = () => {
                               colors={product.colors}
                               colorbuttons={product.colorbuttons}
                               description={product.description}
+                              productImgs={product.productImgs}
                           />
                         </li>
                     ))}

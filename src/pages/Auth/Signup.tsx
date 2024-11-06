@@ -201,48 +201,82 @@ const Signup = () => {
         }`}>
             {isSubmitting ? <LoadingSppiner/> : (
                 <>
-                <div
-                    className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
-                    <div className="mb-6 mt-4 flex-col items-center text-center">
-                        <h2 className="mb-2 text-3xl font-bold">Welcome!</h2>
-                        <p className="text-slate-500">for your first visit! </p>
-                    </div>
-                    <div className="flex w-full flex-col items-center">
-                        {!isCheckedEmail ? (
-                            !isSentEmail ? (
-                                <form
-                                    onSubmit={handleSubmit(sendEmailHandler)}
-                                    className="flex w-full max-w-sm flex-col"
-                                >
-                                    <Input
-                                        {...register("email", {
-                                            required: "Please provide an email",
-                                            pattern: {
-                                                value: EMAIL_REGEX,
-                                                message:
-                                                    "Please provide a properly formatted email address",
-                                            },
-                                        })}
-                                        error={errors.code?.message}
-                                        ariaInvalid={isDirty}
-                                        labelText="Email"
-                                        type="email"
-                                        className="mb-3"
-                                        autoComplete="on"
-                                        autoFocus
-                                    />
+                    <div
+                        className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
+                        <div className="mb-6 mt-4 flex-col items-center text-center">
+                            <h2 className="mb-2 text-3xl font-bold">Welcome!</h2>
+                            <p className="text-slate-500">for your first visit! </p>
+                        </div>
+                        <div className="flex w-full flex-col items-center">
+                            {!isCheckedEmail ? (
+                                !isSentEmail ? (
+                                    <form
+                                        onSubmit={handleSubmit(sendEmailHandler)}
+                                        className="flex w-full max-w-sm flex-col"
+                                    >
+                                        <Input
+                                            {...register("email", {
+                                                required: "Please provide an email",
+                                                pattern: {
+                                                    value: EMAIL_REGEX,
+                                                    message:
+                                                        "Please provide a properly formatted email address",
+                                                },
+                                            })}
+                                            error={errors.code?.message}
+                                            ariaInvalid={isDirty}
+                                            labelText="Email"
+                                            type="email"
+                                            className="mb-3"
+                                            autoComplete="on"
+                                            autoFocus
+                                        />
 
-                                    <Button
-                                        text={"Send Email"}
-                                        type="submit"
-                                        className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
-                                    />
-                                </form>
+                                        <Button
+                                            text={"Send Email"}
+                                            type="submit"
+                                            className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+                                        />
+                                    </form>
+                                ) : (
+                                    <form
+                                        onSubmit={handleSubmit(checkEmailHandler)}
+                                        className="flex w-full max-w-sm flex-col"
+                                    >
+                                        <Input
+                                            {...register("email")}
+                                            ariaInvalid={isDirty}
+                                            labelText="Email"
+                                            type="email"
+                                            className="mb-3"
+                                            disabled
+                                        />
+                                        <Input
+                                            {...register("code", {
+                                                required: "Please provide a code",
+                                            })}
+                                            error={errors.code?.message}
+                                            ariaInvalid={isDirty}
+                                            labelText="Code"
+                                            type="text"
+                                            className="mb-3"
+                                        />
+                                        <Button
+                                            text={"Verify Email"}
+                                            type="submit"
+                                            className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+                                        />
+                                    </form>
+                                )
                             ) : (
                                 <form
-                                    onSubmit={handleSubmit(checkEmailHandler)}
                                     className="flex w-full max-w-sm flex-col"
+                                    onSubmit={handleSubmit(submit)}
                                 >
+                                    <div className={"flex justify-end text-blue-500 mb-1 mr-1"}>
+                                        Your email has been successfully verified
+                                    </div>
+
                                     <Input
                                         {...register("email")}
                                         ariaInvalid={isDirty}
@@ -251,163 +285,132 @@ const Signup = () => {
                                         className="mb-3"
                                         disabled
                                     />
+
                                     <Input
-                                        {...register("code", {
-                                            required: "Please provide a code",
+                                        {...register("username", {
+                                            required: "Please provide a Username",
                                         })}
-                                        error={errors.code?.message}
+                                        error={errors.username?.message}
                                         ariaInvalid={isDirty}
-                                        labelText="Code"
+                                        labelText="Username"
                                         type="text"
+                                        className={"mb-3"}
+                                        autoComplete="on"
+                                    />
+
+                                    <Input
+                                        {...register("password", {
+                                            required: "Please provide a password",
+                                            minLength: {
+                                                value: 6,
+                                                message: "Password needs to be between 6 to 20 characters",
+                                            },
+                                            maxLength: {
+                                                value: 20,
+                                                message: "Password needs to be between 6 to 20 characters",
+                                            },
+                                        })}
+                                        error={errors.password?.message}
+                                        ariaInvalid={isDirty}
+                                        labelText="Password"
+                                        type="password"
                                         className="mb-3"
+                                        autoComplete="off"
                                     />
-                                    <Button
-                                        text={"Verify Email"}
-                                        type="submit"
-                                        className="rounded-lg mb-4 bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
+
+                                    <Input
+                                        {...register("confirmPassword", {
+                                            required: "Please provide a confirm password",
+                                            validate: (val: string) => {
+                                                if (watch("password") !== val) {
+                                                    return "Please check your password";
+                                                }
+                                            },
+                                        })}
+                                        error={errors.confirmPassword?.message}
+                                        ariaInvalid={isDirty}
+                                        labelText={"Confirm password"}
+                                        type={"password"}
+                                        className={"mb-3"}
+                                        autoComplete="off"
                                     />
-                                </form>
-                            )
-                        ) : (
-                            <form
-                                className="flex w-full max-w-sm flex-col"
-                                onSubmit={handleSubmit(submit)}
-                            >
-                                <div className={"flex justify-end text-blue-500 mb-1 mr-1"}>
-                                    Your email has been successfully verified
-                                </div>
 
-                                <Input
-                                    {...register("email")}
-                                    ariaInvalid={isDirty}
-                                    labelText="Email"
-                                    type="email"
-                                    className="mb-3"
-                                    disabled
-                                />
+                                    <div
+                                        className={`border peer rounded-lg py-2 px-4 border-gray-300 ${
+                                            isSubmitted && Object.keys(errors).length > 0
+                                                ? "border-red-500"
+                                                : ""
+                                        } `}
+                                    >
+                                        <div className="border-b border-gray-300 pb-3 mb-3">
+                                            <Checkbox
+                                                type="checkbox"
+                                                labelText={"전체 동의"}
+                                                id="check-all"
+                                                onChange={(e) => handleAllCheck(e.target.checked)}
+                                                checked={checkItems.length === agreements.length}
+                                            />
+                                        </div>
 
-                                <Input
-                                    {...register("username", {
-                                        required: "Please provide a Username",
-                                    })}
-                                    error={errors.username?.message}
-                                    ariaInvalid={isDirty}
-                                    labelText="Username"
-                                    type="text"
-                                    className={"mb-3"}
-                                    autoComplete="on"
-                                />
-
-                                <Input
-                                    {...register("password", {
-                                        required: "Please provide a password",
-                                        minLength: {
-                                            value: 6,
-                                            message: "Password needs to be between 6 to 20 characters",
-                                        },
-                                        maxLength: {
-                                            value: 20,
-                                            message: "Password needs to be between 6 to 20 characters",
-                                        },
-                                    })}
-                                    error={errors.password?.message}
-                                    ariaInvalid={isDirty}
-                                    labelText="Password"
-                                    type="password"
-                                    className="mb-3"
-                                    autoComplete="off"
-                                />
-
-                                <Input
-                                    {...register("confirmPassword", {
-                                        required: "Please provide a confirm password",
-                                        validate: (val: string) => {
-                                            if (watch("password") !== val) {
-                                                return "Please check your password";
-                                            }
-                                        },
-                                    })}
-                                    error={errors.confirmPassword?.message}
-                                    ariaInvalid={isDirty}
-                                    labelText={"Confirm password"}
-                                    type={"password"}
-                                    className={"mb-3"}
-                                    autoComplete="off"
-                                />
-
-                                <div
-                                    className={`border peer rounded-lg py-2 px-4 border-gray-300 ${
-                                        isSubmitted && Object.keys(errors).length > 0
-                                            ? "border-red-500"
-                                            : ""
-                                    } `}
-                                >
-                                    <div className="border-b border-gray-300 pb-3 mb-3">
-                                        <Checkbox
-                                            type="checkbox"
-                                            labelText={"전체 동의"}
-                                            id="check-all"
-                                            onChange={(e) => handleAllCheck(e.target.checked)}
-                                            checked={checkItems.length === agreements.length}
-                                        />
+                                        {agreements.map((item) => (
+                                            <Checkbox
+                                                type="checkbox"
+                                                {...register(`consent.${item.key}` as keyof IProps, {
+                                                    required: item.required
+                                                        ? "This field is required."
+                                                        : false,
+                                                })}
+                                                labelText={item.label}
+                                                id={item.key}
+                                                key={item.key}
+                                                className={"mb-1"}
+                                                onChange={(e) =>
+                                                    handleSingleCheck(e.target.checked, item.id, item.key)
+                                                }
+                                                checked={checkItems.includes(item.id)}
+                                            />
+                                        ))}
                                     </div>
 
-                                    {agreements.map((item) => (
-                                        <Checkbox
-                                            type="checkbox"
-                                            {...register(`consent.${item.key}` as keyof IProps, {
-                                                required: item.required
-                                                    ? "This field is required."
-                                                    : false,
-                                            })}
-                                            labelText={item.label}
-                                            id={item.key}
-                                            key={item.key}
-                                            className={"mb-1"}
-                                            onChange={(e) =>
-                                                handleSingleCheck(e.target.checked, item.id, item.key)
-                                            }
-                                            checked={checkItems.includes(item.id)}
-                                        />
-                                    ))}
-                                </div>
+                                    {isSubmitted && Object.keys(errors).length > 0 && (
+                                        <small role="alert" className={`animate-shake text-red-500`}>
+                                            check please
+                                        </small>
+                                    )}
 
-                                {isSubmitted && Object.keys(errors).length > 0 && (
-                                    <small role="alert" className={`animate-shake text-red-500`}>
-                                        check please
-                                    </small>
-                                )}
+                                    <Button
+                                        type="submit"
+                                        onClick={() => setIsSubmitted(true)}
+                                        text={"Signup"}
+                                        disabled={isSubmitting}
+                                        className="rounded-lg bg-violet-500 mt-4 py-4 font-semibold text-white hover:bg-violet-500"
+                                    />
+                                </form>
+                            )}
 
-                                <Button
-                                    type="submit"
-                                    onClick={() => setIsSubmitted(true)}
-                                    text={"Signup"}
-                                    disabled={isSubmitting}
-                                    className="rounded-lg bg-violet-500 mt-4 py-4 font-semibold text-white hover:bg-violet-500"
-                                />
-                            </form>
-                        )}
-
-                        <div className={"mt-10 text-slate-500"}>
-                            Already have an account?
-                            <Link to={"/login"} className={"p-2 font-semibold text-violet-500"}>
-                                Log in
-                            </Link>
+                            <div className={"mt-10 text-slate-500"}>
+                                Already have an account?
+                                <Link to={"/login"} className={"p-2 font-semibold text-violet-500"}>
+                                    Log in
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <AuthImageContainer
-                image={"/images/register.webp"}
-                 firstText="Create your Account"
-                 secondText="Signup here"
-        />
-        </>
-    )
-}
+                    <AuthImageContainer
+                        image={"/images/register.webp"}
+                        firstText="Create your Account"
+                        secondText="Signup here"
+                        width={400}
+                        height={400}
+                        className={'-mt-16'}
+                    />
+                </>
+            )
+            }
 
-</section>
-)
-    ;
+        </section>
+    )
+        ;
 };
 
 export default Signup;

@@ -41,6 +41,7 @@ export interface ProductType {
   // options?: string;
   id: number; // 1
   image: string[]; // ["aa","bb","cc"]
+  productImgs?: string[];
   // details?: string;
   highlights: string[]; // ["aza","bbb","ccc"]
   inventory: number; // 152

@@ -57,11 +57,11 @@ const Login = () => {
     };
 
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'))
-    useEffect(()=>{
-        if(isLoggedIn){
+    useEffect(() => {
+        if (isLoggedIn) {
             navigate('/')
         }
-    },[isLoggedIn])
+    }, [isLoggedIn])
 
     return (
         <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
@@ -162,6 +162,9 @@ const Login = () => {
                 image={"/images/login.webp"}
                 firstText="shop smarter"
                 secondText="Login here"
+                width={400}
+                height={400}
+                className={'-mt-16'}
             />
 
         </section>

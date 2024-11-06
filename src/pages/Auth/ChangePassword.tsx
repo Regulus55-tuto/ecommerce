@@ -30,25 +30,25 @@ const ChangePassword = () => {
 
     const submit = async (data: IProps) => {
         // console.log(data);
-        if(data.password !== data.confirmPassword){
+        if (data.password !== data.confirmPassword) {
             alert('password not match')
             return
         }
 
-        try{
+        try {
             const userInput = {
                 token: queryParams.get('token'),
                 password: data.password,
             }
-            console.log('data',userInput)
+            console.log('data', userInput)
 
             const url = 'http://localhost:8000/api/auth/change/password'
-            const {status} =await axios.put(url, userInput)
-            if(status === 200){
+            const {status} = await axios.put(url, userInput)
+            if (status === 200) {
                 alert('Password has been changed successfully')
             }
-        }catch(e){
-            console.log('errorrrrr',e)
+        } catch (e) {
+            console.log('errorrrrr', e)
         }
     };
 
@@ -126,6 +126,9 @@ const ChangePassword = () => {
                 image={"/images/register.webp"}
                 firstText="Find your password"
                 secondText="Make your new Password"
+                width={400}
+                height={400}
+                className={'-mt-16'}
             />
         </section>
     );
