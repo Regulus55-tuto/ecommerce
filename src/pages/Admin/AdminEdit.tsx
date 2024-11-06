@@ -96,9 +96,6 @@ const AdminEdit = () => {
     // 이미지
     const [imagePreviews, setImagePreviews] = useState<string[]>(productData?.productImgs || ['/images/default_image.webp']);
     const watchFiles = watch('productImgs');
-    console.log('프리부',watchFiles)
-    console.log('이미지프리부',imagePreviews)
-    console.log('프로덕트에티아',productData)
 
     // 기본이미지 가져오는것
     useEffect(()=>{
@@ -113,7 +110,6 @@ const AdminEdit = () => {
         if (watchFiles && watchFiles.length > 0) {
             // 이미지파일 변경되면 화면에 표시
             const previews = Array.from(watchFiles).map(file => URL.createObjectURL(file as File));
-            console.log('프리부',previews)
             setImagePreviews(previews);
 
             return () => {
@@ -216,13 +212,13 @@ const AdminEdit = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            // const url = `http://localhost:8000/api/product/${params.id}`
-            // const result = await axios.put(url, userInput, config);
-            // if (result.status === 200) {
-            //     alert('수정성공')
-            //     navigate('/product/new')
-            // }
-            // console.log('resutlttt', result)
+            const url = `http://localhost:8000/api/product/${params.id}`
+            const result = await axios.put(url, userInput, config);
+            if (result.status === 200) {
+                alert('Edit Successful')
+                navigate('/product/new')
+            }
+            console.log('resutlttt', result)
             console.log('edit userInput',userInput)
         } catch (e) {
             console.log(e)

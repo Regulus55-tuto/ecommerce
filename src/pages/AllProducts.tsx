@@ -19,7 +19,7 @@ const AllProducts = () => {
   const [productData, setProductData] = useState<ProductType[]>([]);
   const getProductData = async () => {
     try{
-      const url = "http://localhost:8000/api/product?order=ASC&page=1&take=10"
+      const url = "http://localhost:8000/api/product?order=ASC&page=1&take=30"
       const result = await axios.get(url)
       setProductData(result.data.body.data)
     }catch(e){
