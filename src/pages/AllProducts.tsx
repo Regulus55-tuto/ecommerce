@@ -13,12 +13,22 @@ import ProductCard31 from "../components/ui/ProductCard31";
 import axios from "axios";
 import PageDropdown from "../components/ui/PageDropdown";
 
+interface pageProps {
+    itemCount?: number;
+    page: number;
+    pageCount: number;
+    take: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+}
+
 const AllProducts = () => {
     const {query, searchParams, setSortParams, deleteSortParams} =
         useSortParams();
 
-    // 페이지 당 아이템 갯수
+    // 페이지네이션
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pageData, setPageData] = useState<pageProps>()
     const [page, setPage] = useState(1);
     const [take, setTake] = useState(10);
     const openModal = () => setIsModalOpen(true);
@@ -32,6 +42,7 @@ const AllProducts = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
                 closeModal();
+                window.location.reload()
             }
         };
 
@@ -54,6 +65,7 @@ const AllProducts = () => {
             const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}`
             const result = await axios.get(url)
             setProductData(result.data.body.data)
+            setPageData(result.data.body.meta)
         } catch (e) {
             console.log(e)
         }
@@ -61,7 +73,6 @@ const AllProducts = () => {
     useEffect(() => {
         getProductData()
     }, [page, take])
-    // console.log('product data',productData)
 
     // Get Filter Options
     const [colors, setColors] = useState<string[]>([]);
@@ -70,7 +81,7 @@ const AllProducts = () => {
 
     return (
         <div className={"bg-white"}>
-            <main className={"mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8"}>
+            <main className={"mx-auto mb-2 max-w-7xl px-4 sm:px-6 lg:px-8"}>
                 {/* Title, Breadcrumbs, Sort */}
                 <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
                     <div className="flex flex-col">
@@ -82,7 +93,7 @@ const AllProducts = () => {
                         <div className={'mr-8'}>
                             Selected Items :{" "}
                             <button onClick={openModal}
-                                    className="bg-gray-300 text-md font-medium text-white px-4 py-1 rounded-lg">
+                                    className="bg-violet-400 text-md font-medium text-white px-4 py-1 rounded-lg">
                                 {take}
                             </button>
 
@@ -187,14 +198,41 @@ const AllProducts = () => {
                     </div>
                     {/* 페이지네이션 */}
                     <div className={'flex items-center justify-center mt-20'}>
-                        <ChevronLeftIcon className={'h-16 w-16 hover:cursor-pointer hover:scale-110'}/>
+                        <ChevronLeftIcon
+                            onClick={()=>{
+                                window.scrollTo({ top: 0, left: 0 });
+                                if(pageData?.hasPreviousPage) {
+                                    setPage(page-1)
+                                }
+                            }}
+                            className={`h-12 w-12  ${
+                            pageData?.hasPreviousPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                        }`} aria-hidden="true"/>
 
-
-                        <div className={'h-16 flex items-center justify-center'}>
-                            1~10
-                        </div>
-
-                        <ChevronRightIcon className={'h-16 w-16 hover:cursor-pointer hover:scale-110'}/>
+                        {[...Array(pageData?.pageCount)].map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => {
+                                    setPage(index + 1);
+                                    window.scrollTo({ top: 0, left: 0 });
+                                }}
+                                className={`h-10 mx-1 px-4 py-2 bg-violet-300 text-md flex items-center justify-center rounded-lg ${
+                                    page === index + 1 ? "cursor-default scale-125 mx-2 border-2 border-gray-600 pointer-events-none" : "hover:bg-violet-400"
+                                }`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <ChevronRightIcon
+                            onClick={() => {
+                                window.scrollTo({ top: 0, left: 0 });
+                                if (pageData?.hasNextPage) {
+                                    setPage(page + 1)
+                                }
+                            }}
+                            className={`h-12 w-12  ${
+                                pageData?.hasNextPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                            }`} aria-hidden="true"/>
                     </div>
                 </section>
             </main>

@@ -22,9 +22,9 @@ const PageDropdown: React.FC<DropdownProps> = ({ isOpen, onClose, onSelect }) =>
                             onSelect(option);
                             onClose();
                         }}
-                        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white focus:outline-none"
+                        className="block w-full text-center px-4 py-2 text-gray-800 hover:bg-violet-400 hover:text-white focus:outline-none"
                     >
-                        {option} items
+                        {option} per page
                     </button>
                 ))}
             </div>
