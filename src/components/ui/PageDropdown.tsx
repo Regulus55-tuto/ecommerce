@@ -1,0 +1,35 @@
+// Dropdown.tsx
+import React, {useEffect, useRef} from 'react';
+
+interface DropdownProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSelect: (value: number) => void;
+}
+
+const PageDropdown: React.FC<DropdownProps> = ({ isOpen, onClose, onSelect }) => {
+    const options = [10, 20, 30];
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg w-40 z-50">
+            <div className="space-y-2">
+                {options.map((option) => (
+                    <button
+                        key={option}
+                        onClick={() => {
+                            onSelect(option);
+                            onClose();
+                        }}
+                        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white focus:outline-none"
+                    >
+                        {option} items
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default PageDropdown;

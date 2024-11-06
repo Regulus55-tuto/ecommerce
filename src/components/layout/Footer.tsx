@@ -131,17 +131,17 @@ const Footer = () => {
             ))}
           </ul>
           {/* Copyrights note */}
-          <div className="mr-4 text-sm text-gray-600">
-            Made by{" "}
-            <Link
-              className="text-blue-600 hover:underline"
-              target="_blank"
-              to="https://github.com/Regulus55"
-            >
-              Regulus55
-            </Link>
-            . All rights reserved.
-          </div>
+          {/*<div className="mr-4 text-sm text-gray-600">*/}
+          {/*  Made by{" "}*/}
+          {/*  <Link*/}
+          {/*    className="text-blue-600 hover:underline"*/}
+          {/*    target="_blank"*/}
+          {/*    to="https://github.com/Regulus55"*/}
+          {/*  >*/}
+          {/*    Regulus55*/}
+          {/*  </Link>*/}
+          {/*  . All rights reserved.*/}
+          {/*</div>*/}
         </div>
       </div>
     </footer>

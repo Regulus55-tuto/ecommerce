@@ -8,5 +8,6 @@ import ProductCard1 from "./ProductCard1";
 import ProductCard2 from "./ProductCard2";
 import ProductCard3 from "./ProductCard3";
 import ProductTitle from "./ProductTitle";
+import pageDropdown from "./PageDropdown";
 
-export { Input, Button, AuthImageContainer  , Checkbox, DeleteModal, EditModal,ProductCard1 , ProductCard2,ProductCard3 , ProductTitle};
+export { Input, Button, AuthImageContainer  , Checkbox, DeleteModal, EditModal, pageDropdown, ProductCard1 , ProductCard2, ProductCard3 , ProductTitle};

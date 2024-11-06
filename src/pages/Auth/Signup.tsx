@@ -104,9 +104,9 @@ const Signup = () => {
                 navigate("/login");
             }
         } catch (e: any) {
-            if (e.response.status === 400) {
-                alert('A user with this email address already exists')
-            }
+            // if (e.response.status === 400) {
+            //     alert('A user with this email address already exists')
+            // }
             console.log("signup errorrrr", e);
         }
     };
