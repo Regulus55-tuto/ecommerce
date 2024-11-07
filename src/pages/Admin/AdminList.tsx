@@ -1,16 +1,17 @@
 import {Menu} from "@headlessui/react";
-import {ChevronDownIcon, FunnelIcon} from "@heroicons/react/16/solid";
+import {ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, FunnelIcon} from "@heroicons/react/16/solid";
 import {Icon} from "@iconify/react";
 import CategorySort from "components/Product/CategorySort";
 import ProductTitle from "components/ui/ProductTitle";
 import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import useSortParams from "hooks/useSortParams";
-import {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Link, useParams} from "react-router-dom";
 import {ProductType} from "utiles/interfaces";
 import axios from "axios";
 import DeleteModal from "../../components/ui/DeleteModal";
+import PageDropdown from "../../components/ui/PageDropdown";
 
 interface AdminProps {
     title?: string;
@@ -23,6 +24,15 @@ interface AdminProps {
     tags?: string[];
     colors?: string[];
     inventory?: number;
+}
+
+interface pageProps {
+    itemCount?: number;
+    page: number;
+    pageCount: number;
+    take: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
 }
 
 const AdminList = ({
@@ -41,21 +51,43 @@ const AdminList = ({
         useSortParams();
     const token = localStorage.getItem('token')
 
-    const [productss, setProductss] = useState<ProductType[]>([
-        ...smartphone.aSeries,
-        ...smartphone.sSeries,
-        ...smartphone.flipSeries,
-        ...smartphone.foldSeries,
-        ...computer.tablet,
-        ...computer.laptop,
-        ...accessory.watch,
-        ...accessory.buds,
-        ...accessory.ring,
-    ]);
+    // 페이지네이션
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [pageData, setPageData] = useState<pageProps>()
+    const [page, setPage] = useState(1);
+    const [take, setTake] = useState(10);
+    const openDropdown = () => setIsDropdownOpen(true);
+    const closeDropdown = () => setIsDropdownOpen(false);
+    const DropdownRef = useRef<HTMLDivElement>(null);
+
+    const pageSelected = (item: number) => {
+        setTake(item)
+    }
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
+                closeDropdown();
+                window.location.reload()
+            }
+        };
+
+        if (isDropdownOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+
+    // 프로덕트 데이타
     const getItemData = async () => {
-        const url = "http://localhost:8000/api/product?order=ASC&page=1&take=20"
+        const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}`
         const {data} = await axios.get(url)
         setProductData(data.body.data)
+        setPageData(data.body.meta)
     }
     const [productData, setProductData] = useState<any>([]);
 
@@ -98,7 +130,7 @@ const AdminList = ({
     useEffect(() => {
         window.scrollTo(0, 0)
         getItemData()
-    }, [])
+    }, [take, page])
 
     return (
         <div className={"bg-white"}>
@@ -109,7 +141,26 @@ const AdminList = ({
                         {/* page title */}
                         <ProductTitle title={"Product List"}/>
                     </div>
+
+
                     <div className={"flex items-center"}>
+
+                        <div className={'mr-8 font-medium'}>
+                            Selected Items :{" "}
+                            <button onClick={openDropdown}
+                                    className="bg-violet-400 text-md font-medium text-white px-4 py-1 rounded-lg">
+                                {take}
+                            </button>
+                            {isDropdownOpen && (
+                                <div ref={DropdownRef}>
+                                    <PageDropdown
+                                        isOpen={isDropdownOpen}
+                                        onClose={closeDropdown}
+                                        onSelect={pageSelected}
+                                    />
+                                </div>
+                            )}
+                        </div>
                         <Link to="/product/add">
                             <button className="bg-gray-300 border-gray-500 rounded-lg p-2 mr-8">
                                 Add Product
@@ -293,6 +344,44 @@ const AdminList = ({
                         {/*    </tr>*/}
                         {/*))}*/}
                     </table>
+                </div>
+                {/* 페이지네이션 */}
+                <div className={'flex items-center justify-center mt-20'}>
+                    <ChevronLeftIcon
+                        onClick={()=>{
+                            window.scrollTo({ top: 0, left: 0 });
+                            if(pageData?.hasPreviousPage) {
+                                setPage(page-1)
+                            }
+                        }}
+                        className={`h-12 w-12  ${
+                            pageData?.hasPreviousPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                        }`} aria-hidden="true"/>
+
+                    {[...Array(pageData?.pageCount)].map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => {
+                                setPage(index + 1);
+                                window.scrollTo({ top: 0, left: 0 });
+                            }}
+                            className={`h-10 mx-1 px-4 py-2 bg-violet-300 text-md flex items-center justify-center rounded-lg ${
+                                page === index + 1 ? "cursor-default scale-125 mx-2 border-2 border-gray-600 pointer-events-none" : "hover:bg-violet-400"
+                            }`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    <ChevronRightIcon
+                        onClick={() => {
+                            window.scrollTo({ top: 0, left: 0 });
+                            if (pageData?.hasNextPage) {
+                                setPage(page + 1)
+                            }
+                        }}
+                        className={`h-12 w-12  ${
+                            pageData?.hasNextPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                        }`} aria-hidden="true"/>
                 </div>
             </main>
         </div>

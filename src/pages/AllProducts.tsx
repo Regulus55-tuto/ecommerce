@@ -27,26 +27,26 @@ const AllProducts = () => {
         useSortParams();
 
     // 페이지네이션
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [pageData, setPageData] = useState<pageProps>()
     const [page, setPage] = useState(1);
     const [take, setTake] = useState(10);
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
-    const modalRef = useRef<HTMLDivElement>(null);
+    const openDropdown = () => setIsDropdownOpen(true);
+    const closeDropdown = () => setIsDropdownOpen(false);
+    const DropdownRef = useRef<HTMLDivElement>(null);
 
     const pageSelected = (item: number) => {
         setTake(item)
     }
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                closeModal();
+            if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
+                closeDropdown();
                 window.location.reload()
             }
         };
 
-        if (isModalOpen) {
+        if (isDropdownOpen) {
             document.addEventListener("mousedown", handleClickOutside);
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -55,7 +55,7 @@ const AllProducts = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [isModalOpen]);
+    }, [isDropdownOpen]);
 
 
     // 프로덕트 데이타
@@ -90,18 +90,18 @@ const AllProducts = () => {
                     </div>
                     <div className={"flex items-center"}>
 
-                        <div className={'mr-8'}>
+                        <div className={'mr-8 font-medium'}>
                             Selected Items :{" "}
-                            <button onClick={openModal}
+                            <button onClick={openDropdown}
                                     className="bg-violet-400 text-md font-medium text-white px-4 py-1 rounded-lg">
                                 {take}
                             </button>
 
-                            {isModalOpen && (
-                                <div ref={modalRef}>
+                            {isDropdownOpen && (
+                                <div ref={DropdownRef}>
                                     <PageDropdown
-                                        isOpen={isModalOpen}
-                                        onClose={closeModal}
+                                        isOpen={isDropdownOpen}
+                                        onClose={closeDropdown}
                                         onSelect={pageSelected}
                                     />
                                 </div>
