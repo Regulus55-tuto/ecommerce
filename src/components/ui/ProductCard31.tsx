@@ -95,22 +95,25 @@ const ProductCard31 = ({
                         src={productImgs?.[0]}
                         alt={title}
                         className={
-                            "absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75 "
+                            "absolute top-0 left-0 h-auto w-auto -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75 "
                         }
                     />
-                    {/*<LazyLoadImage*/}
-                    {/*    src={item?.productImgs[0]}*/}
-                    {/*    alt={title}*/}
-                    {/*    className={"h-32 w-32"}*/}
-                    {/*/>*/}
+
                 </div>
             </div>
 
             <div className={"p-5"}>
+                <div className={'text-center font-light text-xs text-gray-800 mb-2'}>
+                    {tags?.map((tag) => (
+                        <span key={tag} className={"border border-gray-500 rounded-lg mx-1 p-0.5 whitespace-pre-wrap leading-6"}>
+                            {tag}{" "}
+                        </span>
+                    ))}
+                </div>
                 <h3 className={"text-center text-2xl font-bold text-gray-900 mb-1"}>
                     {name}
                 </h3>
-                {/*<h5 className="text-center text-xs text-gray-500">{model}</h5>*/}
+                <h5 className="text-center text-xs text-gray-500">{name}</h5>
 
                 <div
                     className={`grid my-2 ${
@@ -137,7 +140,7 @@ const ProductCard31 = ({
                 </div>
 
                 {/* 가격 */}
-                <div className={"flex items-center justify-center pt-5"}>
+                <div className={"flex items-center justify-center"}>
                     {/*        <div*/}
                     {/*            className={*/}
                     {/*                "relative rounded-lg border-2 border-gray-400 px-2 py-0.5 text-center -mt-10"*/}

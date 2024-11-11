@@ -88,7 +88,7 @@ const ProductDetail = () => {
                                                 <LazyLoadImage
                                                     src={img}
                                                     alt={productDetail?.description}
-                                                    className="absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
+                                                    className="absolute top-0 left-0 w-auto w-auto -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
                                                 />
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@ const ProductDetail = () => {
                                                 <LazyLoadImage
                                                     src={img}
                                                     alt={productDetail?.description}
-                                                    className="absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
+                                                    className="absolute top-0 left-0 h-auto w-auto -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
                                                 />
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@ const ProductDetail = () => {
                                                 "text-xl text-gray-400 leading-tight line-through"
                                             }
                                         >
-                                            ₩ {productDetail?.price}
+                                            ₩ {productDetail?.price ? Math.floor(productDetail?.price).toLocaleString() : 'No Price Info'}
                                         </p>
                                     </div>
                                     <PiArrowFatRightThin className="text-5xl text-gray-700 mx-6"/>
@@ -169,7 +169,7 @@ const ProductDetail = () => {
                                     Promotional Price
                                   </span>
                                         <p className={"text-3xl font-bold text-violet-500"}>
-                                            ₩ {productDetail?.price}
+                                            ₩ {productDetail?.price ? Math.floor(productDetail?.price).toLocaleString() : 'No Price Info'}
                                         </p>
                                     </div>
                                 </div>

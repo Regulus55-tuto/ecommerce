@@ -117,7 +117,7 @@ const AllProducts = () => {
                     <div className={"flex items-center"}>
 
                         {/*페이지 드롭다운*/}
-                        <div className={'mr-8 font-medium'}>
+                        <div className={'mr-8 text-sm font-medium text-gray-700 hover:text-gray-900'}>
                             Selected Items :{" "}
                             <button onClick={openDropdown}
                                     className="bg-violet-400 text-md font-medium text-white px-4 py-1 rounded-lg">
@@ -195,47 +195,49 @@ const AllProducts = () => {
                                     </li>
                                 ))}
                             </ul>
+                            {/* 페이지네이션 */}
+                            <div className={'flex items-center justify-center mt-20'}>
+                                <ChevronLeftIcon
+                                    onClick={() => {
+                                        window.scrollTo({top: 0, left: 0});
+                                        if (pageData?.hasPreviousPage) {
+                                            setPage(page - 1)
+                                        }
+                                    }}
+                                    className={`h-12 w-12  ${
+                                        pageData?.hasPreviousPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                                    }`} aria-hidden="true"/>
+
+                                {[...Array(pageData?.pageCount)].map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => {
+                                            setPage(index + 1);
+                                            window.scrollTo({top: 0, left: 0});
+                                        }}
+                                        className={`h-10 mx-1 px-4 py-2 bg-violet-300 text-md flex items-center justify-center rounded-lg ${
+                                            page === index + 1 ? "cursor-default scale-125 mx-2 border-2 border-gray-600 pointer-events-none" : "hover:bg-violet-400"
+                                        }`}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+                                <ChevronRightIcon
+                                    onClick={() => {
+                                        window.scrollTo({top: 0, left: 0});
+                                        if (pageData?.hasNextPage) {
+                                            setPage(page + 1)
+                                        }
+                                    }}
+                                    className={`h-12 w-12  ${
+                                        pageData?.hasNextPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                                    }`} aria-hidden="true"/>
+                            </div>
                         </div>
+
                     </div>
 
-                    {/* 페이지네이션 */}
-                    <div className={'flex items-center justify-center mt-20'}>
-                        <ChevronLeftIcon
-                            onClick={() => {
-                                window.scrollTo({top: 0, left: 0});
-                                if (pageData?.hasPreviousPage) {
-                                    setPage(page - 1)
-                                }
-                            }}
-                            className={`h-12 w-12  ${
-                                pageData?.hasPreviousPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
-                            }`} aria-hidden="true"/>
 
-                        {[...Array(pageData?.pageCount)].map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => {
-                                    setPage(index + 1);
-                                    window.scrollTo({top: 0, left: 0});
-                                }}
-                                className={`h-10 mx-1 px-4 py-2 bg-violet-300 text-md flex items-center justify-center rounded-lg ${
-                                    page === index + 1 ? "cursor-default scale-125 mx-2 border-2 border-gray-600 pointer-events-none" : "hover:bg-violet-400"
-                                }`}
-                            >
-                                {index + 1}
-                            </button>
-                        ))}
-                        <ChevronRightIcon
-                            onClick={() => {
-                                window.scrollTo({top: 0, left: 0});
-                                if (pageData?.hasNextPage) {
-                                    setPage(page + 1)
-                                }
-                            }}
-                            className={`h-12 w-12  ${
-                                pageData?.hasNextPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
-                            }`} aria-hidden="true"/>
-                    </div>
                 </section>
             </main>
         </div>

@@ -134,18 +134,48 @@ const AdminList = ({
 
     return (
         <div className={"bg-white"}>
-            <main className={"mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8"}>
+            <main className={"mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"}>
+
+                <div className={'pt-16 pb-4 w-full flex items-start'}>
+                    <Link to="/product/add">
+                        <button
+                            className="bg-violet-400 text-white border border-gray-500 rounded-full px-4 py-2">
+                            + Add New Product
+                        </button>
+                    </Link>
+                </div>
+
                 {/* Title, Breadcrumbs, Sort */}
-                <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
-                    <div className="flex flex-col">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-6">
+
+                    <div className="flex w-1/3">
                         {/* page title */}
                         <ProductTitle title={"Product List"}/>
                     </div>
 
 
-                    <div className={"flex items-center"}>
+                    <div className={"flex items-center justify-end pb-1 w-full"}>
 
-                        <div className={'mr-8 font-medium'}>
+                        <label htmlFor="search"
+                               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <div className="relative w-1/2 mr-4">
+                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                            </div>
+                            <input type="search" id="search"
+                                   className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="Search" required/>
+                            <button type="submit"
+                                    className="text-white absolute end-2.5 bottom-2.5 bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search
+                            </button>
+                        </div>
+
+                        {/*페이지 드롭다운*/}
+                        <div className={'mr-8 text-sm font-medium text-gray-700 hover:text-gray-900'}>
                             Selected Items :{" "}
                             <button onClick={openDropdown}
                                     className="bg-violet-400 text-md font-medium text-white px-4 py-1 rounded-lg">
@@ -161,11 +191,7 @@ const AdminList = ({
                                 </div>
                             )}
                         </div>
-                        <Link to="/product/add">
-                            <button className="bg-gray-300 border-gray-500 rounded-lg p-2 mr-8">
-                                Add Product
-                            </button>
-                        </Link>
+
 
                         <Menu as={"div"} className={"relative inline-block text-left"}>
                             <div>
@@ -187,6 +213,7 @@ const AdminList = ({
                             />
                         </Menu>
 
+
                         <button
                             className={
                                 "-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
@@ -199,67 +226,80 @@ const AdminList = ({
                 </div>
 
                 {/* 밑에 상품정보부분 */}
-                <div className="flex items-center justify-center px-40 mt-10">
+                <div className="flex items-center justify-center mt-10">
                     <table className="table-auto w-full">
-                        <tr className="text-start font-bold text-xl text-gray-700 border-y-4 border-gray-500">
+                        <tr className="text-center font-bold text-xl text-gray-700 border-y-4 border-gray-500">
                             {/*제목부분 */}
-                            <td className="p-2">NO.</td>
-                            <td className="p-2 pl-12">Product</td>
-                            <td className="p-2">Price</td>
-                            <td className="p-2">Inventory</td>
-                            <td className="p-2">Edit</td>
-                            <td className="p-2">Delete</td>
+                            <td className="py-1">NO.</td>
+                            <td className="py-1">Images</td>
+                            <td className="py-1 w-28">Name</td>
+                            <td className="py-1">Price</td>
+                            <td className="py-1 w-40">Sale</td>
+                            <td className="py-1 w-16">Edit</td>
+                            <td className="py-1 w-16">Delete</td>
                         </tr>
 
                         {/*실제 아이템 데이터*/}
                         {productData?.map((item: any, i: number) => (
-                            <tr className="text-start" key={i}>
+                            <tr className="text-center" key={i}>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     {i + 1}
                                 </td>
-                                <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    <div className="flex items-center justify-start">
-                                        <LazyLoadImage
-                                            src={item?.productImgs[0]}
-                                            alt={title}
-                                            className={"h-32 w-32"}
-                                        />
-                                        {item.name}
+
+                                <td className="flex items-center justify-center border-b border-gray-500 text-lg text-gray-700 font-bold">
+                                    <div className="flex items-center justify-center h-40 w-96 -space-x-12">
+                                        {item?.productImgs?.map((img: any, i: number) => (
+                                            <span
+                                                className={`flex items-center justify-center bg-gray-100 w-32 h-32 rounded-full shadow-md border-8 border-white z-${i + 1}`}
+                                                key={i}>
+                                            <LazyLoadImage
+                                                src={img}
+                                                className={"h-auto w-auto "}
+                                            />
+                                                </span>
+                                        ))}
+
                                     </div>
+                                </td>
+
+                                <td className="border-y border-gray-500 px-2 font-bold">
+                                    <p className={' text-lg text-gray-700'}>{item.name}</p>
+                                    <p className={'text-sm text-gray-400'}>{item.name}</p>
                                 </td>
 
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     ₩ {Math.floor(item.price)?.toLocaleString()}
                                 </td>
+
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    {/*{item.inventory}*/}
-                                    {/*152*/}
-                                    {item.stock}
+                                    {item.stock === 0 ? (
+                                        <span className="bg-red-600 text-white rounded-full p-2 h-full w-20">Out of Stock</span>
+                                    ) : (
+                                        <span className="bg-green-500 text-white rounded-full p-2 w-20">On Sale</span>
+                                    )}
                                 </td>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
-                                    <div>
-                                        <div>
-                                            <Link
-                                                to={`/product/edit/${item.id}`}
-                                                state={{
-                                                    title,
-                                                    referencePrice,
-                                                    promotionalPrice,
-                                                    category,
-                                                    id,
-                                                    colors,
-                                                    image,
-                                                    tags,
-                                                }}
-                                            >
-                                                <Icon icon="fluent:edit-16-regular" width="36"/>
-                                            </Link>
-                                        </div>
+                                    <div className={'flex items-center justify-center '}>
+                                        <Link
+                                            to={`/product/edit/${item.id}`}
+                                            state={{
+                                                title,
+                                                referencePrice,
+                                                promotionalPrice,
+                                                category,
+                                                id,
+                                                colors,
+                                                image,
+                                                tags,
+                                            }}
+                                        >
+                                            <Icon icon="fluent:edit-16-regular" width="36"/>
+                                        </Link>
                                     </div>
                                 </td>
 
                                 <td className="border-y border-gray-500 p-2 text-lg text-gray-700 font-bold">
-                                    <div>
+                                    <div className={'flex items-center justify-center'}>
                                         <Icon
                                             icon="fluent:delete-24-regular"
                                             className="cursor-pointer"
@@ -280,78 +320,15 @@ const AdminList = ({
                             </tr>
                         ))}
 
-                        {/* {목데이터 아이템} */}
-                        {/*{products?.map((item,i) => (*/}
-                        {/*    <tr className="text-start" key={i}>*/}
-                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
-                        {/*            {item.id}*/}
-                        {/*        </td>*/}
-                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
-                        {/*            <div className="flex items-center justify-start">*/}
-                        {/*                <LazyLoadImage*/}
-                        {/*                    src={item.image[0]}*/}
-                        {/*                    alt={title}*/}
-                        {/*                    className={"h-32 w-32"}*/}
-                        {/*                />*/}
-                        {/*                {item.title}*/}
-                        {/*            </div>*/}
-                        {/*        </td>*/}
-                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
-                        {/*            {item.promotionalPrice.toLocaleString()}*/}
-                        {/*        </td>*/}
-                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
-                        {/*            {item.inventory}*/}
-                        {/*        </td>*/}
-                        {/*        <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">*/}
-                        {/*            <div>*/}
-                        {/*                <div>*/}
-                        {/*                    <Link*/}
-                        {/*                        to={`/product/edit/${item.id}`}*/}
-                        {/*                        state={{*/}
-                        {/*                            title,*/}
-                        {/*                            referencePrice,*/}
-                        {/*                            promotionalPrice,*/}
-                        {/*                            category,*/}
-                        {/*                            id,*/}
-                        {/*                            colors,*/}
-                        {/*                            image,*/}
-                        {/*                            tags,*/}
-                        {/*                        }}*/}
-                        {/*                    >*/}
-                        {/*                        <Icon icon="fluent:edit-16-regular" width="36" />*/}
-                        {/*                    </Link>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*        </td>*/}
-                        {/*        <td className="border-y border-gray-500 p-2 text-lg text-gray-700 font-bold">*/}
-                        {/*            <div>*/}
-                        {/*                <Icon*/}
-                        {/*                    icon="fluent:delete-24-regular"*/}
-                        {/*                    className="cursor-pointer"*/}
-                        {/*                    width="36"*/}
-                        {/*                    onClick={() => openModal(item.id)}*/}
-                        {/*                />*/}
-                        {/*                {isModalOpen && selectedItemId !== null && (*/}
-                        {/*                    <DeleteModal*/}
-                        {/*                        onClose={closeModal}*/}
-                        {/*                        onConfirm={handleDelete}*/}
-                        {/*                        itemId={selectedItemId}*/}
-                        {/*                         )}*/}
-                        {/*                    />*/}
-                        {/*                /!*쓰레기통*!/*/}
-                        {/*            </div>*/}
-                        {/*        </td>*/}
-                        {/*    </tr>*/}
-                        {/*))}*/}
                     </table>
                 </div>
                 {/* 페이지네이션 */}
                 <div className={'flex items-center justify-center mt-20'}>
                     <ChevronLeftIcon
-                        onClick={()=>{
-                            window.scrollTo({ top: 0, left: 0 });
-                            if(pageData?.hasPreviousPage) {
-                                setPage(page-1)
+                        onClick={() => {
+                            window.scrollTo({top: 0, left: 0});
+                            if (pageData?.hasPreviousPage) {
+                                setPage(page - 1)
                             }
                         }}
                         className={`h-12 w-12  ${
@@ -363,7 +340,7 @@ const AdminList = ({
                             key={index}
                             onClick={() => {
                                 setPage(index + 1);
-                                window.scrollTo({ top: 0, left: 0 });
+                                window.scrollTo({top: 0, left: 0});
                             }}
                             className={`h-10 mx-1 px-4 py-2 bg-violet-300 text-md flex items-center justify-center rounded-lg ${
                                 page === index + 1 ? "cursor-default scale-125 mx-2 border-2 border-gray-600 pointer-events-none" : "hover:bg-violet-400"
@@ -374,7 +351,7 @@ const AdminList = ({
                     ))}
                     <ChevronRightIcon
                         onClick={() => {
-                            window.scrollTo({ top: 0, left: 0 });
+                            window.scrollTo({top: 0, left: 0});
                             if (pageData?.hasNextPage) {
                                 setPage(page + 1)
                             }

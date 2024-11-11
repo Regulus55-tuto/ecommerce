@@ -25,7 +25,7 @@ interface AdminProps {
     subCategory?: string;
     id?: string;
     image?: string[];
-    productImgs?:string[];
+    productImgs?: string[];
     tags?: string[];
     colors?: string[];
     highlights?: string[];
@@ -98,12 +98,12 @@ const AdminEdit = () => {
     const watchFiles = watch('productImgs');
 
     // 기본이미지 가져오는것
-    useEffect(()=>{
-        if(productData?.productImgs){
+    useEffect(() => {
+        if (productData?.productImgs) {
             setImagePreviews(productData?.productImgs);
         }
         // productImage 가 디폴트이미지보다 늦게 로드되기때문에 useEffect 사용해서 기본이미지를 productImgs 로 바뀌게함
-    },[productData])
+    }, [productData])
 
 
     useEffect(() => {
@@ -219,7 +219,7 @@ const AdminEdit = () => {
                 navigate('/product/new')
             }
             console.log('resutlttt', result)
-            console.log('edit userInput',userInput)
+            console.log('edit userInput', userInput)
         } catch (e) {
             console.log(e)
         }
@@ -363,9 +363,9 @@ const AdminEdit = () => {
                             <input
                                 className="h-12 w-full border-2 border-gray-300 rounded-lg"
                                 {...register("promotionalPrice")}
-                                placeholder={`₩ ${String(productData?.price
-                                    ?.toLocaleString())
-                                }`}
+                                placeholder={`₩ ${productData?.price ?
+                                    Math.floor(productData.price).toLocaleString()
+                                    : 'No Price Info'}`}
                             />
                         </div>
                     </div>

@@ -42,14 +42,24 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
     ) => {
         // 로그인여부
         const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'))
-        const logout = () => {
+        const logout = async () => {
             try {
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+                const url = "http://localhost:8000/api/auth/logout"
+                const result = await axios.post(url, {}, config)
+                // console.log('logout result', result)
                 localStorage.removeItem('token')
                 setIsLoggedIn(false)
-                window.location.reload()
-                // alert('logout succeeded')
+                if (result.status === 201) {
+                    window.location.reload()
+                    alert('Logout succeeded')
+                }
             } catch (e) {
-                console.log(e)
+                console.log('logout error', e)
             }
         }
 

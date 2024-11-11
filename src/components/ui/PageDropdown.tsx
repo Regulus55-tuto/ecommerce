@@ -8,7 +8,7 @@ interface DropdownProps {
 }
 
 const PageDropdown: React.FC<DropdownProps> = ({ isOpen, onClose, onSelect }) => {
-    const options = [10, 20, 30];
+    const options = [6, 10, 20, 30];
 
     if (!isOpen) return null;
 
