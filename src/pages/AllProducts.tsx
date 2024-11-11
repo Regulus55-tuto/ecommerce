@@ -12,6 +12,7 @@ import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import ProductCard31 from "../components/ui/ProductCard31";
 import axios from "axios";
 import PageDropdown from "../components/ui/PageDropdown";
+import SortMenu from "../components/ui/SortMenu";
 
 interface pageProps {
     itemCount?: number;
@@ -73,6 +74,34 @@ const AllProducts = () => {
     useEffect(() => {
         getProductData()
     }, [page, take])
+    console.log('prodduct data', productData)
+
+
+    // 필터링 및 정렬
+    const [sortOption, setSortOption] = useState<string>(""); // 기본값을 빈 문자열로 설정
+    const [sortedData, setSortedData] = useState<ProductType[]>([]);
+
+    useEffect(() => {
+        // 초기에는 정렬하지 않고 productData를 그대로 표시
+        if (sortOption) {
+            sortData(sortOption);
+        } else {
+            setSortedData(productData); // 기본적으로 데이터 순서대로 표시
+        }
+    }, [productData, sortOption]);
+
+    const sortData = (sortOption: string) => {
+        let sortedProducts = [...productData];
+
+        if (sortOption === "price-asc") {
+            sortedProducts.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+        } else if (sortOption === "price-desc") {
+            sortedProducts.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+        }
+
+        setSortedData(sortedProducts); // 정렬된 데이터로 상태 업데이트
+    };
+
 
     // Get Filter Options
     const [colors, setColors] = useState<string[]>([]);
@@ -108,25 +137,10 @@ const AllProducts = () => {
                             )}
                         </div>
 
-                        <Menu as={"div"} className={"relative inline-block text-left"}>
-                            <div>
-                                <Menu.Button
-                                    className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                                    Sort
-                                    <ChevronDownIcon
-                                        className="-mr-1 ml-1 h-5 w-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                                        aria-hidden="true"
-                                    />
-                                </Menu.Button>
-                            </div>
-
-                            <CategorySort
-                                setSortParams={setSortParams}
-                                deleteSortParams={deleteSortParams}
-                                sortParams={searchParams.get("sort")}
-                                ascParams={searchParams.get("asc")}
-                            />
-                        </Menu>
+                        {/*필터*/}
+                        <div>
+                            <SortMenu productData={productData} setSortedData={setSortedData}/>
+                        </div>
 
                         <button
                             className={
@@ -158,63 +172,57 @@ const AllProducts = () => {
 
                         <div className={"lg:col-span-3"}>
                             <ul className={"grid grid-cols-1 gap-6 md:grid-cols-2"}>
-                                <>{}</>
+                                {/* 기본적으로 정렬된 데이터 출력 */}
                             </ul>
 
-                            <ul
-                                className={
-                                    "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                                }
-                            >
-                                <>
-                                    {productData?.map((product) => (
-                                        <li
-                                            key={product.id}
-                                            className={
-                                                "group border border-slate-100 cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
-                                            }
-                                        >
-                                            <ProductCard31
-                                                image={product.image}
-                                                model={product.model}
-                                                title={product.title}
-                                                name={product.name}
-                                                id={product.id}
-                                                referencePrice={product.referencePrice}
-                                                promotionalPrice={product.promotionalPrice}
-                                                price={product.price}
-                                                category={product.category}
-                                                tags={product.tags}
-                                                colors={product.colors}
-                                                colorbuttons={product.colorbuttons}
-                                                description={product.description}
-                                                productImgs={product.productImgs}
-                                            />
-                                        </li>
-                                    ))}
-                                </>
+
+                            <ul className={"grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"}>
+                                {sortedData?.map((product) => (
+                                    <li
+                                        key={product.id}
+                                        className={"group border border-slate-100 cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"}
+                                    >
+                                        <ProductCard31
+                                            image={product.image}
+                                            model={product.model}
+                                            title={product.title}
+                                            name={product.name}
+                                            id={product.id}
+                                            referencePrice={product.referencePrice}
+                                            promotionalPrice={product.promotionalPrice}
+                                            price={product.price}
+                                            category={product.category}
+                                            tags={product.tags}
+                                            colors={product.colors}
+                                            colorbuttons={product.colorbuttons}
+                                            description={product.description}
+                                            productImgs={product.productImgs}
+                                        />
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
+
                     {/* 페이지네이션 */}
                     <div className={'flex items-center justify-center mt-20'}>
                         <ChevronLeftIcon
-                            onClick={()=>{
-                                window.scrollTo({ top: 0, left: 0 });
-                                if(pageData?.hasPreviousPage) {
-                                    setPage(page-1)
+                            onClick={() => {
+                                window.scrollTo({top: 0, left: 0});
+                                if (pageData?.hasPreviousPage) {
+                                    setPage(page - 1)
                                 }
                             }}
                             className={`h-12 w-12  ${
-                            pageData?.hasPreviousPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
-                        }`} aria-hidden="true"/>
+                                pageData?.hasPreviousPage ? 'hover:cursor-pointer hover:scale-110' : 'opacity-50 pointer-events-none'
+                            }`} aria-hidden="true"/>
 
                         {[...Array(pageData?.pageCount)].map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => {
                                     setPage(index + 1);
-                                    window.scrollTo({ top: 0, left: 0 });
+                                    window.scrollTo({top: 0, left: 0});
                                 }}
                                 className={`h-10 mx-1 px-4 py-2 bg-violet-300 text-md flex items-center justify-center rounded-lg ${
                                     page === index + 1 ? "cursor-default scale-125 mx-2 border-2 border-gray-600 pointer-events-none" : "hover:bg-violet-400"
@@ -225,7 +233,7 @@ const AllProducts = () => {
                         ))}
                         <ChevronRightIcon
                             onClick={() => {
-                                window.scrollTo({ top: 0, left: 0 });
+                                window.scrollTo({top: 0, left: 0});
                                 if (pageData?.hasNextPage) {
                                     setPage(page + 1)
                                 }

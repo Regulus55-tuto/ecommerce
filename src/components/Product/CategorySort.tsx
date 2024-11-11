@@ -22,27 +22,38 @@ const CategorySort = ({
                       }: CategorySortProps) => {
 
     const [activeButton, setActiveButton] = useState('Relevance');
-
-    const clickedButtonHandler = ({name, query}: buttonProps) => {
+    // const clickedButtonHandler = ({name, query}: buttonProps) => {
+    //     if (name === 'Relevance') {
+    //         setActiveButton(name);
+    //         return deleteSortParams('sort')
+    //     }
+    //     setActiveButton(name);
+    //     setSortParams('sort', query)
+    // }
+    const clickedButtonHandler = ({ name, query }: buttonProps) => {
         if (name === 'Relevance') {
             setActiveButton(name);
-            return deleteSortParams('sort')
+            deleteSortParams('sort');  // 'sort' 파라미터 삭제
+            deleteSortParams('asc');   // 'asc' 파라미터 삭제
+        } else {
+            setActiveButton(name);
+            setSortParams('sort', query);  // 'sort' 파라미터 설정 (예: 'price')
+            setSortParams('asc', 'true');  // 'asc' 파라미터 설정 (예: 'true'로 오름차순)
         }
-        setActiveButton(name);
-        setSortParams('sort', query)
-    }
+    };
+
 
     useEffect(() => {
         const combineParams = sortParams && ascParams ? sortParams + ascParams : '';
 
         let name = '';
         switch (combineParams) {
-            case 'likesfalse':
-                name = 'Most Poular';
-                break;
-            case 'registrationDatefalse':
-                name = 'Newest';
-                break;
+            // case 'likesfalse':
+            //     name = 'Most Poular';
+            //     break;
+            // case 'registrationDatefalse':
+            //     name = 'Newest';
+            //     break;
             case 'pricetrue':
                 name = 'Price: Low to High';
                 break;
