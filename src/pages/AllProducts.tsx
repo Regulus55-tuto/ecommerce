@@ -7,8 +7,6 @@ import useSortParams from "../hooks/useSortParams";
 import FilterDesktop from "../components/Product/FilterDesktop";
 import {COLLECTION, FILTERS} from "../data/Products";
 import {ProductType} from "../utiles/interfaces";
-import ProductCard3 from "../components/ui/ProductCard3";
-import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import ProductCard31 from "../components/ui/ProductCard31";
 import axios from "axios";
 import PageDropdown from "../components/ui/PageDropdown";
@@ -43,7 +41,7 @@ const AllProducts = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
                 closeDropdown();
-                window.location.reload()
+                // window.location.reload()
             }
         };
 
@@ -78,15 +76,14 @@ const AllProducts = () => {
 
 
     // 필터링 및 정렬
-    const [sortOption, setSortOption] = useState<string>(""); // 기본값을 빈 문자열로 설정
+    const [sortOption, setSortOption] = useState<string>("");
     const [sortedData, setSortedData] = useState<ProductType[]>([]);
 
     useEffect(() => {
-        // 초기에는 정렬하지 않고 productData를 그대로 표시
         if (sortOption) {
             sortData(sortOption);
         } else {
-            setSortedData(productData); // 기본적으로 데이터 순서대로 표시
+            setSortedData(productData);
         }
     }, [productData, sortOption]);
 
@@ -99,7 +96,7 @@ const AllProducts = () => {
             sortedProducts.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
         }
 
-        setSortedData(sortedProducts); // 정렬된 데이터로 상태 업데이트
+        setSortedData(sortedProducts);
     };
 
 
@@ -119,6 +116,7 @@ const AllProducts = () => {
                     </div>
                     <div className={"flex items-center"}>
 
+                        {/*페이지 드롭다운*/}
                         <div className={'mr-8 font-medium'}>
                             Selected Items :{" "}
                             <button onClick={openDropdown}
@@ -137,19 +135,19 @@ const AllProducts = () => {
                             )}
                         </div>
 
-                        {/*필터*/}
+                        {/*sort 드롭다운*/}
                         <div>
                             <SortMenu productData={productData} setSortedData={setSortedData}/>
                         </div>
 
-                        <button
-                            className={
-                                "-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
-                            }
-                        >
-                            <span className={"sr-only"}>Filters</span>
-                            <FunnelIcon className={"h-5 w-5"} aria-hidden="true"/>
-                        </button>
+                        {/*<button*/}
+                        {/*    className={*/}
+                        {/*        "-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"*/}
+                        {/*    }*/}
+                        {/*>*/}
+                        {/*    <span className={"sr-only"}>Filters</span>*/}
+                        {/*    <FunnelIcon className={"h-5 w-5"} aria-hidden="true"/>*/}
+                        {/*</button>*/}
                     </div>
                 </div>
 
@@ -170,12 +168,8 @@ const AllProducts = () => {
                             searchParams={searchParams}
                         />
 
+                        {/*데이터*/}
                         <div className={"lg:col-span-3"}>
-                            <ul className={"grid grid-cols-1 gap-6 md:grid-cols-2"}>
-                                {/* 기본적으로 정렬된 데이터 출력 */}
-                            </ul>
-
-
                             <ul className={"grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"}>
                                 {sortedData?.map((product) => (
                                     <li
