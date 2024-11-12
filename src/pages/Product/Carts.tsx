@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductTitle from "../../components/ui/ProductTitle";
 import { useForm } from "react-hook-form";
 import Checkbox from "../../components/ui/Checkbox";
@@ -8,11 +8,24 @@ import { DeleteModal } from "components/ui";
 
 const Carts = () => {
   const { register, handleSubmit, formState, setError } = useForm();
+  const [submitType, setSubmitType] = useState<string | null>(null);
 
   const mock = ["a", "b", "c", "d", "e"];
 
   const submit = (data: any) => {
-    console.log("data", data);
+    try {
+      console.log("data", data);
+
+      if (submitType === "purchase") {
+        console.log("purch data", data);
+      } else if (submitType === "delete") {
+        console.log("delete data", data);
+      } else {
+        console.log("no submit type");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -34,9 +47,17 @@ const Carts = () => {
           }
         >
           <div className={"col-span-2 w-4/5 xl:w-full mx-auto xl:mx-0"}>
+            {/* 선택삭제버튼 */}
+            <button
+              type={"submit"}
+              onClick={() => setSubmitType("delete")}
+              className="mb-4 text-md bg-violet-500 text-white rounded-lg py-2 px-4"
+            >
+              Delete Selected Item
+            </button>
             <div className="flex items-center justify-center">
               <table className="table-auto w-full">
-                <tr className="text-center font-bold text-xl text-gray-700 border-y-4 border-gray-500 py-1">
+                <tr className="text-center font-semibold text-xl text-gray-700 border-y-4 border-gray-500 py-1">
                   {/*제목부분 */}
                   <td className="py-1">ㅁ</td>
                   <td className="py-1">Product</td>
@@ -86,7 +107,7 @@ const Carts = () => {
                             </span>
                           </div>
                           <div className="font-bold text-lg text-gray-600 mt-2">
-                            W 1,321,000
+                            ₩ 1,321,000
                           </div>
                         </div>
                       </div>
@@ -168,6 +189,7 @@ const Carts = () => {
 
               <button
                 type={"submit"}
+                onClick={() => setSubmitType("purchase")}
                 className={
                   "bg-violet-500 hover:bg-violet-600 text-white text-lg w-full font-medium rounded-lg px-4 py-1"
                 }
