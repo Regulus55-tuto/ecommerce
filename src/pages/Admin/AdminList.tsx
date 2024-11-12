@@ -274,7 +274,7 @@ const AdminList = ({
                                 </td>
 
                                 <td className="border-y border-gray-500 px-2 font-bold">
-                                    <p className={' text-lg text-gray-700'}>{item.name}</p>
+                                    <p className={'text-lg text-gray-700'}>{item.name}</p>
                                     <p className={'text-sm text-gray-400'}>{item.name}</p>
                                 </td>
 
