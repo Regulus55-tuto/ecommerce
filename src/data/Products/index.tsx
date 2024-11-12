@@ -45,7 +45,7 @@ export const SORT_OPTIONS = [
 export const FILTERITEM = ["Background", "Body", "Eyes", "Hat", "Nose"];
 export const LOADING_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
 
-// Cart
+// Carts
 export const SHIPPING = 5;
 
 // Check out

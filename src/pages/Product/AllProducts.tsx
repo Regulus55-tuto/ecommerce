@@ -1,16 +1,16 @@
 import React, {useEffect, useRef, useState} from "react";
-import ProductTitle from "../components/ui/ProductTitle";
+import ProductTitle from "../../components/ui/ProductTitle";
 import {Menu} from "@headlessui/react";
 import {ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, FunnelIcon} from "@heroicons/react/16/solid";
-import CategorySort from "../components/Product/CategorySort";
-import useSortParams from "../hooks/useSortParams";
-import FilterDesktop from "../components/Product/FilterDesktop";
-import {COLLECTION, FILTERS} from "../data/Products";
-import {ProductType} from "../utiles/interfaces";
-import ProductCard31 from "../components/ui/ProductCard31";
+import CategorySort from "../../components/Product/CategorySort";
+import useSortParams from "../../hooks/useSortParams";
+import FilterDesktop from "../../components/Product/FilterDesktop";
+import {COLLECTION, FILTERS} from "../../data/Products";
+import {ProductType} from "../../utiles/interfaces";
+import ProductCard31 from "../../components/ui/ProductCard31";
 import axios from "axios";
-import PageDropdown from "../components/ui/PageDropdown";
-import SortMenu from "../components/ui/SortMenu";
+import PageDropdown from "../../components/ui/PageDropdown";
+import SortMenu from "../../components/ui/SortMenu";
 
 interface pageProps {
     itemCount?: number;

@@ -359,7 +359,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                 CAD
               </span>
                         </div>
-                        {/* Cart */}
+                        {/* Carts */}
                         <div className="ml-4 flow-root lg:ml-6">
                             <Link to="/carts" className="group -m-2 flex items-center p-2">
                                 <ShoppingBagIcon

@@ -3,15 +3,16 @@ import {ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, FunnelIcon} from "@h
 import {Icon} from "@iconify/react";
 import CategorySort from "components/Product/CategorySort";
 import ProductTitle from "components/ui/ProductTitle";
-import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import useSortParams from "hooks/useSortParams";
 import React, {useEffect, useRef, useState} from "react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Link, useParams} from "react-router-dom";
-import {ProductType} from "utiles/interfaces";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import DeleteModal from "../../components/ui/DeleteModal";
 import PageDropdown from "../../components/ui/PageDropdown";
+import {ProductType} from "../../utiles/interfaces";
+import SortMenu from "../../components/ui/SortMenu";
+
 
 interface AdminProps {
     title?: string;
@@ -67,7 +68,7 @@ const AdminList = ({
         const handleClickOutside = (event: MouseEvent) => {
             if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
                 closeDropdown();
-                window.location.reload()
+                // window.location.reload()
             }
         };
 
@@ -126,11 +127,36 @@ const AdminList = ({
         closeModal();
     };
 
-
     useEffect(() => {
         window.scrollTo(0, 0)
         getItemData()
     }, [take, page])
+
+
+    // 필터링 및 정렬
+    const [sortOption, setSortOption] = useState<string>("");
+    const [sortedData, setSortedData] = useState<ProductType[]>([]);
+
+    useEffect(() => {
+        if (sortOption) {
+            sortData(sortOption);
+        } else {
+            setSortedData(productData);
+        }
+    }, [productData, sortOption]);
+
+    const sortData = (sortOption: string) => {
+        let sortedProducts = [...productData];
+
+        if (sortOption === "price-asc") {
+            sortedProducts.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+        } else if (sortOption === "price-desc") {
+            sortedProducts.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+        }
+
+        setSortedData(sortedProducts);
+    };
+
 
     return (
         <div className={"bg-white"}>
@@ -167,10 +193,10 @@ const AdminList = ({
                                 </svg>
                             </div>
                             <input type="search" id="search"
-                                   className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="Search" required/>
                             <button type="submit"
-                                    className="text-white absolute end-2.5 bottom-2.5 bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search
+                                    className="text-white absolute end-2.5 bottom-2.5 bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search
                             </button>
                         </div>
 
@@ -193,25 +219,10 @@ const AdminList = ({
                         </div>
 
 
-                        <Menu as={"div"} className={"relative inline-block text-left"}>
-                            <div>
-                                <Menu.Button
-                                    className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                                    Sort
-                                    <ChevronDownIcon
-                                        className="-mr-1 ml-1 h-5 w-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                                        aria-hidden="true"
-                                    />
-                                </Menu.Button>
-                            </div>
-
-                            <CategorySort
-                                setSortParams={setSortParams}
-                                deleteSortParams={deleteSortParams}
-                                sortParams={searchParams.get("sort")}
-                                ascParams={searchParams.get("asc")}
-                            />
-                        </Menu>
+                        {/*sort 드롭다운*/}
+                        <div>
+                            <SortMenu productData={productData} setSortedData={setSortedData}/>
+                        </div>
 
 
                         <button
@@ -234,13 +245,13 @@ const AdminList = ({
                             <td className="py-1">Images</td>
                             <td className="py-1 w-28">Name</td>
                             <td className="py-1">Price</td>
-                            <td className="py-1 w-40">Sale</td>
+                            <td className="py-1 w-40">Stock Status</td>
                             <td className="py-1 w-16">Edit</td>
                             <td className="py-1 w-16">Delete</td>
                         </tr>
 
                         {/*실제 아이템 데이터*/}
-                        {productData?.map((item: any, i: number) => (
+                        {sortedData?.map((item: any, i: number) => (
                             <tr className="text-center" key={i}>
                                 <td className="border-y border-gray-500 px-2 text-lg text-gray-700 font-bold">
                                     {i + 1}

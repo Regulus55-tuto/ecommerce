@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {classNames, removeCollectionsPrefix} from "../utiles/utiles";
+import {classNames, removeCollectionsPrefix} from "../../utiles/utiles";
 import {FreeMode, Thumbs} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {ProductType} from "../utiles/interfaces";
+import {ProductType} from "../../utiles/interfaces";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {RadioGroup} from "@headlessui/react";
-import sizeFilter from "../components/Product/SizeFilter";
-import {Button} from "../components/ui";
+import sizeFilter from "../../components/Product/SizeFilter";
+import {Button} from "../../components/ui";
 import {accessory, computer, smartphone} from "data/Products/collectionsData";
 import {PiArrowFatRightThin} from "react-icons/pi";
 import axios from "axios";

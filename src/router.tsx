@@ -15,7 +15,7 @@ import {
   Login,
   NotFound,
   ProductDetail,
-  Signup,
+  Signup, Carts,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -54,6 +54,10 @@ const router = createBrowserRouter([
         element: <ForgotPassword />,
       },
       {
+        path: "/change/password",
+        element: <ChangePassword />,
+      },
+      {
         path: "/products",
         element: <AllProducts />,
       },
@@ -82,8 +86,8 @@ const router = createBrowserRouter([
         element: <AllProducts />,
       },
       {
-        path: "/change/password",
-        element: <ChangePassword />,
+        path: "/carts",
+        element: <Carts />,
       },
     ],
   },

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import ProductTitle from "../components/ui/ProductTitle";
+import ProductTitle from "../../components/ui/ProductTitle";
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/16/solid";
-import CategorySort from "../components/Product/CategorySort";
-import useSortParams from "../hooks/useSortParams";
-import FilterDesktop from "../components/Product/FilterDesktop";
-import { COLLECTION, FILTERS } from "../data/Products";
-import { ProductType } from "../utiles/interfaces";
-import ProductCard3 from "../components/ui/ProductCard3";
+import CategorySort from "../../components/Product/CategorySort";
+import useSortParams from "../../hooks/useSortParams";
+import FilterDesktop from "../../components/Product/FilterDesktop";
+import { COLLECTION, FILTERS } from "../../data/Products";
+import { ProductType } from "../../utiles/interfaces";
+import ProductCard3 from "../../components/ui/ProductCard3";
 import { accessory, computer, smartphone } from "data/Products/collectionsData";
 
 const Collections = () => {
