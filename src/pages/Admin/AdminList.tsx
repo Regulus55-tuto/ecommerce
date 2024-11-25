@@ -12,6 +12,7 @@ import DeleteModal from "../../components/ui/DeleteModal";
 import PageDropdown from "../../components/ui/PageDropdown";
 import {ProductType} from "../../utiles/interfaces";
 import SortMenu from "../../components/ui/SortMenu";
+import SearchItemDropdown from "../../components/ui/SearchItemDropdown";
 
 
 interface AdminProps {
@@ -84,16 +85,35 @@ const AdminList = ({
     }, [isDropdownOpen]);
 
     //검색창
-    const [searchInput, setSearchInput] = useState<string | null>('')
     const [searchName, setSearchName] = useState<string | null>('')
 
+    //검색항목 선택
+    const [searchItem, setSearchItem] = useState<string | null>('name')
+    const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false)
+    const openSearchDropdown = () => setIsSearchDropdownOpen(true);
+    const closeSearchDropdown = () => setIsSearchDropdownOpen(false);
+    const searchItemSelected = (search: string) => {
+        setSearchItem(search)
+    }
+    const SearchDropdownRef = useRef<HTMLDivElement>(null);
+
+    console.log('검색내용ㅇㅇㅇㅇㅇ', searchName)
+    const aaa = searchName ? searchName.split(",").map((item) => {
+        const trimItem = item.trim()
+        console.log('ddddd', trimItem)
+        return trimItem;
+    }) : null;
+
     // 프로덕트 데이타
-    const [submitType, setSubmitType] = useState<string | null>("getData")
     const getItemData = async () => {
-        const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}&name=${searchName}`
+        // 아이템 검색할떄 검색어가 여러개일경우
+        const queryString = aaa ?
+            aaa.map(item => `&${searchItem}=${encodeURIComponent(item)}`).join("") : "";
+        const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}${queryString}`
         const {data} = await axios.get(url)
         setProductData(data.body.data)
         setPageData(data.body.meta)
+        console.log(url)
     }
     const [productData, setProductData] = useState<any>([]);
 
@@ -136,7 +156,7 @@ const AdminList = ({
         window.scrollTo(0, 0)
         getItemData()
 
-    }, [take, page, searchInput])
+    }, [take, page])
 
 
     // 필터링 및 정렬
@@ -190,7 +210,7 @@ const AdminList = ({
 
                         <label htmlFor="search"
                                className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                        <div className="relative w-1/2 mr-4">
+                        <div className="relative flex items-center w-1/2 mr-4 h-20">
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -200,18 +220,45 @@ const AdminList = ({
                             </div>
                             <input type="search"
                                    id="search"
-                                   className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   className="block w-1/2 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="Search"
-                                   onChange={(e) =>
-                                   {
+                                   onChange={(e) => {
                                        setSearchName(e.target.value)
-
                                    }}
                             />
-                            <button onClick={()=>{
-                               getItemData()
+
+                            <label htmlFor="searchItem"/>
+                            <select id="searchItem"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-20 px-2.5 py-4 mx-2"
+                                    onChange={(e) => {
+                                        setSearchItem(e.target.value)
+                                    }}
+                            >
+                                <option value="name">Name</option>
+                                <option value="tags">Tags</option>
+                            </select>
+
+                            {/*<div className={'mr-8 text-sm font-medium text-gray-700 hover:text-gray-900'}>*/}
+                            {/*    <button onClick={openSearchDropdown}*/}
+                            {/*            className="bg-violet-400 text-md font-medium text-white px-4 py-1 rounded-lg">*/}
+                            {/*        {searchItem}*/}
+                            {/*    </button>*/}
+                            {/*    {isSearchDropdownOpen && (*/}
+                            {/*        <div ref={SearchDropdownRef}>*/}
+                            {/*            <SearchItemDropdown*/}
+                            {/*                isOpen={isSearchDropdownOpen}*/}
+                            {/*                onClose={closeSearchDropdown}*/}
+                            {/*                onSelect={searchItemSelected}*/}
+                            {/*            />*/}
+                            {/*        </div>*/}
+                            {/*    )}*/}
+                            {/*</div>*/}
+
+                            <button onClick={() => {
+                                getItemData()
                             }}
-                                    className="text-white absolute end-2.5 bottom-2.5 bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search
+                                    className="text-white end-2.5 bottom-2.5 bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-4 p-4">
+                                Search
                             </button>
                         </div>
 
