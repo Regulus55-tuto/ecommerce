@@ -115,6 +115,7 @@ const AdminList = ({
         setPageData(data.body.meta)
         console.log(url)
     }
+
     const [productData, setProductData] = useState<any>([]);
 
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
