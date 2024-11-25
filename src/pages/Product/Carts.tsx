@@ -117,15 +117,15 @@ const Carts = () => {
                                         />
                                     </td>
                                     <td className="py-1">Product</td>
-                                    <td className="py-1">Quantity</td>
-                                    <td className="py-1">Total Price</td>
+                                    <td className="py-1 hidden md:table-cell">Quantity</td>
+                                    <td className="py-1 hidden md:table-cell">Total Price</td>
                                     <td className="py-1">Delete</td>
                                 </tr>
 
                                 {mock.map((item, i) => (
                                     <tr className="text-center" key={i}>
                                         {/*내용부분 */}
-                                        <td className="border-y border-gray-500 px-2 font-bold text-xl ">
+                                        <td className="border-y border-gray-500 px-2 font-bold text-xl">
                                             <Checkbox
                                                 type="checkbox"
                                                 {...register(`checkItem.${i}`)}
@@ -135,13 +135,13 @@ const Carts = () => {
                                                 onChange={(e) =>
                                                     handleSingleCheck(e.target.checked, item.id)
                                                 }
-                                                   />
+                                            />
                                         </td>
-                                        <td className=" border-b border-gray-500 text-lg text-gray-700 font-bold w-1/2">
-                                            <div className="flex items-between justify-start w-full h-28 ml-12">
+                                        <td className=" border-b border-gray-500 text-lg text-gray-700 font-bold w-1/5 md:w-1/2">
+                                            <div className="flex items-between justify-start w-full h-16 md:h-28 ml-12">
                                                 <LazyLoadImage
                                                     src="/images/default_image.webp"
-                                                    className="w-28 h-28"
+                                                    className="w-16 h-16 md:w-28 md:h-28 my-auto"
                                                 />
                                                 <div className="flex flex-col items-start justify-start ml-2">
                                                     <div className="font-semibold text-lg text-gray-700">
@@ -156,8 +156,8 @@ const Carts = () => {
                                                             style={{color: "red"}}
                                                             className="text-base font-medium"
                                                         >
-                              black
-                            </span>
+                                                          black
+                                                        </span>
                                                     </div>
                                                     <div
                                                         className="font-bold text-lg text-gray-600 mt-2 hidden md:block">
@@ -166,7 +166,7 @@ const Carts = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="border-b border-gray-500 px-2 h-40 font-medium text-lg hidden md:block">
+                                        <td className={`border-b border-gray-500 px-2 h-40 font-medium text-lg ${isMobile ? 'hidden' : ""}`}>
                                             2
                                         </td>
                                         <td className={`border-b border-gray-500 px-2 h-40 font-medium text-lg ${isMobile ? 'hidden' : ""}`}>
@@ -236,7 +236,7 @@ const Carts = () => {
                                 <div className={"text-gray-800 text-base font-bold my-6"}>
                                     Total Price
                                 </div>
-                                <div className={"text-gray-800 text-base font-bold"}>
+                                <div className={"text-gray-800 text-lg font-bold"}>
                                     ₩ 10,350,846
                                 </div>
                             </div>

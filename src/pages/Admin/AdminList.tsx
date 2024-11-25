@@ -83,9 +83,14 @@ const AdminList = ({
         };
     }, [isDropdownOpen]);
 
+    //검색창
+    const [searchInput, setSearchInput] = useState<string | null>('')
+    const [searchName, setSearchName] = useState<string | null>('')
+
     // 프로덕트 데이타
+    const [submitType, setSubmitType] = useState<string | null>("getData")
     const getItemData = async () => {
-        const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}`
+        const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}&name=${searchName}`
         const {data} = await axios.get(url)
         setProductData(data.body.data)
         setPageData(data.body.meta)
@@ -130,7 +135,8 @@ const AdminList = ({
     useEffect(() => {
         window.scrollTo(0, 0)
         getItemData()
-    }, [take, page])
+
+    }, [take, page, searchInput])
 
 
     // 필터링 및 정렬
@@ -192,10 +198,19 @@ const AdminList = ({
                                           stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg>
                             </div>
-                            <input type="search" id="search"
+                            <input type="search"
+                                   id="search"
                                    className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Search" required/>
-                            <button type="submit"
+                                   placeholder="Search"
+                                   onChange={(e) =>
+                                   {
+                                       setSearchName(e.target.value)
+
+                                   }}
+                            />
+                            <button onClick={()=>{
+                               getItemData()
+                            }}
                                     className="text-white absolute end-2.5 bottom-2.5 bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search
                             </button>
                         </div>
@@ -265,7 +280,7 @@ const AdminList = ({
                                                 key={i}>
                                             <LazyLoadImage
                                                 src={img}
-                                                className={"h-auto w-auto "}
+                                                className={"h-auto w-auto z-0"}
                                             />
                                                 </span>
                                         ))}
