@@ -88,7 +88,7 @@ const AdminList = ({
     const [searchName, setSearchName] = useState<string | null>('')
 
     //검색항목 선택
-    const [searchItem, setSearchItem] = useState<string | null>('name')
+    const [searchItem, setSearchItem] = useState<string>('name')
     const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false)
     const openSearchDropdown = () => setIsSearchDropdownOpen(true);
     const closeSearchDropdown = () => setIsSearchDropdownOpen(false);
@@ -98,7 +98,7 @@ const AdminList = ({
     const SearchDropdownRef = useRef<HTMLDivElement>(null);
 
     console.log('검색내용ㅇㅇㅇㅇㅇ', searchName)
-    const aaa = searchName ? searchName.split(",").map((item) => {
+    const multipleSearch = searchName ? searchName.split(",").map((item) => {
         const trimItem = item.trim()
         console.log('ddddd', trimItem)
         return trimItem;
@@ -107,9 +107,15 @@ const AdminList = ({
     // 프로덕트 데이타
     const getItemData = async () => {
         // 아이템 검색할떄 검색어가 여러개일경우
-        const queryString = aaa ?
-            aaa.map(item => `&${searchItem}=${encodeURIComponent(item)}`).join("") : "";
+        const queryString = multipleSearch ?
+            (
+                searchItem === "tags"
+                    ? multipleSearch.map(item => `&${searchItem}=${encodeURIComponent(item)}`).join("")
+                    : `&${searchItem}=${searchName}`
+                // 검색항목이 태그면 , 로 구분해서 검색/ 아니면 ,포함해서 문자로 검색
+            ) : "";
         const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}${queryString}`
+        // const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}&tags=ring&tags=pow&tags=qwe`
         const {data} = await axios.get(url)
         setProductData(data.body.data)
         setPageData(data.body.meta)
