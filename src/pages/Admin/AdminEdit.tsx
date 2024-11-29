@@ -8,6 +8,8 @@ import {ProductType} from "utiles/interfaces";
 import axios from "axios";
 import {EditModal} from "../../components/ui";
 import DeleteModal from "../../components/ui/DeleteModal";
+import ToastLoading from "../../components/ui/ToastLoading";
+import {toast, ToastContainer} from "react-toastify";
 
 interface CategoryType {
     name: string;
@@ -206,7 +208,16 @@ const AdminEdit = () => {
             category: data.category ? JSON.parse(data.category) : null,
         }
 
+        const loadingToast = toast.info("로딩 중...", {
+            className: "w-20 h-20 bg-black text-white font-semibold rounded-lg shadow-lg p-3",
+            bodyClassName: "text-sm",
+            progressClassName: "bg-green-200",
+            autoClose: false,
+            closeOnClick: true
+        });
+
         try {
+            toast.dismiss(loadingToast);
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -215,12 +226,17 @@ const AdminEdit = () => {
             const url = `http://localhost:8000/api/product/${params.id}`
             const result = await axios.put(url, userInput, config);
             if (result.status === 200) {
-                alert('Edit Successful')
+                toast.success("", {
+                    className: "w-20 h-20 bg-green-500 text-white font-semibold rounded-lg shadow-lg p-3",
+                    bodyClassName: "text-sm",
+                    progressClassName: "bg-green-200",
+                });
                 navigate('/product/new')
             }
             console.log('resutlttt', result)
             console.log('edit userInput', userInput)
         } catch (e) {
+            toast.error("에러 발생: 데이터를 수정할 수 없습니다.");
             console.log(e)
         }
     };

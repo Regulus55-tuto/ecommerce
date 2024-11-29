@@ -1,14 +1,20 @@
 import {Icon} from "@iconify/react";
 import ProductTitle from "components/ui/ProductTitle";
 import {accessory, computer, smartphone} from "data/Products/collectionsData";
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {useFieldArray, useForm} from "react-hook-form";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import FileUploadWithDragAndDrop from "../../components/ui/FileUploadWithDragAndDrop";
 
 interface CategoryType {
     name: string;
     id: number | string;
+}
+
+interface UploadedFile {
+    name: string;
+    size: number;
 }
 
 interface AdminProps {
@@ -152,42 +158,17 @@ const AdminAdd = () => {
     // }
 // console.log('vmfh',categoryInfo)
 
+    ///////////////////////////
+    // 이미지 드래그 앤 드롭
+    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
+    // 자식 컴포넌트에서 파일 데이터를 받는 함수
+    const handleFileUpload = (files: File[]) => {
+        setUploadedFiles(files);
+        console.log("Files received from child:", files);
+    };
     // 제출
     const submit = async (data: any) => {
-        // const productImgsArray = Array.from(data.productImgs || []);
-        // 이미지파일을 array로 만듦, undefined 대비해 빈배열 || 로 만듦
-        // const files = data?.productImgs
-
-        if(data.productImgs){
-            const productImgsArray = Array.from(data.productImgs);
-
-
-        const formData = new FormData()
-        const myData = productImgsArray.forEach((file: any) => formData.append("productImgs", file));
-// const
-
-        console.log('myData', myData);
-        // const myFormData = formData.append('files', files)
-        // console.log('filsse', files)
-        // console.log('myFormData', myFormData)
-        //
-        // // let jsonData = JSON.stringify({ title: "jsonTitle", tag: "jsonTag", content: "jsonContent" });
-        // // let arrayData = ["arrayTitle", "arrayTag", "arrayContent"];
-        // //
-        // // formData.append("jsonData", jsonData);
-        // // formData.append("arrayData", arrayData as any);
-        // //
-        // // console.log('++++',jsonData)
-        // // console.log('====',arrayData)
-        //
-        // const blob = new Blob([JSON.stringify(productImgsArray)], {
-        //     // type에 JSON 타입 지정
-        //     type: 'application/json',
-        // });
-        // formData.append('info', blob);
-        // console.log('blob', blob)
-
 
         const userInput = {
             name: data.name,
@@ -199,8 +180,7 @@ const AdminAdd = () => {
             colors: data.colors,
             stock: 1,
             highlights: data.highlights,
-            productImgs: productImgsArray,
-            // productImgs: files,
+            // productImgs: uploadedFiles,
             category: data.category ? JSON.parse(data.category) : categoryInfo[0],
         }
 
@@ -208,20 +188,22 @@ const AdminAdd = () => {
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-Type' : 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data'
                 }
             }
             const url = `http://localhost:8000/api/product`
             const result = await axios.post(url, userInput, config);
-            if (result.status === 200) {
+            if (result.status === 201) {
                 alert('Product added successfully')
                 navigate('/product/new')
                 console.log('result', result)
             }
             console.log('userInput', userInput)
+
         } catch (e) {
             console.log(e)
-        }}
+        }
+
     };
 
 
@@ -248,22 +230,29 @@ const AdminAdd = () => {
                 <div className="flex flex-col items-center justify-center px-40 mt-10">
                     <div className="grid grid-cols-10 w-full">
                         <div className="col-span-4 flex flex-col items-center">
-                            {imagePreviews.map((preview, index) => (
-                                <img
-                                    key={index}
-                                    src={preview}
-                                    alt={`Preview ${index + 1}`}
-                                    className="h-60 w-60 object-cover"
-                                />
-                            ))}
+                            {/*{imagePreviews.map((preview, index) => (*/}
+                            {/*    <img*/}
+                            {/*        key={index}*/}
+                            {/*        src={preview}*/}
+                            {/*        alt={`Preview ${index + 1}`}*/}
+                            {/*        className="h-60 w-60 object-cover"*/}
+                            {/*    />*/}
+                            {/*))}*/}
                             <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
-                                <input
-                                    {...register("productImgs")}
-                                    type="file"
-                                    accept="image/png,image/jpeg,image/jpg,image/webp"
-                                    multiple
-                                />
-                                <div>JPG, JPEG, PNG, or WEBP</div>
+                                {/*<input*/}
+                                {/*    {...register("productImgs")}*/}
+                                {/*    type="file"*/}
+                                {/*    accept="image/png,image/jpeg,image/jpg,image/webp"*/}
+                                {/*    multiple*/}
+                                {/*/>*/}
+                                {/*<div>JPG, JPEG, PNG, or WEBP</div>*/}
+
+                                {/*사진드래그*/}
+
+
+                                <FileUploadWithDragAndDrop onFileUpload={handleFileUpload}/>
+
+
                             </div>
                         </div>
 
@@ -536,7 +525,6 @@ const AdminAdd = () => {
 
                     <button
                         type={'submit'}
-                        // onClick={()=>setIsModalOpen(true)}
                         className="bg-gray-300 border-gray-500 rounded-lg text-2xl p-4 mt-6 hover:cursor-pointer"
                     >
                         Add Product

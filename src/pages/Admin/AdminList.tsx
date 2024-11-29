@@ -89,18 +89,11 @@ const AdminList = ({
 
     //검색항목 선택
     const [searchItem, setSearchItem] = useState<string>('name')
-    const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false)
-    const openSearchDropdown = () => setIsSearchDropdownOpen(true);
-    const closeSearchDropdown = () => setIsSearchDropdownOpen(false);
-    const searchItemSelected = (search: string) => {
-        setSearchItem(search)
-    }
-    const SearchDropdownRef = useRef<HTMLDivElement>(null);
 
-    console.log('검색내용ㅇㅇㅇㅇㅇ', searchName)
+    // console.log('검색내용ㅇㅇㅇㅇㅇ', searchName)
     const multipleSearch = searchName ? searchName.split(",").map((item) => {
         const trimItem = item.trim()
-        console.log('ddddd', trimItem)
+        // console.log('ddddd', trimItem)
         return trimItem;
     }) : null;
 
@@ -115,11 +108,10 @@ const AdminList = ({
                 // 검색항목이 태그면 , 로 구분해서 검색/ 아니면 ,포함해서 문자로 검색
             ) : "";
         const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}${queryString}`
-        // const url = `http://localhost:8000/api/product?order=ASC&page=${page}&take=${take}&tags=ring&tags=pow&tags=qwe`
         const {data} = await axios.get(url)
         setProductData(data.body.data)
         setPageData(data.body.meta)
-        console.log(url)
+        // console.log(url)
     }
 
     const [productData, setProductData] = useState<any>([]);
