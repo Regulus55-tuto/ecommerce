@@ -10,6 +10,7 @@ import {EditModal} from "../../components/ui";
 import DeleteModal from "../../components/ui/DeleteModal";
 import ToastLoading from "../../components/ui/ToastLoading";
 import {toast, ToastContainer} from "react-toastify";
+import FileUploadWithDragAndDrop from "../../components/ui/FileUploadWithDragAndDrop";
 
 interface CategoryType {
     name: string;
@@ -188,6 +189,14 @@ const AdminEdit = () => {
     //     console.log('모달확ㅇ;ㄴ')
     // }
 
+    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
+    // 자식 컴포넌트에서 파일 데이터를 받는 함수
+    const handleFileUpload = (files: File[]) => {
+        setUploadedFiles(files);
+        console.log("Files received from child:", files);
+    };
+
     // 제출
     const submit = async (data: any) => {
         const productImgsArray = Array.from(data.productImgs || []);
@@ -204,7 +213,7 @@ const AdminEdit = () => {
             colors: data.colors,
             stock: 1,
             highlights: data.highlights,
-            productImgs: productImgsArray,
+            productImgs: uploadedFiles,
             category: data.category ? JSON.parse(data.category) : null,
         }
 
@@ -283,22 +292,23 @@ const AdminEdit = () => {
                     <div className="grid grid-cols-10 w-full">
                         <div className="col-span-4 flex flex-col items-center">
                             {/*<img src={photoImg} className="h-60 w-60"/>*/}
-                            {imagePreviews.map((preview, index) => (
-                                <img
-                                    key={index}
-                                    src={preview}
-                                    alt={`Preview ${index + 1}`}
-                                    className="h-60 w-60 object-cover"
-                                />
-                            ))}
+                            {/*{imagePreviews.map((preview, index) => (*/}
+                            {/*    <img*/}
+                            {/*        key={index}*/}
+                            {/*        src={preview}*/}
+                            {/*        alt={`Preview ${index + 1}`}*/}
+                            {/*        className="h-60 w-60 object-cover"*/}
+                            {/*    />*/}
+                            {/*))}*/}
                             <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
-                                <input
-                                    {...register("productImgs")}
-                                    type="file"
-                                    accept="image/png,image/jpeg,image/jpg,image/webp"
-                                    multiple
-                                />
-                                <div>JPG, JPEG, PNG, or WEBP</div>
+                                {/*<input*/}
+                                {/*    {...register("productImgs")}*/}
+                                {/*    type="file"*/}
+                                {/*    accept="image/png,image/jpeg,image/jpg,image/webp"*/}
+                                {/*    multiple*/}
+                                {/*/>*/}
+                                {/*<div>JPG, JPEG, PNG, or WEBP</div>*/}
+                                <FileUploadWithDragAndDrop onFileUpload={handleFileUpload}/>
                             </div>
                         </div>
 

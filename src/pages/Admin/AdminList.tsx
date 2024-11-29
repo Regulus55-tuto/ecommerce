@@ -12,6 +12,7 @@ import DeleteModal from "../../components/ui/DeleteModal";
 import PageDropdown from "../../components/ui/PageDropdown";
 import {ProductType} from "../../utiles/interfaces";
 import SortMenu from "../../components/ui/SortMenu";
+import {toast, ToastContainer} from "react-toastify";
 import SearchItemDropdown from "../../components/ui/SearchItemDropdown";
 
 
@@ -132,8 +133,21 @@ const AdminList = ({
         setIsModalOpen(false);
     };
 
+    //////////////////////
+    const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
+
+    //////////////////////
+
     const handleDelete = async (id: number, name: string) => {
+        let loadingToastAdmin: React.ReactText | undefined;
+
+
         try {
+            setIsLoading(true);
+            loadingToastAdmin = toast.loading("Deleting...",{
+                position:"top-center"
+            });
+
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -142,7 +156,20 @@ const AdminList = ({
             const url = `http://localhost:8000/api/product/${id}`
             const result = await axios.delete(url, config)
             if (result.status === 200) {
-                alert(`${name} deletion successful`)
+                // toast.update(loadingToastAdmin, {
+                //     render: `${name} deletion successful`,
+                //     type: "success",
+                //     isLoading: false,
+                //     autoClose: 3000, // 3초 후 자동 닫힘
+                //     position: "top-right", // 메시지 위치
+                //     hideProgressBar: false, // 진행바 표시 여부
+                //     closeOnClick: true, // 클릭 시 닫힘
+                //     pauseOnHover: true, // 마우스를 올리면 닫힘 일시 정지
+                //     draggable: true, // 드래그로 위치 변경 가능
+                // });
+
+
+            alert(`${name} deletion successful`)
                 window.location.reload()
             }
         } catch (e) {
@@ -433,6 +460,8 @@ const AdminList = ({
                         }`} aria-hidden="true"/>
                 </div>
             </main>
+            <ToastContainer/>
+
         </div>
     );
 };

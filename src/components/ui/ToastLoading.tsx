@@ -1,20 +1,36 @@
-import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import React, { forwardRef, useImperativeHandle } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ToastLoading = () => {
-    const handleSubmit = async () => {
-        toast.info("로딩 중..."); // 로딩 메시지
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // 로딩 시뮬레이션
-        toast.success("제출 성공!"); // 성공 메시지
+const ToastLoading = forwardRef((props, ref) => {
+    // Toast 메시지 함수 정의
+    const showSuccessToast = () => {
+        toast.success("성공 메시지!");
     };
 
+    const showErrorToast = () => {
+        toast.error("에러 메시지!");
+    };
+
+    // 부모에서 사용할 수 있도록 ref로 함수 전달
+    useImperativeHandle(ref, () => ({
+        showSuccessToast,
+        showErrorToast
+    }));
+
     return (
-        <div>
-            <button onClick={handleSubmit}>제출</button>
-            <ToastContainer />
-        </div>
+        <>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                pauseOnHover
+                draggable
+            />
+        </>
     );
-};
+});
 
 export default ToastLoading;
