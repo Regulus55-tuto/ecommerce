@@ -166,30 +166,15 @@ const AdminEdit = () => {
         computer: ["Tab series", "Book series"],
         accessory: ["Watch series", "Buds series", "Ring series"],
     };
-    // const [selectedCategory, setSelectedCategory] = useState(
-    //   productInfo?.category || ""
-    // );
-    // const [selectedSubCategory, setSelectedSubCategory] = useState(
-    //   productInfo?.subCategory || ""
-    // );
-    // const options = Object.keys(categories[selectedCategory]);
-    // const options = categories[selectedCategory] ? Object.keys(categories[selectedCategory]) : [];
-    //
-    // const handleCategoryChange = (e: any) => {
-    //   setSelectedCategory(e.target.value);
-    // };
-    // const handleSubCategoryChange = (e: any) => {
-    //   setSelectedSubCategory(e.target.value);
-    // };
+
+    //////////////////////
+    const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
+    //////////////////////
 
 
-    // 모달
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-    // const example = () =>{
-    //     console.log('모달확ㅇ;ㄴ')
-    // }
-
+    // 이미지파일
     const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+    let loadingToastAdmin: React.ReactText | undefined;
 
     // 자식 컴포넌트에서 파일 데이터를 받는 함수
     const handleFileUpload = (files: File[]) => {
@@ -217,16 +202,13 @@ const AdminEdit = () => {
             category: data.category ? JSON.parse(data.category) : null,
         }
 
-        const loadingToast = toast.info("로딩 중...", {
-            className: "w-20 h-20 bg-black text-white font-semibold rounded-lg shadow-lg p-3",
-            bodyClassName: "text-sm",
-            progressClassName: "bg-green-200",
-            autoClose: false,
-            closeOnClick: true
-        });
 
         try {
-            toast.dismiss(loadingToast);
+            setIsLoading(true);
+            loadingToastAdmin = toast.loading("Deleting...",{
+                position:"top-center"
+            });
+
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -235,7 +217,7 @@ const AdminEdit = () => {
             const url = `http://localhost:8000/api/product/${params.id}`
             const result = await axios.put(url, userInput, config);
             if (result.status === 200) {
-                toast.success("", {
+                toast.success("sssuccc", {
                     className: "w-20 h-20 bg-green-500 text-white font-semibold rounded-lg shadow-lg p-3",
                     bodyClassName: "text-sm",
                     progressClassName: "bg-green-200",
@@ -245,7 +227,7 @@ const AdminEdit = () => {
             console.log('resutlttt', result)
             console.log('edit userInput', userInput)
         } catch (e) {
-            toast.error("에러 발생: 데이터를 수정할 수 없습니다.");
+            toast.error("fail to edit");
             console.log(e)
         }
     };
@@ -278,7 +260,7 @@ const AdminEdit = () => {
         <div className={"bg-white"}>
             <form
                 onSubmit={handleSubmit(submit)}
-                className={"mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8"}
+                className={"mx-auto mb-32 max-w-5xl px-4 sm:px-6 lg:px-8"}
             >
                 {/* Title, Breadcrumbs, Sort */}
                 <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
@@ -365,7 +347,7 @@ const AdminEdit = () => {
                     </div>
 
                     {/*<div className="flex w-full p-3">*/}
-                    {/*    <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">*/}
+                    {/*    <h3 className="w-40 mr-10 font-bold text-2xl text-gray-700">*/}
                     {/*        Reference Price*/}
                     {/*    </h3>*/}
                     {/*    <div className="w-full">*/}
@@ -380,8 +362,8 @@ const AdminEdit = () => {
                     {/*    </div>*/}
                     {/*</div>*/}
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             {/*Promotional */}
                             Price
                         </h3>
@@ -397,7 +379,7 @@ const AdminEdit = () => {
                     </div>
 
                     <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Description
                         </h3>
                         <div className="w-full">
@@ -409,8 +391,8 @@ const AdminEdit = () => {
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Category
                         </h3>
                         <div className="w-full">
@@ -430,7 +412,7 @@ const AdminEdit = () => {
                     </div>
 
                     {/*<div className="flex w-full p-3">*/}
-                    {/*    <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">*/}
+                    {/*    <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">*/}
                     {/*        SubCategory*/}
                     {/*    </h3>*/}
                     {/*    <div className="w-full">*/}
@@ -448,13 +430,13 @@ const AdminEdit = () => {
                     {/*    </div>*/}
                     {/*</div>*/}
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Colors
                         </h3>
                         <div className="w-full">
                             {colorFields.map((field, index) => (
-                                <>
+                                <div className={'flex items-center justify-center my-1'} key={index}>
                                     <input
                                         key={field.id}
                                         {...register(`colors.${index}`)}
@@ -464,46 +446,45 @@ const AdminEdit = () => {
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveColor(index)}
-                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                        className="bg-gray-500 text-white p-2 w-1/4 ml-2 rounded-lg"
                                     >
                                         Remove
                                     </button>
-                                </>
+                                </div>
                             ))}
                             <button
                                 type="button"
                                 onClick={handleAddColor}
-                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                                className="w-full bg-gray-500 text-white p-2 rounded-lg mt-2"
                             >
                                 Add
                             </button>
-
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
-                            Color Buttons
-                        </h3>
-                        <div className="w-full">
-                            {/*{colorbuttonFields.map((field, index) => (*/}
-                            {/*    <input*/}
-                            {/*        key={field.id}*/}
-                            {/*        {...register(`colorbuttons.${index}`)}*/}
-                            {/*        className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
-                            {/*        placeholder={productInfo?.colorbuttons?.[index]}*/}
-                            {/*    />*/}
-                            {/*))}*/}
-                        </div>
-                    </div>
+                    {/*<div className="flex w-full p-3 my-2">*/}
+                    {/*    <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">*/}
+                    {/*        Color Buttons*/}
+                    {/*    </h3>*/}
+                    {/*    <div className="w-full">*/}
+                    {/*        {colorbuttonFields.map((field, index) => (*/}
+                    {/*            <input*/}
+                    {/*                key={field.id}*/}
+                    {/*                {...register(`colorbuttons.${index}`)}*/}
+                    {/*                className="h-12 w-full border-2 border-gray-300 rounded-lg"*/}
+                    {/*                placeholder={productInfo?.colorbuttons?.[index]}*/}
+                    {/*            />*/}
+                    {/*        ))}*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Highlights
                         </h3>
                         <div className="w-full">
                             {highlightFields.map((field, index) => (
-                                <>
+                                <div className={'flex items-center justify-center my-1'} key={index}>
                                     <textarea
                                         key={field.id}
                                         {...register(`highlights.${index}`)}
@@ -513,29 +494,29 @@ const AdminEdit = () => {
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveHighlight(index)}
-                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                        className="bg-gray-500 text-white p-2 w-1/4 ml-2 rounded-lg h-10"
                                     >
                                         Remove
                                     </button>
-                                </>
+                                </div>
                             ))}
                             <button
                                 type="button"
                                 onClick={handleAddHighlight}
-                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2 w-full"
                             >
                                 Add
                             </button>
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Tags
                         </h3>
                         <div className="w-full">
                             {tagFields.map((field, index) => (
-                                <>
+                                <div className={'flex items-center justify-center my-1'} key={index}>
                                     <input
                                         key={field.id}
                                         {...register(`tags.${index}`)}
@@ -545,16 +526,16 @@ const AdminEdit = () => {
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveTag(index)}
-                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                        className="bg-gray-500 text-white p-2 w-1/4 ml-2 rounded-lg h-10"
                                     >
                                         Remove
                                     </button>
-                                </>
+                                </div>
                             ))}
                             <button
                                 type="button"
                                 onClick={handleAddTag}
-                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                                className="w-full bg-gray-500 text-white p-2 rounded-lg mt-2"
                             >
                                 Add
                             </button>
@@ -576,6 +557,8 @@ const AdminEdit = () => {
                     {/*)}*/}
                 </div>
             </form>
+            <ToastContainer/>
+
         </div>
     );
 };

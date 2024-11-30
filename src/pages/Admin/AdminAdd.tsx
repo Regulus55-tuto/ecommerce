@@ -217,7 +217,7 @@ const AdminAdd = () => {
         <div className={"bg-white"}>
             <form
                 onSubmit={handleSubmit(submit)}
-                className={"mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8"}
+                className={"mx-auto mb-32 max-w-5xl px-4 sm:px-6 lg:px-8"}
             >
                 {/* Title, Breadcrumbs, Sort */}
                 <div className="flex items-end justify-between border-b border-gray-200 pt-24 pb-6">
@@ -230,29 +230,8 @@ const AdminAdd = () => {
                 <div className="flex flex-col items-center justify-center px-40 mt-10">
                     <div className="grid grid-cols-10 w-full">
                         <div className="col-span-4 flex flex-col items-center">
-                            {/*{imagePreviews.map((preview, index) => (*/}
-                            {/*    <img*/}
-                            {/*        key={index}*/}
-                            {/*        src={preview}*/}
-                            {/*        alt={`Preview ${index + 1}`}*/}
-                            {/*        className="h-60 w-60 object-cover"*/}
-                            {/*    />*/}
-                            {/*))}*/}
                             <div className="flex flex-col items-center justify-end text-gray-500 mt-2">
-                                {/*<input*/}
-                                {/*    {...register("productImgs")}*/}
-                                {/*    type="file"*/}
-                                {/*    accept="image/png,image/jpeg,image/jpg,image/webp"*/}
-                                {/*    multiple*/}
-                                {/*/>*/}
-                                {/*<div>JPG, JPEG, PNG, or WEBP</div>*/}
-
-                                {/*사진드래그*/}
-
-
                                 <FileUploadWithDragAndDrop onFileUpload={handleFileUpload}/>
-
-
                             </div>
                         </div>
 
@@ -325,7 +304,7 @@ const AdminAdd = () => {
                     {/*</div>*/}
 
                     <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             {/*Promotional */}
                             Price
                         </h3>
@@ -338,8 +317,8 @@ const AdminAdd = () => {
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Description
                         </h3>
                         <div className="w-full">
@@ -351,8 +330,8 @@ const AdminAdd = () => {
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Category
                         </h3>
                         <div className="w-full">
@@ -390,39 +369,38 @@ const AdminAdd = () => {
                     {/*    </div>*/}
                     {/*</div>*/}
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Colors
                         </h3>
                         <div className="w-full">
                             {colorFields.length === 0 && (
                                 <input
                                     {...register(`colors.0`)}
-                                    className="h-12 w-3/4 border-2 border-gray-300 rounded-lg mb-2"
+                                    className="h-20 w-full border-2 border-gray-300 rounded-lg my-1"
                                     placeholder="Color 1"
                                 />
                             )}
                             {colorFields.map((field, index) => (
-                                <>
+                                <div className={'flex items-center justify-center my-1'} key={index}>
                                     <input
-                                        key={field.id}
                                         {...register(`colors.${index}`)}
-                                        className="h-12 w-3/4 border-2 border-gray-300 rounded-lg"
+                                        className="h-20 w-3/4 border-2 border-gray-300 rounded-lg"
                                         placeholder={`Color ${index + 1}`}
                                     />
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveColor(index)}
-                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                        className="bg-gray-500 text-white p-2 w-1/4 ml-2 rounded-lg mt-2 h-10"
                                     >
                                         Remove
                                     </button>
-                                </>
+                                </div>
                             ))}
                             <button
                                 type="button"
                                 onClick={handleAddColor}
-                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2 w-full"
                             >
                                 Add
                             </button>
@@ -445,78 +423,77 @@ const AdminAdd = () => {
                     {/*    </div>*/}
                     {/*</div>*/}
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Highlights
                         </h3>
                         <div className="w-full">
                             {highlightFields.length === 0 && (
-                                <input
+                                <textarea
                                     {...register(`highlights.0`)}
-                                    className="h-12 w-3/4 border-2 border-gray-300 rounded-lg mb-2"
+                                    className="h-20 w-full border-2 border-gray-300 rounded-lg my-1"
                                     placeholder="Highlight 1"
                                 />
                             )}
                             {highlightFields.map((field, index) => (
-                                <>
+                                <div className={'flex items-center justify-center my-1'} key={index}>
                                     <textarea
-                                        key={field.id}
                                         {...register(`highlights.${index}`)}
-                                        className="h-20 w-3/4  border-2 border-gray-300 rounded-lg"
-                                        placeholder='Highlights'
+                                        className="h-20 w-3/4 border-2 border-gray-300 rounded-lg"
+                                        placeholder={`Highlight ${index + 1}`}
                                     />
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveHighlight(index)}
-                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                        className="bg-gray-500 text-white p-2 w-1/4 ml-2 rounded-lg mt-2 h-10"
                                     >
                                         Remove
                                     </button>
-                                </>
+                                </div>
                             ))}
                             <button
                                 type="button"
                                 onClick={handleAddHighlight}
-                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2 w-full"
                             >
                                 Add
                             </button>
                         </div>
                     </div>
 
-                    <div className="flex w-full p-3">
-                        <h3 className="w-80 mr-10 font-bold text-2xl text-gray-700">
+                    <div className="flex w-full p-3 my-2">
+                        <h3 className="w-60 mr-10 font-bold text-2xl text-gray-700">
                             Tags
                         </h3>
                         <div className="w-full">
                             {tagFields.length === 0 && (
                                 <input
                                     {...register(`tags.0`)}
-                                    className="h-12 w-3/4 border-2 border-gray-300 rounded-lg mb-2"
+                                    className="h-20 w-full border-2 border-gray-300 rounded-lg my-1"
                                     placeholder="Tag 1"
                                 />
                             )}
                             {tagFields.map((field, index) => (
-                                <>
+                                <div className={'flex items-center justify-center my-1'} key={index}>
                                     <input
-                                        key={field.id}
                                         {...register(`tags.${index}`)}
-                                        className="h-12 w-3/4 border-2 border-gray-300 rounded-lg"
+                                        className="h-20 w-3/4 border-2 border-gray-300 rounded-lg"
                                         placeholder='Tags'
                                     />
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveTag(index)}
-                                        className="bg-gray-500 text-white p-2 ml-2 rounded-lg mt-2"
+                                        className="bg-gray-500 text-white p-2 w-1/4 ml-2 rounded-lg mt-2 h-10"
                                     >
                                         Remove
                                     </button>
-                                </>
+                                </div>
                             ))}
                             <button
                                 type="button"
                                 onClick={handleAddTag}
-                                className="bg-gray-500 text-white p-2 rounded-lg mt-2"
+                                className="bg-gray-500 text-white p-2 rounded-lg mt-2 w-full"
                             >
                                 Add
                             </button>
